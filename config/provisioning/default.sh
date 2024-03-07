@@ -18,7 +18,7 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
-    "https://github.com/deforum-art/deforum-for-automatic1111-webui.git"
+    "https://github.com/deforum-art/deforum-for-automatic1111-webui"
     "https://github.com/Scholar01/sd-webui-mov2mov"
     "https://github.com/volotat/SD-CN-Animation"
     "https://github.com/miaoshouai/miaoshouai-assistant"
