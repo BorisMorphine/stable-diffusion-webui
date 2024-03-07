@@ -24,8 +24,9 @@ EXTENSIONS=(
     "https://github.com/miaoshouai/miaoshouai-assistant"
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
     "https://github.com/pkuliyi2015/sd-webui-stablesr"
-    "https://github.com/Mikubill/sd-webui-controlnet.git"
-    "https://github.com/light-and-ray/sd-webui-video-extras-tab.git"
+    "https://github.com/lllyasviel/ControlNet"
+    "https://github.com/Mikubill/sd-webui-controlnet"
+    "https://github.com/light-and-ray/sd-webui-video-extras-tab"
 )
 
 CHECKPOINT_MODELS=(
