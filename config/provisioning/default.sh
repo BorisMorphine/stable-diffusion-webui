@@ -9,8 +9,8 @@
 DISK_GB_REQUIRED=30
 
 MAMBA_PACKAGES=(
-    #"package1"
-    #"package2=version"
+    "package1"
+    "package2=version"
   )
   
 PIP_PACKAGES=(
@@ -37,13 +37,17 @@ CHECKPOINT_MODELS=(
 )
 
 LORA_MODELS=(
-    #"https://civitai.com/api/download/models/16576"
+    "https://civitai.com/api/download/models/16576"
+    "https://civitai.com/api/download/models/292351"
+    "https://civitai.com/api/download/models/234351"
+    "https://civitai.com/api/download/models/274425"
+    "https://civitai.com/api/download/models/187082"
 )
 
 VAE_MODELS=(
-    "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
-    "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
-    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    #"https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
+    #"https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
+    #"https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
 )
 
 ESRGAN_MODELS=(
