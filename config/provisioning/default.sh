@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 # This file will be sourced in init.sh
 # Namespace functions with provisioning_
 
