@@ -43,6 +43,25 @@ LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
     "https://civitai.com/models/124347/xlmoreart-full-xlreal-enhancer?modelVersionId=152309#:~:text=Model%20SafeTensor%20(685.71%20MB)"
     "https://civitai.com/models/229213?modelVersionId=258687"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_mm.ckpt"
+    "https://civitai.com/api/download/models/367245?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v14.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sdxl_v10_beta.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_PanLeft.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_PanRight.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_RollingAnticlockwise.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_RollingClockwise.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_TiltDown.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_TiltUp.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_ZoomIn.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_ZoomOut.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_adapter.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_mm.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_sparsectrl_rgb.ckpt"
+    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_sparsectrl_scribble.ckpt"
+
 )
 
 VAE_MODELS=(
