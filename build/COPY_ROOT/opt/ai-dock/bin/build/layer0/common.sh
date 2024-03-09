@@ -1,7 +1,7 @@
 #!/bin/false
 
 source /opt/ai-dock/etc/environment.sh
-webui_git="https://github.com/AUTOMATIC1111/stable-diffusion-webui"
+webui_git="https://github.com/lllyasviel/stable-diffusion-webui-forge"
 
 build_common_main() {
     build_common_create_env
