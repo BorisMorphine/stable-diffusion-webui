@@ -5,7 +5,6 @@ FROM ${IMAGE_BASE}
 
 LABEL org.opencontainers.image.source https://github.com/ai-dock/stable-diffusion-webui
 LABEL org.opencontainers.image.description "Automatic1111 Stable Diffusion Web UI Forge"
-LABEL maintainer="Rob Ballantyne <rob@dynamedia.uk>"
 
 ENV IMAGE_SLUG="stable-diffusion-webui-forge"
 ENV OPT_SYNC=stable-diffusion-webui-forge
