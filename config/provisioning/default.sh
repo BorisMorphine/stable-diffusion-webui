@@ -9,12 +9,12 @@
 DISK_GB_REQUIRED=50
 
 MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
+    #"package1"
+    #"package2=version"
   )
   
 PIP_PACKAGES=(
-    "bitsandbytes==0.41.2.post2"
+    #"bitsandbytes==0.41.2.post2"
   )
 
 EXTENSIONS=(
