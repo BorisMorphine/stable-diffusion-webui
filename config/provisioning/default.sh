@@ -18,18 +18,21 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
-    "https://github.com/deforum-art/deforum-for-automatic1111-webui.git"
-    "https://github.com/ljleb/sd-webui-neutral-prompt.git"
-    "https://github.com/Scholar01/sd-webui-mov2mov"
-    "https://github.com/volotat/SD-CN-Animation"
     "https://github.com/miaoshouai/miaoshouai-assistant"
     "https://github.com/lllyasviel/stable-diffusion-webui-forge.git"
-    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    "https://github.com/continue-revolution/sd-forge-animatediff.git" 
+    "https://github.com/Haoming02/sd-webui-diffusion-cg.git"
+    "https://github.com/deforum-art/sd-forge-deforum"
+    "https://github.com/layerdiffusion/sd-forge-layerdiffuse"
+    "https://github.com/Haoming02/sd-webui-boomer"
+    "https://github.com/Haoming02/sd-webui-clear-screen.git"
+    "https://github.com/Haoming02/sd-webui-easy-tag-insert.git"
 )
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
     "https://civitai.com/models/101055/sd-xl#:~:text=Model%20SafeTensor%20(6.46%20GB)"
+    "https://civitai.com/api/download/models/344540?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
     "https://huggingface.co/RunDiffusion/Juggernaut-XL-v9/resolve/main/Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors?download=true"
     "https://huggingface.co/RunDiffusion/Juggernaut-XL-Lightning/resolve/main/Juggernaut_RunDiffusionPhoto2_Lightning_4Steps.safetensors?download=true"
@@ -53,6 +56,19 @@ ESRGAN_MODELS=(
     "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
     "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
 )
+
+DIFFUSERS_MODELS=(
+    "https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_turbo.ckpt?download=true"
+    "https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_768v_000139.ckpt?download=true"
+    "https://huggingface.co/Iceclear/StableSR/resolve/main/face_vqgan_cfw_00011.ckpt?download=true"
+    "https://huggingface.co/Iceclear/StableSR/resolve/main/ldmsr4x_finetune_119.ckpt?download=true"
+)
+
+CONTROLNET_MODELS=(
+    "https://civitai.com/api/download/models/181335"
+    "https://civitai.com/api/download/models/183051?type=Model&format=SafeTensor"
+)
+    
 
 
 
