@@ -6,42 +6,42 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=30
+DISK_GB_REQUIRED=50
 
 MAMBA_PACKAGES=(
-    #"package1"
-    #"package2=version"
+    "package1"
+    "package2=version"
   )
   
 PIP_PACKAGES=(
-    #"bitsandbytes==0.41.2.post2"
+    "bitsandbytes==0.41.2.post2"
   )
 
 EXTENSIONS=(
-    "https://github.com/deforum-art/deforum-for-automatic1111-webui"
+    "https://github.com/deforum-art/sd-forge-deforum"
     "https://github.com/Scholar01/sd-webui-mov2mov"
     "https://github.com/volotat/SD-CN-Animation"
     "https://github.com/miaoshouai/miaoshouai-assistant"
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
     "https://github.com/pkuliyi2015/sd-webui-stablesr"
-    "https://github.com/lllyasviel/ControlNet"
     "https://github.com/Mikubill/sd-webui-controlnet"
     "https://github.com/light-and-ray/sd-webui-video-extras-tab"
+    "https://github.com/lllyasviel/ControlNet-v1-1-nightly.git"
 )
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    "https://civitai.com/models/101055/sd-xl#:~:text=Model%20SafeTensor%20(6.46%20GB)"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+    "https://huggingface.co/RunDiffusion/Juggernaut-XL-v9/resolve/main/Juggernaut-XL_v9_RunDiffusionPhoto_v2.safetensors?download=true"
+    "https://huggingface.co/RunDiffusion/Juggernaut-XL-Lightning/resolve/main/Juggernaut_RunDiffusionPhoto2_Lightning_4Steps.safetensors?download=true"
+    "https://civitai.com/api/download/models/288982?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
-    "https://civitai.com/api/download/models/292351"
-    "https://civitai.com/api/download/models/234351"
-    "https://civitai.com/api/download/models/274425"
-    "https://civitai.com/api/download/models/187082"
+    "https://civitai.com/models/124347/xlmoreart-full-xlreal-enhancer?modelVersionId=152309#:~:text=Model%20SafeTensor%20(685.71%20MB)"
+    "https://civitai.com/models/229213?modelVersionId=258687"
 )
 
 VAE_MODELS=(
