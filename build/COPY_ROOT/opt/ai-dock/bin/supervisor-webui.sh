@@ -17,7 +17,7 @@ function start() {
         WEBUI_PORT=${WEBUI_PORT_HOST:-7860}
     fi
     PROXY_PORT=$WEBUI_PORT
-    SERVICE_NAME="A1111 SD Web UI"
+    SERVICE_NAME="SD Web UI Forge"
     
     file_content="$(
       jq --null-input \
