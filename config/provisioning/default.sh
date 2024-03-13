@@ -18,8 +18,6 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
-    "https://github.com/miaoshouai/miaoshouai-assistant"
-    "https://github.com/lllyasviel/stable-diffusion-webui-forge.git"
     "https://github.com/continue-revolution/sd-forge-animatediff.git" 
     "https://github.com/Haoming02/sd-webui-diffusion-cg.git"
     "https://github.com/deforum-art/sd-forge-deforum"
@@ -94,7 +92,7 @@ CONTROLNET_MODELS=(
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 function provisioning_start() {
-    source /opt/ai-dock/etc/environment.sh
+    source https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/config/provisioning/environment.sh
     DISK_GB_AVAILABLE=$(($(df --output=avail -m "${WORKSPACE}" | tail -n1) / 1000))
     DISK_GB_USED=$(($(df --output=used -m "${WORKSPACE}" | tail -n1) / 1000))
     DISK_GB_ALLOCATED=$(($DISK_GB_AVAILABLE + $DISK_GB_USED))
