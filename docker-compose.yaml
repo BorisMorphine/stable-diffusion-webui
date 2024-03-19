@@ -115,11 +115,6 @@ RUN pip3 install -U --no-cache-dir jupyterlab \
         ipykernel \
         ipywidgets \
 
-# Install RunPod File Uploader
-RUN curl -sSL https://github.com/kodxana/RunPod-FilleUploader/raw/main/scripts/installer.sh -o installer.sh && \
-    chmod +x installer.sh && \
-    ./installer.sh
-
 # Install rclone
 RUN curl https://rclone.org/install.sh | bash    
 # Set the template version
