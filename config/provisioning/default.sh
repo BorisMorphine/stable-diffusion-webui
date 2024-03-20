@@ -18,13 +18,15 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
-    "https://github.com/continue-revolution/sd-forge-animatediff.git" 
-    "https://github.com/Haoming02/sd-webui-diffusion-cg.git"
-    "https://github.com/deforum-art/sd-forge-deforum"
-    "https://github.com/layerdiffusion/sd-forge-layerdiffuse"
-    "https://github.com/Haoming02/sd-webui-boomer"
-    "https://github.com/Haoming02/sd-webui-clear-screen.git"
-    "https://github.com/Haoming02/sd-webui-easy-tag-insert.git"
+    "https://github.com/Mikubill/sd-webui-controlnet.git"
+    "https://github.com/miaoshouai/miaoshouai-assistant.git"
+    "https://github.com/Scholar01/sd-webui-mov2mov.git"
+    "https://github.com/deforum-art/deforum-for-automatic1111-webui.git"
+    "https://github.com/continue-revolution/sd-webui-animatediff.git"
+    "https://github.com/volotat/SD-CN-Animation.git"
+    "https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper.git"
+    "https://github.com/NVIDIA/Stable-Diffusion-WebUI-TensorRT"
+    
 )
 
 CHECKPOINT_MODELS=(
