@@ -6,7 +6,7 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=70
+DISK_GB_REQUIRED=60
 
 MAMBA_PACKAGES=(
     "package1"
@@ -21,25 +21,24 @@ EXTENSIONS=(
     "https://github.com/Mikubill/sd-webui-controlnet.git"
     "https://github.com/miaoshouai/miaoshouai-assistant.git"
     "https://github.com/Scholar01/sd-webui-mov2mov.git"
-    "https://github.com/deforum-art/deforum-for-automatic1111-webui.git"
-    "https://github.com/continue-revolution/sd-webui-animatediff.git"
     "https://github.com/volotat/SD-CN-Animation.git"
     "https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper.git"    
 )
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    "https://civitai.com/models/101055/sd-xl#:~:text=Model%20SafeTensor%20(6.46%20GB)"
+    "https://civitai.com/api/download/models/101055/sd-xl#:~:text=Model%20SafeTensor%20(6.46%20GB)"
     "https://civitai.com/api/download/models/344540?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors?download=true"
+    "https://civitai.com/api/download/models/344487?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://huggingface.co/RunDiffusion/Juggernaut-XL-v9?download=true"
     "https://huggingface.co/RunDiffusion/Juggernaut-XL-Lightning/resolve/main/Juggernaut_RunDiffusionPhoto2_Lightning_4Steps.safetensors?download=true"
     "https://civitai.com/api/download/models/288982?type=Model&format=SafeTensor&size=full&fp=fp16"
 )
 
 LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
-    "https://civitai.com/models/124347/xlmoreart-full-xlreal-enhancer?modelVersionId=152309#:~:text=Model%20SafeTensor%20(685.71%20MB)"
-    "https://civitai.com/models/229213?modelVersionId=258687"
+    "https://civitai.com/api/download/models/124347/xlmoreart-full-xlreal-enhancer?modelVersionId=152309#:~:text=Model%20SafeTensor%20(685.71%20MB)"
+    "https://civitai.com/api/download/models/229213?modelVersionId=258687"
     "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_mm.ckpt?download=true"
     "https://civitai.com/api/download/models/367245?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v14.ckpt?download=true"
@@ -66,9 +65,9 @@ VAE_MODELS=(
 )
 
 ESRGAN_MODELS=(
-    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
-    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
-    "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
+    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth?download=true"
+    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth?download=true"
+    "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth?download=true"
 )
 
 DIFFUSERS_MODELS=(
@@ -82,7 +81,6 @@ CONTROLNET_MODELS=(
     "https://civitai.com/api/download/models/181335"
     "https://civitai.com/api/download/models/183051?type=Model&format=SafeTensor"
 )
-    
 
 
 
