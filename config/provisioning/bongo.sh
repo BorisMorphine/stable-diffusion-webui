@@ -20,7 +20,6 @@ EXTENSIONS=(
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    "https://civitai.com/api/download/models/101055/sd-xl#:~:text=Model%20SafeTensor%20(6.46%20GB)"
     "https://civitai.com/api/download/models/344540?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     "https://civitai.com/api/download/models/344487?type=Model&format=SafeTensor&size=pruned&fp=fp16"
     "https://huggingface.co/RunDiffusion/Juggernaut-XL-v9?download=true"
@@ -30,7 +29,6 @@ CHECKPOINT_MODELS=(
 
 LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
-    "https://civitai.com/api/download/models/124347/xlmoreart-full-xlreal-enhancer?modelVersionId=152309#:~:text=Model%20SafeTensor%20(685.71%20MB)"
     "https://civitai.com/api/download/models/229213?modelVersionId=258687"
     "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_mm.ckpt?download=true"
     "https://civitai.com/api/download/models/367245?type=Model&format=SafeTensor&size=pruned&fp=fp16"
