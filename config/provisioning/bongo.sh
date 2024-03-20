@@ -14,7 +14,8 @@ EXTENSIONS=(
     "https://github.com/miaoshouai/miaoshouai-assistant"
     "https://github.com/Scholar01/sd-webui-mov2mov"
     "https://github.com/volotat/SD-CN-Animation"
-    "https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper"    
+    "https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper"
+    "https://github.com/IceClear/StableSR"
 )
 
 CHECKPOINT_MODELS=(
@@ -47,7 +48,7 @@ ESRGAN_MODELS=(
     "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth?download=true"
 )
 
-DIFFUSERS_MODELS=(
+SR_MODELS=(
     "https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_turbo.ckpt?download=true"
     "https://huggingface.co/Iceclear/StableSR/resolve/main/stablesr_768v_000139.ckpt?download=true"
     "https://huggingface.co/Iceclear/StableSR/resolve/main/face_vqgan_cfw_00011.ckpt?download=true"
@@ -87,6 +88,9 @@ function provisioning_start() {
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/stable-diffusion-webui/extensions/StableSR/Models" \
+        "${SR_MODELS[@]}"
      
 function provisioning_get_extensions() {
     for repo in "${EXTENSIONS[@]}"; do
