@@ -8,15 +8,6 @@
 
 DISK_GB_REQUIRED=60
 
-MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
-  )
-  
-PIP_PACKAGES=(
-    "bitsandbytes==0.41.2.post2"
-  )
-
 EXTENSIONS=(
     "https://github.com/Mikubill/sd-webui-controlnet"
     "https://github.com/s9roll7/ebsynth_utility"
@@ -97,32 +88,6 @@ function provisioning_start() {
         "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
      
-    PLATFORM_FLAGS=""
-    if [[ $XPU_TARGET = "CPU" ]]; then
-        PLATFORM_FLAGS="--use-cpu all --skip-torch-cuda-test --no-half"
-    fi
-    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 11404 --exit"
-    FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
-    
-    # Start and exit because webui will probably require a restart
-    cd /opt/stable-diffusion-webui && \
-    micromamba run -n webui -e LD_PRELOAD=libtcmalloc.so python launch.py \
-        ${FLAGS_COMBINED}
-    provisioning_print_end
-}
-
-function provisioning_get_mamba_packages() {
-    if [[ -n $MAMBA_PACKAGES ]]; then
-        $MAMBA_INSTALL -n webui ${MAMBA_PACKAGES[@]}
-    fi
-}
-
-function provisioning_get_pip_packages() {
-    if [[ -n $PIP_PACKAGES ]]; then
-        micromamba run -n webui $PIP_INSTALL ${PIP_PACKAGES[@]}
-    fi
-}
-
 function provisioning_get_extensions() {
     for repo in "${EXTENSIONS[@]}"; do
         dir="${repo##*/}"
