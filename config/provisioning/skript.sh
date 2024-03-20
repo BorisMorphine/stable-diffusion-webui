@@ -18,11 +18,12 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
-    "https://github.com/Mikubill/sd-webui-controlnet.git"
-    "https://github.com/miaoshouai/miaoshouai-assistant.git"
-    "https://github.com/Scholar01/sd-webui-mov2mov.git"
-    "https://github.com/volotat/SD-CN-Animation.git"
-    "https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper.git"    
+    "https://github.com/Mikubill/sd-webui-controlnet"
+    "https://github.com/s9roll7/ebsynth_utility"
+    "https://github.com/miaoshouai/miaoshouai-assistant"
+    "https://github.com/Scholar01/sd-webui-mov2mov"
+    "https://github.com/volotat/SD-CN-Animation"
+    "https://github.com/zixaphir/Stable-Diffusion-Webui-Civitai-Helper"    
 )
 
 CHECKPOINT_MODELS=(
@@ -41,21 +42,6 @@ LORA_MODELS=(
     "https://civitai.com/api/download/models/229213?modelVersionId=258687"
     "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_mm.ckpt?download=true"
     "https://civitai.com/api/download/models/367245?type=Model&format=SafeTensor&size=pruned&fp=fp16"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v14.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sd_v15_v2.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/mm_sdxl_v10_beta.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_PanLeft.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_PanRight.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_RollingAnticlockwise.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_RollingClockwise.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_TiltDown.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_TiltUp.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_ZoomIn.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v2_lora_ZoomOut.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_adapter.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_mm.ckpt?download=true"
-    "https://huggingface.co/guoyww/animatediff/resolve/main/v3_sd15_sparsectrl_rgb.ckpt?download=true"
 )
 
 VAE_MODELS=(
