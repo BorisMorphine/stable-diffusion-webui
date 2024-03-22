@@ -6,9 +6,10 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=60
+DISK_GB_REQUIRED=50
 
 EXTENSIONS=(
+    "https://github.com/lllyasviel/stable-diffusion-webui-forge"
     "https://github.com/Mikubill/sd-webui-controlnet"
     "https://github.com/s9roll7/ebsynth_utility"
     "https://github.com/miaoshouai/miaoshouai-assistant"
