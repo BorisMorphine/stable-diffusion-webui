@@ -94,7 +94,7 @@ function provisioning_start() {
 function provisioning_get_extensions() {
     for repo in "${EXTENSIONS[@]}"; do
         dir="${repo##*/}"
-        path="/opt/stable-diffusion-webui/extensions/${dir}"
+        path="/workspace/stable-diffusion-webui/extensions/${dir}"
         requirements="${path}/requirements.txt"
         if [[ -d $path ]]; then
             if [[ ${AUTO_UPDATE,,} != "false" ]]; then
