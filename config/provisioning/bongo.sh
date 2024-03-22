@@ -2,7 +2,7 @@
 # This file will be sourced in init.sh
 # Namespace functions with provisioning_
 
-# https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/config/provisioning/default.sh
+# https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/config/provisioning/d_compose.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
@@ -18,7 +18,7 @@ CHECKPOINT_MODELS=(
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 function provisioning_start() {
-    source https://github.com/Roldondo/stable-diffusion-webui/edit/main/config/provisioning/environment.sh
+    source https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/config/provisioning/d_compose.sh
     DISK_GB_AVAILABLE=$(($(df --output=avail -m "${WORKSPACE}" | tail -n1) / 1000))
     DISK_GB_USED=$(($(df --output=used -m "${WORKSPACE}" | tail -n1) / 1000))
     DISK_GB_ALLOCATED=$(($DISK_GB_AVAILABLE + $DISK_GB_USED))
