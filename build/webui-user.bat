@@ -1,18 +1,16 @@
 @echo off
 
-set PYTHON=
+set PYTHON="3.10.14"
 set GIT=
-set VENV_DIR=
+set VENV_DIR=/workspace/stable-diffusion-webui/
 set COMMANDLINE_ARGS=
 
-@REM Uncomment following code to reference an existing A1111 checkout.
-@REM set A1111_HOME=Your A1111 checkout dir
-@REM
-@REM set VENV_DIR=%A1111_HOME%/venv
-@REM set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% ^
-@REM  --ckpt-dir %A1111_HOME%/models/Stable-diffusion ^
-@REM  --hypernetwork-dir %A1111_HOME%/models/hypernetworks ^
-@REM  --embeddings-dir %A1111_HOME%/embeddings ^
-@REM  --lora-dir %A1111_HOME%/models/Lora
+@set A1111_HOME=/opt/stable-diffusion-webui/
+set VENV_DIR=/worksapce/stable-diffusion-webui/
+set COMMANDLINE_ARGS="--xformers --enable-insecure-extension-access --api --deforum-api" ^
+--ckpt-dir /opt/storage/stable_diffusion/models/ckpt ^
+--hypernetwork-dir /opt/storage/stable_diffusion/models/hypernetworks ^
+--embeddings-dir /opt/storage/stable_diffusion/models//embeddings ^
+--lora-dir /opt/storage/stable_diffusion/models/models/Lora
 
 call webui.bat
