@@ -10,7 +10,7 @@ install_dir="/opt/stable-diffusion-webui-forge"
 clone_dir="/opt/stable-diffusion-webui-forge/extensions/stable-diffusion-webui"
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
-export COMMANDLINE_ARGS="autostart"
+export COMMANDLINE_ARGS="--autostart"
 
 # python3 executable
 python_cmd="python3 pip install -r requirements.txt, pip install -r requirements-test.txt,
