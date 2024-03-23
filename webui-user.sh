@@ -7,7 +7,7 @@
 install_dir="/opt/stable-diffusion-webui-forge"
 
 # Name of the subdirectory
-clone_dir="/opt/stable-diffusion-webui"
+clone_dir="/opt/stable-diffusion-webui-forge/extensions/stable-diffusion-webui"
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
 export COMMANDLINE_ARGS="autostart"
