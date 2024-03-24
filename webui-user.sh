@@ -6,9 +6,9 @@ clone_dir="/opt/stable-diffusion-webui-forge"
 
 venv_dir="/opt/micromamba/envs/webui"
 
-export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
+export REQS_FILE="/opt/stable-diffusion-webui-forge/requirements.txt"
 
-export REQS_FILE="/stable-diffusion-webui-forge/requirements.txt"
+export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
 # Fixed git repos
 export K_DIFFUSION_PACKAGE="pip install k-diffusion"
