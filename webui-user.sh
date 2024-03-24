@@ -10,8 +10,6 @@ export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://
 
 export REQS_FILE="requirements.txt"
 
-export ACCELERATE="True"
-
 # Fixed git repos
 export K_DIFFUSION_PACKAGE="pip install k-diffusion"
 export GFPGAN_PACKAGE="pip install gfpgan"
@@ -26,6 +24,7 @@ export COMMANDLINE_ARGS="
 --lora-dir workspace/stable-diffusion-webui-forge/models/lora
 "
 
+#export ACCELERATE="True"
 
 # Fixed git commits
 #export STABLE_DIFFUSION_COMMIT_HASH=""
