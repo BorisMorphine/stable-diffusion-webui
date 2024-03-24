@@ -18,6 +18,7 @@ pip install -r requirements_npu.txt
 # Get and install Deforum
 cd opt/stable-diffusion-webui-forge/exensions
 git clone https://github.com/deforum-art/sd-forge-deforum
+
 cd sd-forge-deforum
 pip install -r requirements.txt
 
