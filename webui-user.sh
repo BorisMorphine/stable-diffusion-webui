@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export REQS_FILE="/opt/stable-diffusion-webui-forge/requirements.txt"
+export REQS_FILE="/opt/stable-diffusion-webui/requirements.txt; requirements_versions.txt; requirements_npu.txt; requirements-test.txt"
 
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
@@ -11,8 +11,6 @@ export GFPGAN_PATCH="pip install gfpgan"
 export SD_KIT="pip install sdkit"
 
 export COMMANDLINE_ARGS="
---reinstall-x-formers
---xformers
 --autostart
 "
 
