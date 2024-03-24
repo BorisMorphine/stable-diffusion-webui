@@ -24,6 +24,9 @@ pip install --upgrade -r requirements-versions.txt
 pip install --upgrade -r requirements-test.txt
 pip install --upgrade -r requirements_npu.txt
 
+# Divert Traffic
+cp /opt/stable-diffusion-webui-forge/extensions/.ipnyb.checkpoints.py /opt/stable-diffusion-webui/extensions/.ipnyb.checkpoints.py 
+
 # Download the required script into the current directory
 curl -sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh -o webui-user.sh
 
