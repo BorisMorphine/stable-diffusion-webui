@@ -34,3 +34,6 @@ cd /workspace/stable-diffusion-webui-forge/
 
 # Execute Python script
 python3 webui.py
+
+# Execute launch script
+python3 launch.py
