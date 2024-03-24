@@ -1,9 +1,8 @@
 #!/bin/bash
 
 ########################_UNCOMMIT_AND_ADD_TO_'ON_STARTUP'_COMMANDS_####################################################
-#echo $PATH; curl sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/Forge_Morphine.sh sudo | bash
-#if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
-#supervisorctrl restart webui
+#echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
+#python3 /opt/stable-diffusion-webui-forge/launch.py
 ########################_UNCOMMIT_AND_ADD_TO_'ON_STARTUP'_COMMANDS_####################################################
 
 # Go to root
