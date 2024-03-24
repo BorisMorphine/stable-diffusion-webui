@@ -10,6 +10,8 @@
 # Go to root
 cd /root
 
+-e data_dir="workspace"
+
 -e install_dir="/opt"
 
 -e clone_dir="/opt/stable-diffusion-webui-forge"
