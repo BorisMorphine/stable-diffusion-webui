@@ -22,7 +22,7 @@ cd stable-diffusion-webui
 
 # Install requirement
 pip install -r requirements.txt
-pip install -r requirements_NPU.txt
+pip install -r requirements_npu.txt
 pip install -r requirements-versions.txt
 pip install -r requirements-test.txt
 
