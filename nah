@@ -6,7 +6,7 @@ cd workspace
 # Clone the repository into a temporary directory 
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git
 
-# Change to the cloned
+# Change to forge dir
 cd /workspace/stable-diffusion-webui-forge/
 
 # Install requirement
@@ -29,5 +29,8 @@ git clone https://github.com/deforum-art/sd-forge-deforum
 cd sd-forge-deforum
 pip install -r requirements.txt
 
+# Change to forge dir
+cd /workspace/stable-diffusion-webui-forge/
+
 # Execute Python script
-python3 launch.py
+python3 webui.py
