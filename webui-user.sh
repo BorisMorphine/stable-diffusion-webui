@@ -4,11 +4,11 @@
 #########################################################
 
 # Install directory without trailing slash
-A1111_home="/opt/"
+#export GIT=""
 
-install_dir="/opt/stable-diffusion-webui-forge"
+install_dir="/opt/stable-diffusion-webui"
 
-clone_dir="/opt/stable-diffusion-webui"
+clone_dir="/A1111"
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
 export COMMANDLINE_ARGS="--autostart"
@@ -16,9 +16,6 @@ export COMMANDLINE_ARGS="--autostart"
 # python3 executable
 python_cmd="python3 pip install -r requirements.txt, pip install -r requirements-test.txt,
 pip install -r requirements_NPU.txt, pip install -r requirements_versions.txt"
-
-# git executable
-#export GIT="git"
 
 # python3 venv without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
 venv_dir="webui"
@@ -42,7 +39,7 @@ export REQS_FILE="requirements.txt"
 #export BLIP_COMMIT_HASH=""
 
 # Uncomment to enable accelerated launch
-export ACCELERATE="True"
+#export ACCELERATE="True"
 
 # Uncomment to disable TCMalloc
 #export NO_TCMALLOC="True"
