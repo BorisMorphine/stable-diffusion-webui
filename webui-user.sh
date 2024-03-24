@@ -4,7 +4,7 @@ install_dir="/workspace"
 
 clone_dir="/workspace/stable-diffusion-webui-forge"
 
-venv_dir="/opts/micromamba/envs/webui/"
+venv_dir="/opts/micromamba/envs/webui"
 
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
