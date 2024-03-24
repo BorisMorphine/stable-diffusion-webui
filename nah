@@ -21,10 +21,10 @@ mv --force stable-diffusion-webui-temp stable-diffusion-webui
 cd stable-diffusion-webui
 
 # Install requirement
-pip install -r requirements.txt
-pip install -r requirements_npu.txt
-pip install -r requirements-versions.txt
-pip install -r requirements-test.txt
+pip install --upgrade -r requirements.txt
+pip install --upgrade -r requirements_npu.txt
+pip install --upgrade -r requirements-versions.txt
+pip install --upgrade -r requirements-test.txt
 
 # Download the required script into the current directory
 curl -sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh -o webui-user.sh
