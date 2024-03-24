@@ -1,5 +1,7 @@
 #!/bin/bash
 
+echo $PATH
+
 # Go to data dir
 cd workspace
 
