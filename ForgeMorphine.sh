@@ -20,18 +20,12 @@ pip install -r requirements_versions.txt
 pip install -r requirements_npu.txt
 pip install -r requirements-test.txt
 
-# Cleanup
-if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
-
 # Get and install Deforum
 cd /workspace/stable-diffusion-webui-forge/extensions
 git clone https://github.com/deforum-art/sd-forge-deforum
 
 cd /sd-forge-deforum
 pip install -r requirements.txt
-
-# Cleanup
-if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
 
 # Divert Traffic
 cd /workspace/stable-diffusion-webui
@@ -51,6 +45,10 @@ curl -o 16xPNSR.pth https://openmodeldb.info/models/16x-PSNR#:~:text=Download%20
 
 # Change back to forge dir
 cd /workspace/stable-diffusion-webui-forge
+
+# Cleanup
+echo $PATH
+if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
 
 # Dry run
 python3 webui.py
