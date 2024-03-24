@@ -20,8 +20,14 @@ mv --force stable-diffusion-webui-temp stable-diffusion-webui
 # Change to the cloned (and renamed) directory
 cd stable-diffusion-webui
 
+# Install requirement
+pip install -r requirements.txt
+pip install -r requirements_NPU.txt
+pip install -r requirements-versions.txt
+pip install -r requirements-test.txt
+
 # Download the required script into the current directory
 curl -sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh -o webui-user.sh
 
 # Execute Python script
-python3 launch.py
+python3 webui.py
