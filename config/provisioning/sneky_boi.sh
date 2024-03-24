@@ -31,6 +31,9 @@ lora_dir=${models_dir}/Lora
 vae_dir=${models_dir}/VAE
 esrgan_dir=${models_dir}/ESRGAN
 
+opt/stabe-diffusion-webui/models/ESRGAN
+
+
 cd ${ESRGAN}
 # throw in some shiny new upscalers...
 cd ${ESRGAN}
