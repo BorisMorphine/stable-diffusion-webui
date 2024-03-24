@@ -1,10 +1,10 @@
 #!/bin/bash
 
-########################_ADD_TO_ON_STARTUP_COMMANDS_#######################################################
+########################_UNCOMMIT_AND_ADD_TO_'ON_STARTUP'_COMMANDS_####################################################
 #supervisorctrl restart webui
 #curl https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/ForgeMorphine.sh sudo | bash
 #supervisorctrl restart webui
-########################_ADD_TO_ON_STARTUP_COMMANDS_#######################################################
+########################_UNCOMMIT_AND_ADD_TO_'ON_STARTUP'_COMMANDS_####################################################
 
 # Go to data dir
 cd /workspace
