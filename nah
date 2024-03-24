@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Go to data dir
-cd opt
+cd workspace
 
 # Clone the repository into a temporary directory 
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git
 
 # Change to the cloned
-cd /opt/stable-diffusion-webui-forge/
+cd /workspace/stable-diffusion-webui-forge/
 
 # Install requirement
 pip install -r requirements.txt
@@ -16,17 +16,17 @@ pip install -r requirements-test.txt
 pip install -r requirements_npu.txt
 
 # Get and install Deforum
-cd opt/stable-diffusion-webui-forge/exensions
+cd workspace/stable-diffusion-webui-forge/exensions
 git clone https://github.com/deforum-art/sd-forge-deforum
 
 cd sd-forge-deforum
 pip install -r requirements.txt
 
 # Divert Traffic
-cp opt/stable-diffusion-webui-forge/extensions/.ipnyb.checkpoints.py opt/stable-diffusion-webui/extensions/.ipnyb.checkpoints.py 
+cp workspace/stable-diffusion-webui-forge/extensions/.ipnyb.checkpoints.py opt/stable-diffusion-webui/extensions/.ipnyb.checkpoints.py 
 
 # Return to main SD Forge dir
-cd opt/stable-diffusion-webui-forge
+cd workspace/stable-diffusion-webui-forge
 
 # Download the required script into the current directory
 curl -sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh -o webui-user.sh
