@@ -8,6 +8,12 @@
 #supervisorctrl restart webui
 ########################_UNCOMMIT_AND_ADD_TO_'ON_STARTUP'_COMMANDS_####################################################
 
+-e install_dir="/opt"
+
+-e clone_dir="/opt/stable-diffusion-webui-forge"
+
+-e venv_dir="/opt/micromamba/envs/webui"
+
 # Go to data dir
 cd /opt
 
