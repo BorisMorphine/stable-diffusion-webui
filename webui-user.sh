@@ -1,8 +1,8 @@
 #!/bin/bash
 
-install_dir="/workspace"
+install_dir="/opt"
 
-clone_dir="/workspace/stable-diffusion-webui-forge"
+clone_dir="/opt/stable-diffusion-webui-forge"
 
 venv_dir="/opt/micromamba/envs/webui"
 
@@ -17,11 +17,11 @@ export GFPGAN_PATCH="pip install gfpgan"
 export SD_KIT="pip install sdkit"
 
 export COMMANDLINE_ARGS="
---ckpt-dir /workspace/stable-diffusion-webui-forge/models/ckpt
---hypernetwork-dir /workspace/stable-diffusion-webui-forge/models/hypernetworks
---embeddings-dir w/orkspace/stable-diffusion-webui-forge/embeddings
---lora-dir /workspace/stable-diffusion-webui-forge/models/lora
---esrgan-dir /workspace/storage/stable_diffusion/models/esrgan
+--ckpt-dir /opt/stable-diffusion-webui-forge/models/ckpt
+--hypernetwork-dir /opt/stable-diffusion-webui-forge/models/hypernetworks
+--embeddings-dir /opt/stable-diffusion-webui-forge/embeddings
+--lora-dir /opt/stable-diffusion-webui-forge/models/lora
+--esrgan-dir /opt/storage/stable_diffusion/models/esrgan
 --reinstall-x-formers
 --xformers
 --autostart
