@@ -15,8 +15,10 @@ export REQS_FILE="requirements.txt"
 export ACCELERATE="True"
 
 # Fixed git repos
-#export K_DIFFUSION_PACKAGE=""
-#export GFPGAN_PACKAGE=""
+export K_DIFFUSION_PACKAGE="pip install k-diffusion"
+export GFPGAN_PACKAGE="pip install gfpgan"
+export GFPGAN_PATCH="pip install gfpgan"
+export SD_KIT="pip install sdkit"
 
 # Fixed git commits
 #export STABLE_DIFFUSION_COMMIT_HASH=""
