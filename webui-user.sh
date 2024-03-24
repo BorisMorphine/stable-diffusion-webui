@@ -1,30 +1,18 @@
 #!/bin/bash
-#########################################################
-# Uncomment and change the variables below to your need:#
-#########################################################
 
-# Install directory without trailing slash
-install_dir="/opt/stable-diffusion-webui"
+install_dir="workspace/stable-diffusion-webui-forge"
 
-clone_dir="/opt/A1111/"
+clone_dir="workspace/stable-diffusion-webui"
 
-# Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
-export COMMANDLINE_ARGS="--autostart"
-
-# python3 executable
-#python_cmd="python3"
-
-# python3 venv without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
 venv_dir="/opt/micromamba/envs/webui/"
 
-# script to launch to start the app
-#export LAUNCH_SCRIPT="launch.py"
+export COMMANDLINE_ARGS="--autostart"
 
-# install command for torch
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
-# Requirements file to use for stable-diffusion-webui
 export REQS_FILE="requirements.txt"
+
+export ACCELERATE="True"
 
 # Fixed git repos
 #export K_DIFFUSION_PACKAGE=""
@@ -34,9 +22,6 @@ export REQS_FILE="requirements.txt"
 #export STABLE_DIFFUSION_COMMIT_HASH=""
 #export CODEFORMER_COMMIT_HASH=""
 #export BLIP_COMMIT_HASH=""
-
-# Uncomment to enable accelerated launch
-#export ACCELERATE="True"
 
 # Uncomment to disable TCMalloc
 #export NO_TCMALLOC="True"
