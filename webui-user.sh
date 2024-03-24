@@ -4,24 +4,21 @@
 #########################################################
 
 # Install directory without trailing slash
-#export GIT=""
-
 install_dir="/opt/stable-diffusion-webui"
 
-clone_dir="/A1111"
+clone_dir="/opt/A1111/"
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
 export COMMANDLINE_ARGS="--autostart"
 
 # python3 executable
-python_cmd="python3 pip install -r requirements.txt, pip install -r requirements-test.txt,
-pip install -r requirements_NPU.txt, pip install -r requirements_versions.txt"
+#python_cmd="python3"
 
 # python3 venv without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
-venv_dir="webui"
+venv_dir="/opt/micromamba/envs/webui/"
 
 # script to launch to start the app
-export LAUNCH_SCRIPT="launch.py"
+#export LAUNCH_SCRIPT="launch.py"
 
 # install command for torch
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
