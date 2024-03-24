@@ -11,11 +11,6 @@ export GFPGAN_PATCH="pip install gfpgan"
 export SD_KIT="pip install sdkit"
 
 export COMMANDLINE_ARGS="
---ckpt-dir /opt/stable-diffusion-webui-forge/models/ckpt
---hypernetwork-dir /opt/stable-diffusion-webui-forge/models/hypernetworks
---embeddings-dir /opt/stable-diffusion-webui-forge/embeddings
---lora-dir /opt/stable-diffusion-webui-forge/models/lora
---esrgan-dir /opt/storage/stable_diffusion/models/esrgan
 --reinstall-x-formers
 --xformers
 --autostart
