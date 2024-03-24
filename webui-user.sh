@@ -2,7 +2,7 @@
 
 install_dir="/workspace"
 
-clone_dir="/stable-diffusion-webui-forge"
+clone_dir="/workspace/stable-diffusion-webui-forge"
 
 venv_dir="/opts/micromamba/envs/webui/"
 
