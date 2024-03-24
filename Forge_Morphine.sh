@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ########################_UNCOMMIT_AND_ADD_TO_'ON_STARTUP'_COMMANDS_####################################################
-#supervisorctrl restart webui
 #echo $PATH
 #curl sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/Forge_Morphine.sh sudo | bash
 #if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
