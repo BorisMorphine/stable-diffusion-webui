@@ -1,11 +1,5 @@
 #!/bin/bash
 
-install_dir="/opt"
-
-clone_dir="/opt/stable-diffusion-webui-forge"
-
-venv_dir="/opt/micromamba/envs/webui"
-
 export REQS_FILE="/opt/stable-diffusion-webui-forge/requirements.txt"
 
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
