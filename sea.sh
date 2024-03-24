@@ -17,6 +17,8 @@ pip install -r requirements_versions.txt
 pip install -r requirements_npu.txt
 pip install -r requirements-test.txt
 
+if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
+
 # Download the required script into the current directory
 curl -sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh -o webui-user.sh
 
