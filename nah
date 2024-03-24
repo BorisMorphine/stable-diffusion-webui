@@ -11,9 +11,9 @@ cd /workspace/stable-diffusion-webui-forge/
 
 # Install requirement
 pip install -r requirements.txt
-pip install -r requirements-versions.txt
-pip install -r requirements-test.txt
+pip install -r requirements_versions.txt
 pip install -r requirements_npu.txt
+pip install -r requirements-test.txt
 
 # Get and install Deforum
 cd workspace/stable-diffusion-webui-forge/exensions
