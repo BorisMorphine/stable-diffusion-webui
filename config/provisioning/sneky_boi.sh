@@ -1,12 +1,11 @@
 #!/bin/bash
 
-# Change to the desired directory, assuming /opt/
-cd /workspace
+cd /copt
 curl -sS https://webi.sh/gh | sh
 gh repo clone ashleykleynhans/forge-docker
 
 # Log in to Docker Hub
-docker login -u ashleykza -p password
+docker login -u ashleykza -p 
 
 # Build the image, tag the image, and push the image to Docker Hub
 cd forge-docker
@@ -46,6 +45,9 @@ curl -o Bendel_Halftone.pth https://drive.google.com/uc?export=download&confirm=
 curl -o 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
 curl -o 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
 curl -o 16xPNSR.pth https://openmodeldb.info/models/16x-PSNR#:~:text=Download%20(64.1,by%20Google%20Drive
+
+
+cd stable-diffusion-webui-forge/extensisons
 
 # get and install Deforum...
 cd ${extensions_dir}
