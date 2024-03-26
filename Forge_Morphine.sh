@@ -34,6 +34,6 @@ git lfs install
 git clone https://huggingface.co/lllyasviel/sd_control_collection
 
 cd /workspace/forge
-wget -O webui-user.sh https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh sudo | bash
+wget -O https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/heavy-user.sh sudo | bash
 python3 launch.py
 
