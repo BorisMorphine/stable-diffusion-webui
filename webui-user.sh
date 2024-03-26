@@ -9,10 +9,10 @@ install_dir="/workspace"
 data_dir="/workspace"
 
 # Name of the subdirectory
-clone_dir="Forge"
+clone_dir="forge"
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
-export COMMANDLINE_ARGS="--port 3001 --listen --api —-data-dir /workspace —-subpath /Forge --xformers --enable-insecure-extension-access --no-half-vae
+export COMMANDLINE_ARGS="--port 3001 --listen --api —-data-dir /workspace —-subpath /forge --xformers --enable-insecure-extension-access --no-half-vae
 
 # python3 executable
 #python_cmd="python3"
