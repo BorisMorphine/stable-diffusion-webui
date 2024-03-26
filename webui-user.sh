@@ -11,7 +11,7 @@ export GFPGAN_PATCH="pip install gfpgan"
 export SD_KIT="pip install sdkit"
 
 export COMMANDLINE_ARGS="
---autostart
+--data-dir /opt/stable-diffusion-webui
 "
 
 #export ACCELERATE="True"
