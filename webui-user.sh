@@ -1,7 +1,7 @@
 #!/bin/bash
-#########################################################
-# Uncomment and change the variables below to your need:#
-#########################################################
+#########################_JUPYTER_###########################
+#-e DATA_DIRECTORY=/workspace/ -e JUPYTER_DIR=/ -e JUPYTER_PASSWORD=password -e PROVISIONING_SCRIPT="https://github.com/Roldondo/stable-diffusion-webui/blob/main/Forge_Morphine.sh"  -e WEBUI_FLAGS="--xformers --port 3001 --listen --api --deforuem-api --no-half-controlnet" -p 22:22 -p 1111:1111 -p 7860:7860 -p 8888:8888 -e OPEN_BUTTON_TOKEN=1 -e OPEN_BUTTON_PORT=1111
+#############################################################
 
 # Install directory without trailing slash
 install_dir="/workspace"
