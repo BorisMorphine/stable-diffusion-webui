@@ -1,68 +1,39 @@
+########################__FLAG__##############################################################
+#—-config https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh
+##############################################################################################
 #!/bin/bash
 
-########################_UNCOMMIT_AND_ADD_TO_'ON_STARTUP'_COMMANDS_####################################################
-#echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
-#python3 /opt/stable-diffusion-webui-forge/launch.py
-########################_UNCOMMIT_AND_ADD_TO_'ON_STARTUP'_COMMANDS_####################################################
+cd /
+pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezsynth GitPython Pillow accelerate blendmodes clean-fid einops facexlib fastapi>=0.90.1 gradio==3.41.2 inflection jsonmerge kornia lark numpy omegaconf open-clip-torch piexif psutil pytorch_lightning requests resize-right safetensors scikit-image>=0.19 tomesd torch torchdiffeq torchsde transformers==4.30.2 pytest-base-url~=2.0 pytest-cov~=4.0 pytest~=7.3 cloudpickle decorator synr==0.5.0 tornado
 
-# Go to root
-cd /root
+cd /workspace
+git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+git branch lllyasviel/main
+git checkout lllyasviel/main
+git fetch forge
+git branch -u forge/main
+git pull
 
-# Clone the repository into a temporary directory 
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git 
+cd /extensions
+git remote add animateddiff https://github.com/continue-revolution/sd-forge-animatediff
+git branch forge-master
+git checkout forge-master
+git fetch forge
+git branch -u forge-master
+git pull
 
-# cd into the new repo...
-cd /root/stable-diffusion-webui-forge
-
-# now, download the required web-ui script into the current directory...
-curl -sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh -o webui-user.sh
-
-# and install requirements.
-pip install -r requirements.txt
-pip install -r requirements_versions.txt
-pip install -r requirements_npu.txt
-pip install -r requirements-test.txt
-
-# Most important guy in the room.
--e webui_dir=/root/stable-diffusion-webui-forge
--e models_dir=${webui_dir}/models
--e sd_models_dir=${models_dir}/Stable-diffusion
--e extensions_dir=${webui_dir}/extensions
--e cn_models_dir=${extensions_dir}/sd-webui-controlnet/models
--e vae_models_dir=${models_dir}/VAE
--e upscale_models_dir=${models_dir}/ESRGAN
-
-# throw in some shiny new upscalers...
-cd ${ESRGAN}
-curl -o 4xUltraSharp.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/vRYVhaDA
-curl -o 4xUltraMix_Balanced.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-curl -o 4xUltraMix_Restore.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-curl -o 4xUltraMix_Smooth.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT
-curl -o 4x-FSDedither.pth https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w
-curl -o Bendel_Halftone.pth https://drive.google.com/uc?export=download&confirm=1&id=1vR_tvWNi8jXhXdmgW5xvWsQp0pXN3ge-
-curl -o 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
-curl -o 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
-curl -o 16xPNSR.pth https://openmodeldb.info/models/16x-PSNR#:~:text=Download%20(64.1,by%20Google%20Drive
-
-# get and install Deforum...
-cd ${extensions_dir}
-git clone https://github.com/deforum-art/sd-forge-deforum.git
-
-cd ${extensions_dir}/sd-forge-deforum
+cd /workspace/forge/extensions
+git clone Deforum https://github.com/deforum-art/sd-forge-deforum.git
+cd Deforum
 pip install -r requirements.txt
 
-# change back to forge dir and cleanup...
-cd ${webui_dir}
-echo $PATH
-if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
+cd /workspace/forge/extensions
+git clone ControlNet https://github.com/lllyasviel/ControlNet-v1-1-nightly.git
+cd/ControlNet
+git lfs install
+git clone https://huggingface.co/lllyasviel/sd_control_collection
 
-# export all
-mkdir /opt/stable-diffusion-webui-forge
-cp /root/stable-diffusion-webui-forge /opt/stable-diffusion-webui-forge
-cd ${webui_dir}
-
-# dry-run
-python3 webui.py
-
-# Execute launch script
+cd /workspace/forge
+wget -O webui-user.sh https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh sudo | bash
 python3 launch.py
+
