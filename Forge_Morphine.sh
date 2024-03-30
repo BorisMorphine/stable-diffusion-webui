@@ -1,8 +1,5 @@
-########################__FLAG__##############################################################
-#—-config https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh
-##############################################################################################
 #!/bin/bash
-
+cd /opt/stable-diffusion-webui
 sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
@@ -29,6 +26,11 @@ git fetch forge
 git branch -u forge-master
 git pull
 
+cd /opt/stable-diffusion-webui/models
+mkdir annotators
+cd annotators
+git clone https://huggingface.co/lllyasviel/Annotators
+
 # Setting download directory paths: 
 set annotators_models_dir="/workspace/stable-diffusion-webui/models/annotators"
 set safetensors_models_dir="/workspace/stable-diffusion-webui/models/Stable-diffusion"
@@ -46,12 +48,7 @@ set lora_models_dir="/opt/stable-diffusion-webui/models/Lora"
 set reactor_models_dir="/opt/stable-diffusion-webui/models/reactor"
 set swinIR_modles_dir="/opt/stable-diffusion-webui/models/swinIR"
 set vae_models_dir="/opt/stable-diffusion-webui/models/VAE"
-set vae_approx_models_dir="/opt/stable-diffusion-webui/models/VAE-approx"
-
-cd workspace/stable-diffusion-webui/models/
-mkdir annotators
-cd annotators
-git clone https://huggingface.co/lllyasviel/Annotators
+set vae_approx_models_dir="/opt/stable-diffusion-webui/models/VAE-approx
 
 cd ${esrgan_models_dir}
 curl -o 4xUltraSharp.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/vRYVhaDA
