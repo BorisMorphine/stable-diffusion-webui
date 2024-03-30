@@ -1,18 +1,15 @@
 #!/bin/bash
-#########################_JUPYTER_###########################
-####-e DATA_DIRECTORY=/workspace/ -e JUPYTER_DIR=/ -e JUPYTER_PASSWORD=password -e PROVISIONING_SCRIPT="https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/Forge_Morphine.sh"  -e WEBUI_FLAGS="--xformers --port 3001 --listen --api --deforuem-api --no-half-controlnet" -p 22:22 -p 1111:1111 -p 7860:7860 -p 8888:8888 -e OPEN_BUTTON_TOKEN=1 -e OPEN_BUTTON_PORT=1111
-#############################################################
 
 # Install directory without trailing slash
-install_dir="/workspace"
+install_dir="/opt"
 
 data_dir="/workspace"
 
 # Name of the subdirectory
-clone_dir="forge"
+clone_dir="stable-diffusion-webui"
 
 # Commandline arguments for webui.py, for example: export COMMANDLINE_ARGS="--medvram --opt-split-attention"
-export COMMANDLINE_ARGS="--port 3001 --listen --api —-data-dir /workspace —-subpath /forge --xformers --enable-insecure-extension-access --no-half-vae
+export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
 
 # python3 executable
 #python_cmd="python3"
