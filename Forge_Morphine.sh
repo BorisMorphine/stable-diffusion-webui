@@ -1,32 +1,29 @@
 #!/bin/bash
 
-# To run this script in CLI uncommit and use:
-# wget https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/Forge_Morphine.sh
-# chmod +x Forge_Morphine.sh
-# sudo ./Forge_Morphine.sh
-
-# Setup environment and configuration for Stable Diffusion WebUI
-
 # Check if we are on Debian or Ubuntu
 if [[ "$(lsb_release -is)" == "Debian" ]] || [[ "$(lsb_release -is)" == "Ubuntu" ]]; then
-    echo "Installing python3.10-venv..."
-    sudo apt update && sudo apt install -y python3.10-venv
+    echo "Installing dependencies..."
+    sudo apt update && sudo apt install -y git-lfs
 else
     echo "This setup script is intended for Debian or Ubuntu systems."
+    exit 1  # Exit if not Debian or Ubuntu
 fi
 
-# Base directory for the installation
+# Directories setup
 data_dir="/workspace"
 install_dir="/workspace"
+clone_dir="${install_dir}/stable-diffusion-webui"
+workspace="${clone_dir}/stable-diffusion-webui-forge"
+REQS_FILE="${clone_dir}/requirements.txt"
 
-export A1111_HOME="${install_dir}/${clone_dir}/venv"
-venv_dir="$A1111_HOME/venv"
+# Sync directory setup
+sync_dir="/home/user/Sync"
+rsync -av "${workspace}/" "${sync_dir}/"
+echo "Synced ${workspace} to ${sync_dir}"
 
-# Subdirectory for the cloned project
-clone_dir="stable-diffusion-webui"
-
-# Command-line arguments for webui.py
+# Configuration for environment and operations
 export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
+# Assuming COMMANDLINE_ARGS uses variables defined elsewhere for paths
 
 # Configuration for Git and the launch script
 export GIT="git"
@@ -35,19 +32,9 @@ export LAUNCH_SCRIPT="launch.py"
 # Command to install PyTorch (adjust as necessary for your setup)
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
-# Requirements file for dependency installation
-export REQS_FILE="requirements_versions.txt"
-
-export COMMANDLINE_ARGS="$COMMANDLINE_ARGS --ckpt-dir $A1111_HOME/models/Stable-diffusion --hypernetwork-dir $A1111_HOME/models/hypernetworks --embeddings-dir $A1111_HOME/embeddings --lora-dir $A1111_HOME/models/Lora"
-
-# Navigate to the installation directory and prepare the virtual environment
-cd "${install_dir}/${clone_dir}"
-
-# Create and activate the virtual environment
-if [ ! -d "$venv_dir" ]; then
-    python3 -m venv "$venv_dir"
-fi
-source "${venv_dir}/bin/activate"
+# Assuming micromamba is correctly set up and configured on the system
+eval "$(micromamba shell hook --shell=bash)"
+micromamba activate webui
 
 # Install PyTorch and other dependencies
 eval "$TORCH_COMMAND"
