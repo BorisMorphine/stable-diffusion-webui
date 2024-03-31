@@ -1,40 +1,38 @@
-rt #!/bin/bash
+#!/bin/bash
 
-# Check if we are on Debian or Ubuntu
-if [[ "$(lsb_release -is)" == "Debian" ]] || [[ "$(lsb_release -is)" == "Ubuntu" ]]; then
-    echo "Installing dependencies..."
-    sudo apt update && sudo apt install -y git-lfs
+# Check if we are on Debian or Ubuntu for dependency installation
+if command -v lsb_release &> /dev/null; then
+    if [[ "$(lsb_release -is)" == "Debian" ]] || [[ "$(lsb_release -is)" == "Ubuntu" ]]; then
+        echo "Installing dependencies..."
+        sudo apt update && sudo apt install -y git-lfs
+    else
+        echo "This setup script is intended for Debian or Ubuntu systems."
+        exit 1  # Exit if not Debian or Ubuntu
+    fi
 else
-    echo "This setup script is intended for Debian or Ubuntu systems."
-    exit 1  # Exit if not Debian or Ubuntu
+    echo "lsb_release command not found. Skipping system-specific dependency checks."
 fi
 
 # Assuming micromamba is correctly set up and configured on the system
-eval "$(micromamba shell hook --shell=bash)"
-micromamba activate webui
-
-# Git operations for Stable Diffusion WebUI fork
-if ! git remote | grep -q forge; then
-    sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
-fi
-sudo git fetch forge
-sudo git checkout -b lllyasviel-main forge/main || sudo git checkout lllyasviel-main
-sudo git config --global pull.rebase false
+# Note: This part is specific to Linux and might not work on Git Bash without WSL
+if command -v micromamba &> /dev/null; then
+    eval "$(micromamba shell hook --shell=bash)"
+    micromamba activate webui
+else
+    echo "Micromamba is not installed or not found in the PATH."
+    exit 1
 fi
 
 # Directories setup
-data_dir="workspace"
-install_dir="workspace"
-clone_dir="stable-diffuision-webui"
-forge_dir="stable-diffusion-webui-forge"
-sync_dir="workspace/Home/sync"
-rsync -av "${clone_dir}/" "/${sync_dir}/"
-echo "Synced ${workspace} to ${sync_dir}"
+data_dir="/workspace"
+install_dir="/workspace"
+clone_dir="${install_dir}/stable-diffusion-webui"
+forge_dir="${clone_dir}/stable-diffusion-webui-forge"
+sync_dir="${data_dir}/Home/sync"  # Adjusted for consistency
 
-# Sync directory setup
-Sync_dir="/workspace/home/user/Sync"
-rsync -av "${A1111_home}/" "/${Forge_home}/"
-echo "Synced ${A1111_home} to ${sync_dir}"
+# Sync directory setup - Example using rsync, available in Git Bash
+rsync -av "${forge_dir}/" "${sync_dir}/"
+echo "Synced ${forge_dir} to ${sync_dir}"
 
 # Configuration for environment and operations
 export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
@@ -49,46 +47,35 @@ export REQS_FILE="${clone_dir}/requirements.txt"
 # Command to install PyTorch (adjust as necessary for your setup)
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
-# Navigate to the installation directory and prepare the virtual environment
-cd "${clone_dir}"
+# Navigate to the installation directory and prepare for operations
+cd "${clone_dir}" || exit
 
 # Install PyTorch and other dependencies
 eval "$TORCH_COMMAND"
 pip install -r "$REQS_FILE"
 
-# Set Forge environment variables for main repos
-export extensions="${workspace_dir}/extensions"
-export embeddings="${workspace_dir}/embeddings"
-export models="${workspace_dir}/models"
+# Ensure the git directory is correctly set before executing git operations
+cd "/opt/stable-diffusion-webui" || exit
+if ! git remote | grep -q forge; then
+    sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+fi
+sudo git fetch forge
+sudo git checkout -b lllyasviel-main forge/main || sudo git checkout lllyasviel-main
+sudo git config --global pull.rebase false
 
-# Set environment variables for boilerplate functions
-export ckpt="${models}/Stable-diffusion"
-export lora="${models}/Lora"
-export vae="${models}/VAE"
-export hypernetworks="${models}/hypernetworks"
-export ESRGAN="${models}/ESRGAN"
+# Clone IceClear StableSR if the extension doesn't exist
+if [ ! -d "${forge_dir}/extensions/StableSR" ]; then
+    mkdir -p "${forge_dir}/extensions"
+    cd "${forge_dir}/extensions" || exit
+    sudo git clone https://github.com/IceClear/StableSR.git
+fi
 
-# Set environment variables for model directories
-annotators_dir="${models}/annnotators"
-codeformers_dir="${models}/Codeformer"
-controlnet_dir="${models}/ControlNet"
-deepbooru_dir="${models}/deepbooru"
-dreambooth_dir="${models}/dreambooth"
-gfpgan_dir="${models}/GFPGAN"
-insightface_dir="${models}/insightface"
-karlo_dir="${models}/models/karlo"
-LDSR_dir="${models}/LDSR"
-swinIR_dir="${models}/swinIR"
-vae_approx_dir="${models}/VAE-approx"
-
-# Setup additional repositories (ensure you're in the correct directory for these operations)
-install git lfs
-cd ${controlnet_dir}
-git lfs
-git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
-git lfs
-git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
-https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5-inpainting.safetensors
+# Clone DeOldify if the extension doesn't exist
+if [ ! -d "${forge_dir}/models/DeOldify" ]; then
+    mkdir -p "${forge_dir}/models"
+    cd "${forge_dir}/models" || exit
+    sudo git clone https://github.com/jantic/DeOldify.git
+fi
 
 cd ${ESRGAN}
 wget -O 4xUltraSharp.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
@@ -113,19 +100,6 @@ wget -O weird_lanscape.safetensors https://civitai.com/api/download/models/30933
 wget -O sheet_of_acid.sadetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
 wget -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Model&format=SafeTensor
 
-# Clone IceClear StableSR if the extension doesn't exist
-if [ ! -d "/workspace/stable-diffusion-webui-forge/extensions/StableSR" ]; then
-    cd opt/stable-diffusion-webui-forge/extensions/
-    sudo git clone https://github.com/IceClear/StableSR.git
-fi
-
-# Clone DeOldify if the extension doesn't exist
-if [ ! -d "/workspace/stable-diffusion-webui-forge/models/DeOldify" ]; then
-    cd ${extensions}
-    sudo git clone https://github.com/jantic/DeOldify.git
-    # Build DeOldify
-    cd /models
-git clone https://github.com/SpenserCai/modles/sd-webui-deoldify.git
 cd ${extensions}/DeOldify/models/Deoldify
 wget -O ColorizeArtistic_gen.pth https://data.deepai.org/deoldify/ColorizeArtistic_gen.pth
 wget -O ColorizeArtistic_crit https://www.dropbox.com/s/xpq2ip9occuzgen/ColorizeArtistic_crit.pth
