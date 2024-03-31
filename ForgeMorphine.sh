@@ -13,19 +13,31 @@ fi
 eval "$(micromamba shell hook --shell=bash)"
 micromamba activate webui
 
-# Directories setup
-data_dir="/workspace"
-install_dir="/workspace"
-clone_dir="${install_dir}/stable-diffusion-webui"
-workspace="${clone_dir}/stable-diffusion-webui-forge"
+# Git operations for Stable Diffusion WebUI fork
+if ! git remote | grep -q forge; then
+    sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+fi
+sudo git fetch forge
+sudo git checkout -b lllyasviel-main forge/main || sudo git checkout lllyasviel-main
+sudo git config --global pull.rebase false
+fi
 
-# Sync directory setup
-sync_dir="workspace/home/user/Sync"
-rsync -av "${workspace}/" "/${sync_dir}/"
+# Directories setup
+data_dir="workspace"
+install_dir="workspace"
+clone_dir="stable-diffuision-webui"
+forge_dir="stable-diffusion-webui-forge"
+sync_dir="workspace/Home/sync"
+rsync -av "${clone_dir}/" "/${sync_dir}/"
 echo "Synced ${workspace} to ${sync_dir}"
 
+# Sync directory setup
+Sync_dir="/workspace/home/user/Sync"
+rsync -av "${A1111_home}/" "/${Forge_home}/"
+echo "Synced ${A1111_home} to ${sync_dir}"
+
 # Configuration for environment and operations
-export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
+export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
 
 # Configuration for Git and the launch script
 export GIT="git"
@@ -44,30 +56,12 @@ cd "${clone_dir}"
 eval "$TORCH_COMMAND"
 pip install -r "$REQS_FILE"
 
-# Git operations for Stable Diffusion WebUI fork
-if ! git remote | grep -q forge; then
-    sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
-fi
-sudo git fetch forge
-sudo git checkout -b lllyasviel-main forge/main || sudo git checkout lllyasviel-main
-sudo git config --global pull.rebase false
+# Set Forge environment variables for main repos
+export extensions="${workspace_dir}/extensions"
+export embeddings="${workspace_dir}/embeddings"
+export models="${workspace_dir}/models"
 
-fi
-# Clone IceClear StableSR if the extension doesn't exist
-if [ ! -d "/workspace/stable-diffusion-webui-forge/extensions/StableSR" ]; then
-    cd opt/stable-diffusion-webui-forge/extensions/
-    sudo git clone https://github.com/IceClear/StableSR.git
-fi
-
-# Clone DeOldify if the extension doesn't exist
-if [ ! -d "/workspace/stable-diffusion-webui-forge/models/DeOldify" ]; then
-    cd opt/stable-diffusion-webui-forge/extensions/
-    sudo git clone https://github.com/jantic/DeOldify.git
-
-# Set environment variables for directories
-export extensions="${data_dir}/extensions"
-export embeddings="${data_dir}/embeddings"
-export models="${data_dir}/models"
+# Set environment variables for boilerplate functions
 export ckpt="${models}/Stable-diffusion"
 export lora="${models}/Lora"
 export vae="${models}/VAE"
@@ -119,14 +113,18 @@ wget -O weird_lanscape.safetensors https://civitai.com/api/download/models/30933
 wget -O sheet_of_acid.sadetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
 wget -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Model&format=SafeTensor
 
-# Build StableSR
-cd ${extensions}
-git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git
-cd /scripts
-wget -O stablesr_turbo.ckpt https://huggingface.co/Iceclear/StableSR/blob/main/stablesr_turbo.ckpt
+# Clone IceClear StableSR if the extension doesn't exist
+if [ ! -d "/workspace/stable-diffusion-webui-forge/extensions/StableSR" ]; then
+    cd opt/stable-diffusion-webui-forge/extensions/
+    sudo git clone https://github.com/IceClear/StableSR.git
+fi
 
-# Build DeOldify
-cd ${extensions}
+# Clone DeOldify if the extension doesn't exist
+if [ ! -d "/workspace/stable-diffusion-webui-forge/models/DeOldify" ]; then
+    cd ${extensions}
+    sudo git clone https://github.com/jantic/DeOldify.git
+    # Build DeOldify
+    cd /models
 git clone https://github.com/SpenserCai/modles/sd-webui-deoldify.git
 cd ${extensions}/DeOldify/models/Deoldify
 wget -O ColorizeArtistic_gen.pth https://data.deepai.org/deoldify/ColorizeArtistic_gen.pth
