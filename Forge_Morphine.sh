@@ -1,5 +1,7 @@
 #!/bin/bash
 
+#!/bin/bash
+
 # Check if we are on Debian or Ubuntu
 if [[ "$(lsb_release -is)" == "Debian" ]] || [[ "$(lsb_release -is)" == "Ubuntu" ]]; then
     echo "Installing dependencies..."
@@ -9,11 +11,17 @@ else
     exit 1  # Exit if not Debian or Ubuntu
 fi
 
+# Assuming micromamba is correctly set up and configured on the system
+eval "$(micromamba shell hook --shell=bash)"
+micromamba activate webui
+
 # Directories setup
 data_dir="/workspace"
 install_dir="/workspace"
 clone_dir="${install_dir}/stable-diffusion-webui"
 workspace="${clone_dir}/stable-diffusion-webui-forge"
+
+# Path to the requirements file
 REQS_FILE="${clone_dir}/requirements.txt"
 
 # Sync directory setup
@@ -23,7 +31,6 @@ echo "Synced ${workspace} to ${sync_dir}"
 
 # Configuration for environment and operations
 export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
-# Assuming COMMANDLINE_ARGS uses variables defined elsewhere for paths
 
 # Configuration for Git and the launch script
 export GIT="git"
@@ -32,16 +39,14 @@ export LAUNCH_SCRIPT="launch.py"
 # Command to install PyTorch (adjust as necessary for your setup)
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
-# Assuming micromamba is correctly set up and configured on the system
-eval "$(micromamba shell hook --shell=bash)"
-micromamba activate webui
+# Navigate to the installation directory and prepare the virtual environment
+cd "${clone_dir}"
 
 # Install PyTorch and other dependencies
 eval "$TORCH_COMMAND"
 pip install -r "$REQS_FILE"
 
 # Git operations for Stable Diffusion WebUI fork
-cd /opt/stable-diffusion-webui
 if ! git remote | grep -q forge; then
     sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 fi
