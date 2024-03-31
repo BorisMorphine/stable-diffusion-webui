@@ -55,8 +55,8 @@ eval "$TORCH_COMMAND"
 pip install -r "$REQS_FILE"
 
 # Ensure the git directory is correctly set before executing git operations
-cd "/opt/stable-diffusion-webui" || exit
-if ! git remote | grep -q forge; then
+cd "/workspace" || exit
+if ! git remote | grep -q stable-diffusion-webui-forge; then
     sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 fi
 sudo git fetch forge
@@ -93,7 +93,7 @@ wget -O 4xLSDIRplus.pth https://github.com/Phhofm/models/blob/main/4xLSDIRplus/4
 wget -0 BSRGAN https://github.com/cszn/KAIR/releases/download/v1.0/BSRGAN.pth
 
 cd ${ckpt}
-wget https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.safetensors
+wget DreamShaper_v2.1_TURBO_DPM++_SDE https://civitai.com/api/download/models/351306?type=Model&format=SafeTensor&size=full&fp=fp16
 
 cd ${lora}
 wget -O weird_lanscape.safetensors https://civitai.com/api/download/models/309330?type=Model&format=SafeTensor
