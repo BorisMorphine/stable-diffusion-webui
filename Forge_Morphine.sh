@@ -2,35 +2,23 @@
 
 cd /opt/stable-diffusion-webui
 sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
-git branch lllyasviel/main
-git checkout lllyasviel/main
-git fetch forge
-git branch -u forge/main
-git pull
+sudo git branch lllyasviel/main
+sudo git checkout lllyasviel/main
+sudo git fetch forge
+sudo git branch -u forge/main
+sudo git pull
 
-# rebase
-#git config --global pull.rebase true
+sudo git config --global pull.rebase true
 
-# merge
-git config --global pull.rebase false
-
-wget bash https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
+sudo wget bash https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
 
 cd /
-pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezsynth GitPython Pillow accelerate blendmodes clean-fid einops facexlib fastapi>=0.90.1 gradio==3.41.2 inflection jsonmerge kornia lark numpy omegaconf open-clip-torch piexif psutil pytorch_lightning requests resize-right safetensors scikit-image>=0.19 tomesd torch torchdiffeq torchsde transformers==4.30.2 pytest-base-url~=2.0 pytest-cov~=4.0 pytest~=7.3 cloudpickle decorator synr==0.5.0 tornado
-
-cd /opt/stable-diffusion-webui-forge/extensions
-git remote add animateddiff https://github.com/continue-revolution/sd-forge-animatediff
-git branch forge-master
-git checkout forge-master
-git fetch forge
-git branch -u forge-master
-git pull
+sudo pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezsynth GitPython Pillow accelerate blendmodes clean-fid einops facexlib fastapi>=0.90.1 gradio==3.41.2 inflection jsonmerge kornia lark numpy omegaconf open-clip-torch piexif psutil pytorch_lightning requests resize-right safetensors scikit-image>=0.19 tomesd torch torchdiffeq torchsde transformers==4.30.2 pytest-base-url~=2.0 pytest-cov~=4.0 pytest~=7.3 cloudpickle decorator synr==0.5.0 tornado
 
 cd /opt/stable-diffusion-webui-forge/models
-mkdir annotators
+sudo mkdir annotators
 cd annotators
-git clone https://huggingface.co/lllyasviel/Annotators
+sudo git clone https://huggingface.co/lllyasviel/Annotators
 
 # Setting download directory paths: 
 set annotators_models_dir="/workspace/stable-diffusion-webui/models/annotators"
@@ -52,23 +40,23 @@ set vae_models_dir="/opt/stable-diffusion-webui/models/VAE"
 set vae_approx_models_dir="/opt/stable-diffusion-webui/models/VAE-approx
 
 cd ${esrgan_models_dir}
-curl -o 4xUltraSharp.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/vRYVhaDA
-curl -o 4xUltraMix_Balanced.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-curl -o 4xUltraMix_Restore.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-curl -o 4xUltraMix_Smooth.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT
-curl -o 4x-FSDedither.pth https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w
-curl -o Bendel_Halftone.pth https://drive.google.com/uc?export=download&confirm=1&id=1vR_tvWNi8jXhXdmgW5xvWsQp0pXN3ge-
-curl -o 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
-curl -o 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
-wget https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
+curl -O 4xUltraSharp.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/vRYVhaDA
+curl -O 4xUltraMix_Balanced.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
+curl -O 4xUltraMix_Restore.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
+curl -O 4xUltraMix_Smooth.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT
+curl -O 4x-FSDedither.pth https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w
+curl -O Bendel_Halftone.pth https://drive.google.com/uc?export=download&confirm=1&id=1vR_tvWNi8jXhXdmgW5xvWsQp0pXN3ge-
+curl -O 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
+curl -O 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
+curl -O https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
 
 cd ${Lora_models_dir}
-https://civitai.com/models/292351
-https://civitai.com/models/234351
-https://civitai.com/models/274425
-https://civitai.com/models/187082
-https://civitai.com/models/263993
-https://civitai.com/models/335970
+wget https://civitai.com/models/292351
+wget https://civitai.com/models/234351
+wget https://civitai.com/models/274425
+wget https://civitai.com/models/187082
+wget https://civitai.com/models/263993
+wget https://civitai.com/models/335970
 
 cd ${controlnet_models_dir}
 git lfs install
