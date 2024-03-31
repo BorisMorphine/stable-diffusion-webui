@@ -1,5 +1,55 @@
 #!/bin/bash
 
+# Setup environment and configuration for Stable Diffusion WebUI
+
+# Install directory without trailing slash
+data_dir="/workspace"
+install_dir="/workspace"
+
+# Name of the subdirectory for the clone
+clone_dir="stable-diffusion-webui"
+
+# Python3 virtual environment directory without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
+venv_dir="${install_dir}/${clone_dir}/venv"
+
+# Define command-line arguments for webui.py
+export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
+
+# Define the git executable environment variable
+export GIT="git"
+
+# Define the script to launch to start the app
+export LAUNCH_SCRIPT="launch.py"
+
+# Define the install command for torch, adjusting the version and CUDA version as necessary
+export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
+
+# Specify the requirements file to use for stable-diffusion-webui
+export REQS_FILE="requirements_versions.txt"
+
+# Assuming git clone has been done, setup Python virtual environment, and install dependencies
+cd "${install_dir}/${clone_dir}"
+
+# Create Python virtual environment if it doesn't exist
+if [ ! -d "$venv_dir" ]; then
+    python3 -m venv "$venv_dir"
+fi
+
+# Activate the virtual environment
+source "${venv_dir}/bin/activate"
+
+# Install PyTorch with specified command
+eval "$TORCH_COMMAND"
+
+# Install other dependencies from the requirements file
+pip install -r "$REQS_FILE"
+
+# Additional setup steps can go here
+# For example, setting up additional model directories or downloading specific models as needed
+
+# Deactivate the virtual environment
+# deactivate
+
 # Navigating to the Stable Diffusion WebUI directory
 cd /opt/stable-diffusion-webui
 
