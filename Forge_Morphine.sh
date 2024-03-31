@@ -6,11 +6,11 @@
 data_dir="/workspace"
 install_dir="/workspace"
 
+export A1111_HOME="${install_dir}/${clone_dir}/venv"
+venv_dir="$A1111_HOME/venv"
+
 # Subdirectory for the cloned project
 clone_dir="stable-diffusion-webui"
-
-# Virtual environment directory (defaults to a specific path within the install directory)
-venv_dir="${install_dir}/${clone_dir}/venv"
 
 # Command-line arguments for webui.py
 export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
@@ -24,6 +24,8 @@ export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://
 
 # Requirements file for dependency installation
 export REQS_FILE="requirements_versions.txt"
+
+export COMMANDLINE_ARGS="$COMMANDLINE_ARGS --ckpt-dir $A1111_HOME/models/Stable-diffusion --hypernetwork-dir $A1111_HOME/models/hypernetworks --embeddings-dir $A1111_HOME/embeddings --lora-dir $A1111_HOME/models/Lora"
 
 # Navigate to the installation directory and prepare the virtual environment
 cd "${install_dir}/${clone_dir}"
@@ -56,8 +58,6 @@ fi
 
 # Set environment variables for model directories
 export annotators_models_dir="/opt/stable-diffusion-webui/models/annotators"
-
-# Setting model directory paths as environment variables
 export annotators_models_dir="/opt/stable-diffusion-webui/models/annotators"
 export safetensors_models_dir="/opt/stable-diffusion-webui/models/Stable-diffusion"
 export codeformer_models_dir="/opt/stable-diffusion-webui/models/Codeformer"
@@ -77,6 +77,7 @@ export vae_models_dir="/opt/stable-diffusion-webui/models/VAE"
 export vae_approx_models_dir="/opt/stable-diffusion-webui/models/VAE-approx"
 
 # Setup additional repositories (ensure you're in the correct directory for these operations)
+install git lfs
 cd ${controlnet_models_dir}
 git lfs install
 git clone https://huggingface.co/lllyasviel/sd_control_collection
