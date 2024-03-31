@@ -1,4 +1,5 @@
 #!/bin/bash
+
 cd /opt/stable-diffusion-webui
 sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
@@ -7,15 +8,18 @@ git fetch forge
 git branch -u forge/main
 git pull
 
-git config --global pull.rebase true
-#git config --global pull.rebase false (merge)
+# rebase
+#git config --global pull.rebase true
+
+# merge
+git config --global pull.rebase false
 
 wget bash https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
 
 cd /
 pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezsynth GitPython Pillow accelerate blendmodes clean-fid einops facexlib fastapi>=0.90.1 gradio==3.41.2 inflection jsonmerge kornia lark numpy omegaconf open-clip-torch piexif psutil pytorch_lightning requests resize-right safetensors scikit-image>=0.19 tomesd torch torchdiffeq torchsde transformers==4.30.2 pytest-base-url~=2.0 pytest-cov~=4.0 pytest~=7.3 cloudpickle decorator synr==0.5.0 tornado
 
-cd /workspace
+cd /opt/stable-diffusion-webui-forge/extensions
 git remote add animateddiff https://github.com/continue-revolution/sd-forge-animatediff
 git branch forge-master
 git checkout forge-master
@@ -23,7 +27,7 @@ git fetch forge
 git branch -u forge-master
 git pull
 
-cd /opt/stable-diffusion-webui/models
+cd /opt/stable-diffusion-webui-forge/models
 mkdir annotators
 cd annotators
 git clone https://huggingface.co/lllyasviel/Annotators
@@ -57,7 +61,6 @@ curl -o Bendel_Halftone.pth https://drive.google.com/uc?export=download&confirm=
 curl -o 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
 curl -o 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
 wget https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
-Copied!
 
 cd ${Lora_models_dir}
 https://civitai.com/models/292351
