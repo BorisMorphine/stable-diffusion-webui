@@ -1,81 +1,29 @@
 #!/bin/bash
 
-# Check if we are on Debian or Ubuntu for dependency installation
-if command -v lsb_release &> /dev/null; then
-    if [[ "$(lsb_release -is)" == "Debian" ]] || [[ "$(lsb_release -is)" == "Ubuntu" ]]; then
-        echo "Installing dependencies..."
-        sudo apt update && sudo apt install -y git-lfs
-    else
-        echo "This setup script is intended for Debian or Ubuntu systems."
-        exit 1  # Exit if not Debian or Ubuntu
-    fi
-else
-    echo "lsb_release command not found. Skipping system-specific dependency checks."
-fi
+# Install Instructions from Dev
+git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+git branch lllyasviel/main
+git checkout lllyasviel/main
+git fetch forge
+git branch -u forge/main
+git pull
 
-# Assuming micromamba is correctly set up and configured on the system
-# Note: This part is specific to Linux and might not work on Git Bash without WSL
-if command -v micromamba &> /dev/null; then
-    eval "$(micromamba shell hook --shell=bash)"
-    micromamba activate webui
-else
-    echo "Micromamba is not installed or not found in the PATH."
-    exit 1
-fi
+cd /extensions
+git remote add animateddiff https://github.com/continue-revolution/sd-forge-animatediff
+git branch forge-master
+git checkout forge-master
+git fetch forge
+git branch -u forge-master
+git pull
 
-# Directories setup
-data_dir="/workspace"
-install_dir="/workspace"
-clone_dir="${install_dir}/stable-diffusion-webui"
-forge_dir="${clone_dir}/stable-diffusion-webui-forge"
-sync_dir="${data_dir}/Home/sync"  # Adjusted for consistency
-
-# Sync directory setup - Example using rsync, available in Git Bash
-rsync -av "${forge_dir}/" "${sync_dir}/"
-echo "Synced ${forge_dir} to ${sync_dir}"
-
-# Configuration for environment and operations
-export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
-
-# Configuration for Git and the launch script
-export GIT="git"
-export LAUNCH_SCRIPT="launch.py"
-
-# Path to the requirements file
-export REQS_FILE="${clone_dir}/requirements.txt"
-
-# Command to install PyTorch (adjust as necessary for your setup)
-export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
-
-# Navigate to the installation directory and prepare for operations
-cd "${clone_dir}" || exit
-
-# Install PyTorch and other dependencies
-eval "$TORCH_COMMAND"
-pip install -r "$REQS_FILE"
-
-# Ensure the git directory is correctly set before executing git operations
-cd "/workspace" || exit
-if ! git remote | grep -q stable-diffusion-webui-forge; then
-    sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
-fi
-sudo git fetch forge
-sudo git checkout -b lllyasviel-main forge/main || sudo git checkout lllyasviel-main
-sudo git config --global pull.rebase false
-
-# Clone IceClear StableSR if the extension doesn't exist
-if [ ! -d "${forge_dir}/extensions/StableSR" ]; then
-    mkdir -p "${forge_dir}/extensions"
-    cd "${forge_dir}/extensions" || exit
-    sudo git clone https://github.com/IceClear/StableSR.git
-fi
-
-# Clone DeOldify if the extension doesn't exist
-if [ ! -d "${forge_dir}/models/DeOldify" ]; then
-    mkdir -p "${forge_dir}/models"
-    cd "${forge_dir}/models" || exit
-    sudo git clone https://github.com/jantic/DeOldify.git
-fi
+# Setting download directory paths: 
+set models="/workspace/stable-diffusion-webui/models"
+set safetensors="/workspace/stable-diffusion-webui/models/Stable-diffusion"
+set codeformer_dir="/workspace/stable-diffusion-webui/models/Codeformer"
+set controlnet="/workspace/stable-diffusion-webui/models/ControlNet"
+set lora="/opt/stable-diffusion-webui/models/Lora"
+set ESRGAN="/opt/stable-diffusion-webui/models/ESRGAN"
+set GFPGAN="/opt/stable-diffusion-webui/models/GFPGAN"
 
 cd ${ESRGAN}
 wget -O 4xUltraSharp.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
