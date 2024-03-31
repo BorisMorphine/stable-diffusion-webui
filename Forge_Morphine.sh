@@ -7,6 +7,14 @@
 
 # Setup environment and configuration for Stable Diffusion WebUI
 
+# Check if we are on Debian or Ubuntu
+if [[ "$(lsb_release -is)" == "Debian" ]] || [[ "$(lsb_release -is)" == "Ubuntu" ]]; then
+    echo "Installing python3.10-venv..."
+    sudo apt update && sudo apt install -y python3.10-venv
+else
+    echo "This setup script is intended for Debian or Ubuntu systems."
+fi
+
 # Base directory for the installation
 data_dir="/workspace"
 install_dir="/workspace"
