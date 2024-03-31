@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# To run this script in CLI uncommit and use:
+# wget https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/Forge_Morphine.sh
+# chmod +x Forge_Morphine.sh
+# sudo ./Forge_Morphine.sh
+
 # Setup environment and configuration for Stable Diffusion WebUI
 
 # Base directory for the installation
