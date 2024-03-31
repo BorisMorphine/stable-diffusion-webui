@@ -1,4 +1,4 @@
-#!/bin/bash
+rt #!/bin/bash
 
 # Check if we are on Debian or Ubuntu
 if [[ "$(lsb_release -is)" == "Debian" ]] || [[ "$(lsb_release -is)" == "Ubuntu" ]]; then
@@ -19,9 +19,6 @@ install_dir="/workspace"
 clone_dir="${install_dir}/stable-diffusion-webui"
 workspace="${clone_dir}/stable-diffusion-webui-forge"
 
-# Path to the requirements file
-REQS_FILE="${clone_dir}/requirements.txt"
-
 # Sync directory setup
 sync_dir="workspace/home/user/Sync"
 rsync -av "${workspace}/" "/${sync_dir}/"
@@ -33,6 +30,9 @@ export COMMANDLINE_ARGS="--port 3001 --listen --api --xformers --enable-insecure
 # Configuration for Git and the launch script
 export GIT="git"
 export LAUNCH_SCRIPT="launch.py"
+
+# Path to the requirements file
+export REQS_FILE="${clone_dir}/requirements.txt"
 
 # Command to install PyTorch (adjust as necessary for your setup)
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
