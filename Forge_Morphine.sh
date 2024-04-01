@@ -4,8 +4,8 @@
 #Step 0: Smuggle in this script and execute via CLI
 ###################################################
 #cd /opt/stable-diffusion-webui/
-#curl -O webui-macos-env.sh https://raw.githubusercontent.com/BorisMorphine/aarrgghhhh/main/config/provisioning/webui-user.sh
-#chmod +x webui-usersh
+#sudo curl -O webui-macos-env.sh https://raw.githubusercontent.com/BorisMorphine/aarrgghhhh/main/config/provisioning/webui-user.sh
+#chmod +x webui-macos-env.sh
 #./webui-macos-env.sh
 ###################################################
 
