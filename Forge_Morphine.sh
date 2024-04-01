@@ -12,25 +12,33 @@
 # Setup Your Home 
 cd /Home/User/
 
-# Get A1111
-git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
-
-# start service to create python virtual env
-./webui.sh
-
-### Step 2 ###
+# Set global variable to merge git repos
+git config --global pull.rebase false
 
 # Get Forge
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
 
-# update webui-user.sh
+# Get A1111
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+
+set FORGE="/workspace/home/user/stable-diffusion-webui-forge"
+set A1111="/workspace/home/user/stable-diffusion-webui-forge"
+
+cd ${FORGE}
+# update Forge webui-user.sh & webui-user.bat
 sudo curl -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
+sudo curl -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
 
-# update webui-user.bat
-sudo curl -O https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
+cd ${A1111}
+# start service to create python virtual env
+./webui.sh
 
-# Set global variable
-git config --global pull.rebase false
+cd ${FORGE}
+# sync with A1111
+./webui-user.sh
+bash webui-user.bat
+
+### Step 2 ###
 
 # cd to main repo and clone Forge
 cd /workspace/stable-diffusion-webui/
