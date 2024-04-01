@@ -12,9 +12,6 @@
 # Setup Your Home 
 cd /Home/User/
 
-# Set global variable to merge git repos
-git config --global pull.rebase false
-
 # Get Forge
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
 
@@ -39,9 +36,13 @@ cd ${FORGE}
 bash webui-user.bat
 
 ### Step 2 ###
-
 # cd to main repo and clone Forge
 cd /workspace/stable-diffusion-webui/
+
+# Set global variable to merge git repos
+git config --global pull.rebase false
+
+# merge Forge with A1111
 git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
@@ -50,21 +51,7 @@ git branch -u forge/main
 git pull 
 
 ### Step 3 ###
-
-# cd back into Forge via Workspace and update user docs
-cd /workspace/home/user/stable-diffusuion-webui-forge/
-
-# create new user env
-./webui-user.sh
-
-# redirect A1111 repos to Forge
-./webui-user.bat
-
-# run service to commit changes 
-./webui.sh
-
-### Step 4 ###
-
+#install extras
 cd ${controlnet_dir}
 install git lfs
 git lfs clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
@@ -139,11 +126,10 @@ git clone https://github.com/volotat/SD-CN-Animation.git
 git clone https://github.com/miaoshouai/miaoshouai-assistant.git
 git clone https://github.com/tritant/sd-webui-creaprompt.git
 
+### Step 5 ###
 # clean up after yourself
 echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
 
-# return home
-cd /home/user/stable-diffusion-webui-forge/
-
-# Run Stable Diffusion WebUI Forge
-${LAUNCH_SCRIPT} sudo | bash 
+### Final Step ###
+# return home and run the program
+cd ${FORGE}; ./${LAUNCH_SCRIPT}
