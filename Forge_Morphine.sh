@@ -11,45 +11,55 @@
 
 ### Step 1 ###
 # Setup Your Home 
-cd /Home/User/
+
+set HOME_DIR="/workspace/home/user"
+
+cd ${HOME}
 
 # Get Forge
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
 
+set FORGE_HOME="/workspace/home/user/stable-diffusion-webui-forge"
+
 # Get A1111
 git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
-set FORGE="/workspace/home/user/stable-diffusion-webui-forge"
-set A1111="/workspace/home/user/stable-diffusion-webui-forge"
+set A1111_HOME="/workspace/home/user/stable-diffusion-webui-forge"
 
-cd ${FORGE}
+cd ${FORGE_HOME}
 # update Forge webui-user.sh & webui-user.bat
 sudo curl -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
 sudo curl -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
 
-cd ${A1111}
+cd ${A1111_HOME}
 # start service to create python virtual env
 ./webui.sh
 
-cd ${FORGE}
+cd ${FORGE_HOME}
 # sync with A1111
 ./webui-user.sh
 bash webui-user.bat
 
 ### Step 2 ###
 # cd to main repo and clone Forge
-cd /workspace/stable-diffusion-webui/
+
+set DATA_DIR="/workspace"
+set CLONE_DIR="${DATA_DIR}/stable-diffusion-webui"
 
 # Set global variable to merge git repos
-git config --global pull.rebase false
+sudo git config --global pull.rebase false
 
-# merge Forge with A1111
+# Now merge the repos
 git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
 git pull 
+
+# Now sync the data
+rsync -av "${CLONE_DIR}/" "${FORGE_HOME}/"
+echo "Synced ${CLONE_DIR} to ${FORGE_HOME}"
 
 ### Step 3 ###
 #install extras
