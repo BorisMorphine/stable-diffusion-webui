@@ -1,5 +1,3 @@
-!#bin/bash
-
 ###################################################
 #Step 0: Smuggle in this script and execute via CLI
 ###################################################
@@ -8,16 +6,16 @@
 #chmod +x webui-macos-env.sh
 #./webui-macos-env.sh
 ###################################################
+!#bin/bash
 
 ### Step 1 ###
-
-# cd Home 
+# Setup Your Home 
 cd /Home/User/
 
 # Get A1111
 git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
-# start service
+# start service to create python virtual env
 ./webui.sh
 
 ### Step 2 ###
