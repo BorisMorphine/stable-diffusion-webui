@@ -79,18 +79,18 @@ wget -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Mo
 
 # Build StableSR
 cd ${EXTENSIONS_DIR}
-git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git
-cd /scripts
-wget -O stablesr_turbo.ckpt https://huggingface.co/Iceclear/StableSR/blob/main/stablesr_turbo.ckpt
+git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git StableSR
+
+# cd into new directory and download models
+cd StableSR/scripts 
+git lfs clone https://huggingface.co/Iceclear/StableSR -force scripts
 
 # Build DeOldify
 cd ${EXTENSIONS_DIR}
-git clone https://github.com/SpenserCai/modles/sd-webui-deoldify.git
+git clone https://github.com/SpenserCai/sd-webui-deoldify.git DeOldify
 
-# cd into new directory
-cd sd-webui-deoldify/DeOldify/models/Deoldify
-
-# download models
+# cd into new directory download models
+cd DeOldify/models/deoldify
 curl -O ColorizeArtistic_gen.pth https://data.deepai.org/deoldify/ColorizeArtistic_gen.pth
 curl -O ColorizeArtistic_crit https://www.dropbox.com/s/xpq2ip9occuzgen/ColorizeArtistic_crit.pth
 curl -O ColorizeArtisitic_PretrainOnly.pth https://www.dropbox.com/s/h782d1zar3vdblw/ColorizeArtistic_PretrainOnly_gen.pth
@@ -115,6 +115,14 @@ pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezs
 git clone https://github.com/s9roll7/ebsynth_utility.git
 git clone https://github.com/Scholar01/sd-webui-mov2mov.git
 git clone https://github.com/Scholar01/sd-webui-bg-mask.git
+
+# get misc. extensions:
+git clone https://github.com/BlafKing/sd-civitai-browser-plus.git
+git clone https://github.com/feffy380/sd-webui-token-downsampling.git
+git clone https://github.com/light-and-ray/sd-webui-replacer.git
+git clone https://github.com/volotat/SD-CN-Animation.git
+git clone https://github.com/miaoshouai/miaoshouai-assistant.git
+git clone https://github.com/tritant/sd-webui-creaprompt.git
 
 #return home
 cd /home/user/stable-diffusion-webui-forge
