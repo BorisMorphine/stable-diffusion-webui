@@ -6,13 +6,14 @@ cd /D "workspace\home\user\stable-diffusion-webui-forge\"
 REM Set environment variables
 set PYTHON=3.10.14
 set GIT=git
+set DATA_DIR=\workspace
+set CLONE_DIR=%DATA_DIR%\stable-diffusion-webui
 
 REM Cloning repos into Forge
-set A1111_HOME=workspace\home\user\stable-diffusion-webui
 set VENV_DIR=%A1111_HOME%\venv
-set MODELS_DIR=%A1111_HOME%\models
-set EXTENSONS_DIR=$A1111_HOME\models
-set EMBEDDINGS_DIR=%A1111_HOME%\embeddings
+set MODELS_DIR=%CLONE_DIR%\models
+set EXTENSONS_DIR=$CLONE_DIR\extensions
+set EMBEDDINGS_DIR=%CLONE_DIR%\embeddings
 set COMMANDLINE_ARGS=--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae
 
 REM Setting model subdirectories
