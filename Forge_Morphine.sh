@@ -133,9 +133,11 @@ git clone https://github.com/volotat/SD-CN-Animation.git
 git clone https://github.com/miaoshouai/miaoshouai-assistant.git
 git clone https://github.com/tritant/sd-webui-creaprompt.git
 
-#return home
-cd /home/user/stable-diffusion-webui-forge
-
-# cleanup and launch
+# clean up after yourself
 echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
+
+# return home
+cd /home/user/stable-diffusion-webui-forge/
+
+# Run Stable Diffusion WebUI Forge
 ${LAUNCH_SCRIPT} sudo | bash 
