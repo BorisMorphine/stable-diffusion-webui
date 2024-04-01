@@ -1,33 +1,36 @@
 @echo off
 
-# set env variables
-set PYTHON="3.10.14"
-set GIT="git"
+REM Navigate to workspace
+cd /D "workspace\home\user\stable-diffusion-webui-forge\"
 
-# clone from:
-A1111_HOME="workspace/home/user/stable-diffusion-webui"
-VENV_DIR="workspace/home/user/stable-diffusion-webui/venv/"
-COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
+REM Set environment variables
+set PYTHON=3.10.14
+set GIT=git
 
-# Cloning repos into Forge
-set VENV_DIR="${A1111_HOME}/venv"
-set COMMANDLINE_ARGS=${COMMANDLINE_ARGS}
-set MODELS_DIR="${A1111_HOME}/models"
-set EMBEDDINGS_DIR="{${A1111_HOME}/embeddings"
+REM Cloning repos into Forge
+set A1111_HOME=workspace\home\user\stable-diffusion-webui
+set VENV_DIR=%A1111_HOME%\venv
+set MODELS_DIR=%A1111_HOME%\models
+set EMBEDDINGS_DIR=%A1111_HOME%\embeddings
+set COMMANDLINE_ARGS=--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae
 
-# Setting model subdirectories
-ckpt_dir="${MODELS_DIR}/Stable-diffusion"
-dreambooth-dir="${MODELS_DIR}/dreambooth"
-hypernetwork_dir="${MODELS_DIR}/hypernetworks"
-lora_dir="${MODELS_DIR}/Lora"
-annotators_dir="${MODELS_DIR}/annnotators"
-codeformers_dir="${MODELS_DIR}/Codeformer"
-deepbooru_dir="${MODELS_DIR}/deepbooru"
-gfpgan_dir="${MODELS_DIR}/GFPGAN"
-insightface_dir="${MODELS_DIR}/insightface"
-karlo_dir="${MODELS_DIR}/karlo"
-LDSR_dir="${MODELS_DIR}/LDSR"
-swinIR_dir="${MODELS_DIR}/swinIR"
-vae_approx_dir="${MODELS_DIR}/VAE-approx"
+REM Setting model subdirectories
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --ckpt-dir %MODELS_DIR%\Stable-diffusion
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --dreambooth-dir %MODELS_DIR%\dreambooth
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --hypernetwork-dir %MODELS_DIR%\hypernetworks
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --lora-dir %MODELS_DIR%\Lora
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --annotators-dir %MODELS_DIR%\annotators
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --codeformers-dir %MODELS_DIR%\Codeformer
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --deepbooru-dir %MODELS_DIR%\deepbooru
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --gfpgan-dir %MODELS_DIR%\GFPGAN
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --insightface-dir %MODELS_DIR%\insightface
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --karlo-dir %MODELS_DIR%\karlo
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --LDSR-dir %MODELS_DIR%\LDSR
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --swinIR-dir %MODELS_DIR%\swinIR
+set COMMANDLINE_ARGS=%COMMANDLINE_ARGS% --vae-approx-dir %MODELS_DIR%\VAE-approx
 
-call webui.bat
+REM Call the webui script with prepared variables
+call "%VENV_DIR%\Scripts\activate"
+python webui.py %COMMANDLINE_ARGS%
+
+exit /b %ERRORLEVEL%
