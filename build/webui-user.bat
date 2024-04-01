@@ -11,6 +11,7 @@ REM Cloning repos into Forge
 set A1111_HOME=workspace\home\user\stable-diffusion-webui
 set VENV_DIR=%A1111_HOME%\venv
 set MODELS_DIR=%A1111_HOME%\models
+set EXTENSONS_DIR=$A1111_HOME\models
 set EMBEDDINGS_DIR=%A1111_HOME%\embeddings
 set COMMANDLINE_ARGS=--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae
 
