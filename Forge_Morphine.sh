@@ -1,3 +1,5 @@
+!#bin/bash
+
 ###################################################
 #Step 0: Smuggle in this script and execute via CLI
 ###################################################
@@ -6,7 +8,6 @@
 #chmod +x webui-macos-env.sh
 #./webui-macos-env.sh
 ###################################################
-!#bin/bash
 
 ### Step 1 ###
 # Setup Your Home 
