@@ -1,22 +1,39 @@
-#!/bin/bash
+#!bin/bash
 
-# Must exit and fail to build if any command fails
-set -eo pipefail
-umask 002
+cd /opt
 
-source /opt/ai-dock/bin/build/layer0/common.sh
+# Get Forge
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge 
+install_dir=“/stable-diffusion-webui-forge”
 
-if [[ "$XPU_TARGET" == "NVIDIA_GPU" ]]; then
-    source /opt/ai-dock/bin/build/layer0/nvidia.sh
-elif [[ "$XPU_TARGET" == "AMD_GPU" ]]; then
-    source /opt/ai-dock/bin/build/layer0/amd.sh
-elif [[ "$XPU_TARGET" == "CPU" ]]; then
-    source /opt/ai-dock/bin/build/layer0/cpu.sh
-else
-    printf "No valid XPU_TARGET specified\n" >&2
-    exit 1
-fi
+cd ${INSTALL_DIR}
+curl https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh -force webui-user.sh
+curl https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat -force webui-user.bat
 
-$MAMBA_DEFAULT_RUN python /opt/ai-dock/tests/assert-torch-version.py
+cd /opt
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+A1111_HOME=“stable-diffusion-webui”
 
-source /opt/ai-dock/bin/build/layer0/clean.sh
+cd ${A1111_HOME}
+# start service to create python virtual env
+./webui.sh
+
+set VENV=“${A1111_HOME}/venv”
+
+cd ${INSTALL_DIR}
+sudo bash /webui-user.bat; 
+sudo bash /webui-user.sh
+
+rsync -av /opt/stable-diffusion-webui “${INSTALL_DIR}/“ “/${A111_HOME}“
+echo "Synced ${A1111_HOME} to ${INSTALL_DIR}”
+
+cd /opt/stable-diffusion-webui
+git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+git branch lllyasviel/main
+git checkout lllyasviel/main
+git fetch forge
+git branch -u forge/main
+git pull;
+git config pull.rebase false
+
+python3 /opt/stable-diffusion-webui launch.py
