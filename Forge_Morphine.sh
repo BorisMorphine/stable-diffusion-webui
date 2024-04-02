@@ -1,5 +1,3 @@
-!#bin/bash
-
 ###################################################
 #Step 0: Smuggle in this script and execute via CLI
 ###################################################
@@ -8,30 +6,30 @@
 #chmod +x webui-macos-env.sh
 #./webui-macos-env.sh
 ###################################################
+!#bin/bash
 
 ### Step 1 ###
 # Setup Your Home 
-
-set HOME_DIR="/workspace/home/user"
+#HOME_DIR=/workspace/home/user/sync
+HOME_DIR=/opt/
 
 cd ${HOME}
 
 # Get Forge
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
 
-set FORGE_HOME="/workspace/home/user/stable-diffusion-webui-forge"
-
 # Get A1111
 git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
-set A1111_HOME="/workspace/home/user/stable-diffusion-webui-forge"
+set FORGE_HOME="${HOME_DIR}/stable-diffusion-webui-forge"
+set A1111_HOME="${HOME_DIR}stable-diffusion-webui"
 
-cd ${FORGE_HOME}
+cd "/${FORGE_HOME}"
 # update Forge webui-user.sh & webui-user.bat
 sudo curl -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
 sudo curl -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
 
-cd ${A1111_HOME}
+cd "/${A1111_HOME}"
 # start service to create python virtual env
 ./webui.sh
 
@@ -43,11 +41,11 @@ bash webui-user.bat
 ### Step 2 ###
 # cd to main repo and clone Forge
 
-set DATA_DIR="/workspace"
+#cd /workspace
+#set DATA_DIR=“/workspace”
+cd /opt
+set DATA_DIR=“/opt”
 set CLONE_DIR="${DATA_DIR}/stable-diffusion-webui"
-
-# Set global variable to merge git repos
-sudo git config --global pull.rebase false
 
 # Now merge the repos
 git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
@@ -56,6 +54,9 @@ git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
 git pull 
+
+# Set global variable to merge git repos
+sudo git config --global pull.rebase false
 
 # Now sync the data
 rsync -av "${CLONE_DIR}/" "${FORGE_HOME}/"
@@ -68,27 +69,27 @@ install git lfs
 git lfs clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
 
 cd ${ESRGAN_dir}
-wget -O 4xUltraSharp.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
-wget -O 4xUltraMix_Balanced.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-wget -O 4xUltraMix_Restore.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-wget -O 4xUltraMix_Smooth.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT
-wget -O 4x-FSDedither.pth https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w
-wget -O 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
-wget -O 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
-wget -O 1x_GainRESV3_Aggro.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/TlkHjITR
-wget -O 1x_GainRESV3_Nautral.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/KxkVEaAQ
-wget -O 1x_GainRESV3_Passive.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/H49nEAzI
-wget -O 4xNomos8kDAT.pth https://drive.usercontent.google.com/download?id=1JRwXYeuMBIsyeNfsTfeSs7gsHqCZD7x
-wget -O 4xLSDIRplus.pth https://github.com/Phhofm/models/blob/main/4xLSDIRplus/4xLSDIRplus.pth
-wget -0 BSRGAN https://github.com/cszn/KAIR/releases/download/v1.0/BSRGAN.pth
+curl -O 4xUltraSharp.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
+curl -O 4xUltraMix_Balanced.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
+curl -O 4xUltraMix_Restore.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
+curl -O 4xUltraMix_Smooth.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT
+curl -O 4x-FSDedither.pth https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w
+curl -O 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
+curl -O 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
+curl -O 1x_GainRESV3_Aggro.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/TlkHjITR
+curl -O 1x_GainRESV3_Nautral.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/KxkVEaAQ
+curl -O 1x_GainRESV3_Passive.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/H49nEAzI
+curl -O 4xNomos8kDAT.pth https://drive.usercontent.google.com/download?id=1JRwXYeuMBIsyeNfsTfeSs7gsHqCZD7x
+curl -O 4xLSDIRplus.pth https://github.com/Phhofm/models/blob/main/4xLSDIRplus/4xLSDIRplus.pth
+curl -0 BSRGAN https://github.com/cszn/KAIR/releases/download/v1.0/BSRGAN.pth
 
 cd ${ckpt_dir}
 wget https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.safetensors
 
 cd ${lora_dir}
-wget -O weird_lanscape.safetensors https://civitai.com/api/download/models/309330?type=Model&format=SafeTensor
-wget -O sheet_of_acid.safetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
-wget -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Model&format=SafeTensor
+curl -O weird_lanscape.safetensors https://civitai.com/api/download/models/309330?type=Model&format=SafeTensor
+curl -O sheet_of_acid.safetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
+curl -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Model&format=SafeTensor
 
 # Build StableSR
 cd ${EXTENSIONS_DIR}
@@ -142,5 +143,13 @@ git clone https://github.com/tritant/sd-webui-creaprompt.git
 echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
 
 ### Final Step ###
-# return home and run the program
-cd ${FORGE}; ./${LAUNCH_SCRIPT}
+${python_cmd}
+
+###################################################
+#Step 0: Smuggle in this script and execute via CLI
+###################################################
+#cd /opt/stable-diffusion-webui/
+#sudo curl -O webui-macos-env.sh https://raw.githubusercontent.com/BorisMorphine/aarrgghhhh/main/config/provisioning/webui-user.sh
+#chmod +x webui-macos-env.sh
+#./webui-macos-env.sh
+###################################################
