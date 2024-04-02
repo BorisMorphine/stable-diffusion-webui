@@ -6,9 +6,8 @@ cd /D "workspace\home\user\stable-diffusion-webui-forge\"
 REM Set environment variables
 set PYTHON=3.10.14
 set GIT=git
-set DATA_DIR=\opt
-@REM set DATA_DIR=\workspace
-set CLONE_DIR=%DATA_DIR%\stable-diffusion-webui
+set DATA_DIR=\workspace
+set CLONE_DIR=\stable-diffusion-webui
 
 REM Cloning repos into Forge
 set VENV_DIR=%A1111_HOME%\venv
