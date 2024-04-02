@@ -1,48 +1,56 @@
 #!bin/bash
-
-cd /opt
-
-# Get Forge
+cd /opt/
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge 
-install_dir=“/stable-diffusion-webui-forge”
 
-cd ${INSTALL_DIR}
-sudo wget https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh 
-sudo wget https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
+# Base directory for the installation
+data_dir=“/opt”
+install_dir=“stable-diffusion-webui-forge”
+clone_dir=“stable-diffusion-webui"
 
-cd /opt
-git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
-A1111_HOME=“stable-diffusion-webui”
+# Correctly setting A1111_HOME if needed for conditional setup later
+# This might need to be adjusted depending on its intended use
+export A1111_HOME=“${CLONE_DIR}”
 
-cd ${A1111_HOME}
-# start service to create python virtual env
-./webui.sh
+# Virtual environment directory (defaults to a specific path within the install directory)
+venv_dir=“opt/micromamba/envs/webui”
 
-cd ${INSTALL_DIR}
-sudo bash /webui-user.bat 
-sudo chmod +x webui-user.bat 
-sudo ./webui-user.sh
+# Command-line arguments for webui.py
+export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --autolaunch”
 
-sudo bash /webui-user.sh
-sudo chmod +x webui-user.sh 
-sudo ./webui-user.sh
+# Configuration for Git and the launch script
+export GIT="git"
+export LAUNCH_SCRIPT="launch.py"
 
-cd /opt/stable-diffusion-webui
+# Command to install PyTorch (adjust as necessary for your setup)
+export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
+
+# Requirements file for dependency installation
+export REQS_FILE="requirements_versions.txt"
+
+# patch
+cd /A1111_HOME
 git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
-git pull
-git config pull.rebase false
+git pull && git config pull.rebase false
 
-python3 /opt/stable-diffusion-webui launch.py
-
+# Sync
+rsync -av “${CLONE_DIR}/“ “${INSTALL_DIR}/“
+echo "Synced A1111 to WebUI-Forge”
 
 ### Step 3 ###
-#install extras
-cd ${controlnet_dir}
+Models_dir=“${INSTALL_DIR}/models”
+Extensions_dir=“${INSTALL_DIR}/extensions”
+Embeddings_dir=“${INSTALL_DIR}/embeddings”
+Safetensors_dir=“${MODELS_DIR}/Stable-Diffusion}
+Lora_dir=“${MODELS_DIR}/Lora”
+ESRGAN_dir=“${MODELS_DIR}/ESRGAN”
+
+cd ${ckpt_dir}
 install git lfs
+wget https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.safetensors
 git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
 
 cd ${ESRGAN_dir}
@@ -59,9 +67,6 @@ curl -O 1x_GainRESV3_Passive.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFj
 curl -O 4xNomos8kDAT.pth https://drive.usercontent.google.com/download?id=1JRwXYeuMBIsyeNfsTfeSs7gsHqCZD7x
 curl -O 4xLSDIRplus.pth https://github.com/Phhofm/models/blob/main/4xLSDIRplus/4xLSDIRplus.pth
 curl -0 BSRGAN https://github.com/cszn/KAIR/releases/download/v1.0/BSRGAN.pth
-
-cd ${ckpt_dir}
-wget https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.safetensors
 
 cd ${lora_dir}
 curl -O weird_lanscape.safetensors https://civitai.com/api/download/models/309330?type=Model&format=SafeTensor
@@ -119,33 +124,11 @@ git clone https://github.com/tritant/sd-webui-creaprompt.git
 # clean up after yourself
 echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
 
+# Create and activate the virtual environment
+source ${VENV_DIR}
+micromamba activate webui
+
 ### Final Step ###
-# Function to call webui script with prepared variables
-call_webui() {
-    # Construct the command line arguments for model directories
-    for key in "${!model_dirs[@]}"; do
-        dir="${model_dirs[$key]}"
-        # Append model directory arguments
-        COMMANDLINE_ARGS+=" --${key//-/_} $dir"
-    done
-
-    # Run the webui command
-    . "${VENV_DIR}/bin/activate"
-    python webui.py $COMMANDLINE_ARGS
-}
-
-main() {
-    # Main function to run the setup and call webui
-    call_webui
-}
-
-main
-
-###################################################
-#Step 0: Smuggle in this script and execute via CLI
-###################################################
-#cd /opt/stable-diffusion-webui/
-#sudo curl -O webui-macos-env.sh https://raw.githubusercontent.com/BorisMorphine/aarrgghhhh/main/config/provisioning/webui-user.sh
-#chmod +x webui-macos-env.sh
-#./webui-macos-env.sh
-###################################################
+# return home and run the program
+cd INSTALL_DIR; ./${LAUNCH_SCRIPT}
+#cd workspace/stable-diffusion-webui-forge; ./${LAUNCH_SCRIPT}
