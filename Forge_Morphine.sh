@@ -5,27 +5,8 @@
 
 cd /workspace/home/user/sync
 
-# Get Forge
-sudo git clone https://github.com/lllyasviel/stable-diffusion-webui-forge FORGE
-set FORGE_HOME="/FORGE"
-# Get A1111
 sudo git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git A1111
 set A1111_HOME="/A1111"
-
-cd ${FORGE_HOME}
-# update Forge webui-user.sh & webui-user.bat
-sudo curl -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
-sudo curl -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
-
-cd ${A1111_HOME}
-# start service to create python virtual env
-./webui.sh
-
-cd ${FORGE_HOME}
-# sync with A1111
-./webui-user.sh
-sudo bash webui-user.bat
-./webui.sh
 
 cd ${A1111_HOME}
 sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
@@ -35,9 +16,23 @@ git fetch forge
 git branch -u forge/main
 sudo git pull.rebase false
 
+sudo git clone https://github.com/lllyasviel/stable-diffusion-webui-forge FORGE
+set FORGE_HOME="/FORGE"
+
 rsync -av "/${A1111_HOME}/" "/${FORGE_HOME}/"
-echo "Synced Forge to A1111"
-rsync -av "${A1111_HOME}" "/opt/stable-diffusion-webui"
+echo "Synced A1111 to Forge"
+
+cd ${FORGE_HOME}
+# update Forge webui-user.sh & webui-user.bat
+sudo curl -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
+sudo curl -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
+
+# execute scripts
+sudo bash webui-user.bat
+./webui-user.sh
+./webui.sh
+
+rsync -av "${FORGE_HOME}" "/opt/stable-diffusion-webui"
 echo "Synced output"
 
 ### Step 3 ###
