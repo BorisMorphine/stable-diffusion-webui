@@ -18,32 +18,6 @@ git fetch forge
 git branch -u forge/main
 git pull
 
-wget -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
-wget -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
-
-# Cloning repos into Forge
-A1111_HOME="/stable-diffusion-webui-forge"
-VENV_DIR="${A1111_HOME}/opt/micromamba/envs/webui/
-COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
-MODELS_DIR="${A1111_HOME}/models"
-EMBEDDINGS_DIR="${A1111_HOME}/embeddings"
-
-# Setting model subdirectories
-declare -A model_dirs=(
-    [ckpt_dir]="${MODELS_DIR}/Stable-diffusion"
-    [dreambooth_dir]="${MODELS_DIR}/dreambooth"
-    [hypernetwork_dir]="${MODELS_DIR}/hypernetworks"
-    [lora_dir]="${MODELS_DIR}/Lora"
-    [annotators_dir]="${MODELS_DIR}/annotators"
-    [codeformers_dir]="${MODELS_DIR}/Codeformer"
-    [deepbooru_dir]="${MODELS_DIR}/deepbooru"
-    [gfpgan_dir]="${MODELS_DIR}/GFPGAN"
-    [insightface_dir]="${MODELS_DIR}/insightface"
-    [karlo_dir]="${MODELS_DIR}/karlo"
-    [LDSR_dir]="${MODELS_DIR}/LDSR"
-    [swinIR_dir]="${MODELS_DIR}/swinIR"
-    [vae_approx_dir]="${MODELS_DIR}/VAE-approx"
-)
 
 ### Step 3 ###
 #install extras
