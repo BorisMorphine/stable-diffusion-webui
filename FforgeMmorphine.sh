@@ -1,45 +1,55 @@
 #!bin/bash
 
-### Step 1 ###
-# Setup Your Home 
+CLONE_DIR="/opt/stable-diffusion-webui"
 
-cd /workspace/home/user/sync
+# Navigate to clone
+cd ${CLONE_DIR}
 
-sudo git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git A1111
-set A1111_HOME="/A1111"
+# Environment variables
+export PYTHON="3.10.14"
+export GIT="git"
+git config --global pull.rebase false
 
-cd ${A1111_HOME}
-sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+cd ${CLONE_DIR}
+sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge.git
 git branch lllyasviel/main
 git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
-sudo git pull.rebase false
+git pull
 
-sudo git clone https://github.com/lllyasviel/stable-diffusion-webui-forge FORGE
-set FORGE_HOME="/FORGE"
+wget -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
+wget -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
 
-rsync -av "/${A1111_HOME}/" "/${FORGE_HOME}/"
-echo "Synced A1111 to Forge"
+# Cloning repos into Forge
+A1111_HOME="/stable-diffusion-webui-forge"
+VENV_DIR="${A1111_HOME}/opt/micromamba/envs/webui/
+COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --enable-insecure-extension-access --no-half-vae"
+MODELS_DIR="${A1111_HOME}/models"
+EMBEDDINGS_DIR="${A1111_HOME}/embeddings"
 
-cd ${FORGE_HOME}
-# update Forge webui-user.sh & webui-user.bat
-sudo curl -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
-sudo curl -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
-
-# execute scripts
-sudo bash webui-user.bat
-./webui-user.sh
-./webui.sh
-
-rsync -av "${FORGE_HOME}" "/opt/stable-diffusion-webui"
-echo "Synced output"
+# Setting model subdirectories
+declare -A model_dirs=(
+    [ckpt_dir]="${MODELS_DIR}/Stable-diffusion"
+    [dreambooth_dir]="${MODELS_DIR}/dreambooth"
+    [hypernetwork_dir]="${MODELS_DIR}/hypernetworks"
+    [lora_dir]="${MODELS_DIR}/Lora"
+    [annotators_dir]="${MODELS_DIR}/annotators"
+    [codeformers_dir]="${MODELS_DIR}/Codeformer"
+    [deepbooru_dir]="${MODELS_DIR}/deepbooru"
+    [gfpgan_dir]="${MODELS_DIR}/GFPGAN"
+    [insightface_dir]="${MODELS_DIR}/insightface"
+    [karlo_dir]="${MODELS_DIR}/karlo"
+    [LDSR_dir]="${MODELS_DIR}/LDSR"
+    [swinIR_dir]="${MODELS_DIR}/swinIR"
+    [vae_approx_dir]="${MODELS_DIR}/VAE-approx"
+)
 
 ### Step 3 ###
 #install extras
 cd ${controlnet_dir}
 install git lfs
-git lfs clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
+git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
 
 cd ${ESRGAN_dir}
 curl -O 4xUltraSharp.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
@@ -116,7 +126,26 @@ git clone https://github.com/tritant/sd-webui-creaprompt.git
 echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
 
 ### Final Step ###
-${python_cmd}
+# Function to call webui script with prepared variables
+call_webui() {
+    # Construct the command line arguments for model directories
+    for key in "${!model_dirs[@]}"; do
+        dir="${model_dirs[$key]}"
+        # Append model directory arguments
+        COMMANDLINE_ARGS+=" --${key//-/_} $dir"
+    done
+
+    # Run the webui command
+    . "${VENV_DIR}/bin/activate"
+    python webui.py $COMMANDLINE_ARGS
+}
+
+main() {
+    # Main function to run the setup and call webui
+    call_webui
+}
+
+main
 
 ###################################################
 #Step 0: Smuggle in this script and execute via CLI
