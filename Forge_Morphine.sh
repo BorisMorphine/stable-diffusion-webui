@@ -1,66 +1,43 @@
-###################################################
-#Step 0: Smuggle in this script and execute via CLI
-###################################################
-#cd /opt/stable-diffusion-webui/
-#sudo curl -O webui-macos-env.sh https://raw.githubusercontent.com/BorisMorphine/aarrgghhhh/main/config/provisioning/webui-user.sh
-#chmod +x webui-macos-env.sh
-#./webui-macos-env.sh
-###################################################
-!#bin/bash
+#!bin/bash
 
 ### Step 1 ###
 # Setup Your Home 
-#HOME_DIR=/workspace/home/user/sync
-HOME_DIR=/opt/
 
-cd ${HOME}
+cd /workspace/home/user/sync
 
 # Get Forge
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
-
+sudo git clone https://github.com/lllyasviel/stable-diffusion-webui-forge FORGE
+set FORGE_HOME="/FORGE"
 # Get A1111
-git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+sudo git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git A1111
+set A1111_HOME="/A1111"
 
-set FORGE_HOME="${HOME_DIR}/stable-diffusion-webui-forge"
-set A1111_HOME="${HOME_DIR}stable-diffusion-webui"
-
-cd "/${FORGE_HOME}"
+cd ${FORGE_HOME}
 # update Forge webui-user.sh & webui-user.bat
 sudo curl -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
 sudo curl -O webui-user.bat https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
 
-cd "/${A1111_HOME}"
+cd ${A1111_HOME}
 # start service to create python virtual env
 ./webui.sh
 
 cd ${FORGE_HOME}
 # sync with A1111
 ./webui-user.sh
-bash webui-user.bat
+sudo bash webui-user.bat
 
-### Step 2 ###
-# cd to main repo and clone Forge
-
-#cd /workspace
-#set DATA_DIR=“/workspace”
-cd /opt
-set DATA_DIR=“/opt”
-set CLONE_DIR="${DATA_DIR}/stable-diffusion-webui"
-
-# Now merge the repos
-git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+cd ${A1111_HOME}
+sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
-git pull 
+sudo git pull.rebase false
 
-# Set global variable to merge git repos
-sudo git config --global pull.rebase false
-
-# Now sync the data
-rsync -av "${CLONE_DIR}/" "${FORGE_HOME}/"
-echo "Synced ${CLONE_DIR} to ${FORGE_HOME}"
+rsync -av "/${A1111_HOME}/" "/${FORGE_HOME}/"
+echo "Synced Forge to A1111"
+rsync -av "${A1111_HOME}" "/opt/stable-diffusion-webui"
+echo "Synced output"
 
 ### Step 3 ###
 #install extras
