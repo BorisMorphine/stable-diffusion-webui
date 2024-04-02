@@ -1,5 +1,5 @@
 #!bin/bash
-cd /opt/
+cd /opt
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge 
 
 # Base directory for the installation
