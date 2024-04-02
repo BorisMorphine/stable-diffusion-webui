@@ -1,34 +1,21 @@
 #!bin/bash
 cd /opt
+export DATA_DIR=“/opt”
+
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge 
-
-# Base directory for the installation
-data_dir=“/opt”
-install_dir=“stable-diffusion-webui-forge”
-clone_dir=“stable-diffusion-webui"
-
-# Correctly setting A1111_HOME if needed for conditional setup later
-# This might need to be adjusted depending on its intended use
-export A1111_HOME=“${CLONE_DIR}”
-
-# Virtual environment directory (defaults to a specific path within the install directory)
-venv_dir=“opt/micromamba/envs/webui”
-
-# Command-line arguments for webui.py
-export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --autolaunch”
-
-# Configuration for Git and the launch script
+cd stable-diffusion-webui-forge
 export GIT="git"
 export LAUNCH_SCRIPT="launch.py"
-
-# Command to install PyTorch (adjust as necessary for your setup)
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
-
-# Requirements file for dependency installation
 export REQS_FILE="requirements_versions.txt"
+export VENV_DIR=“opt/micromamba/envs/webui”
+export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --autolaunch”
+export INSTALL_DIR=“${DATA_DIR}/stable-diffusion-webui-forge”
 
-# patch
-cd /A1111_HOME
+export CLONE_DIR=“${DATA_DIR}/stable-diffusion-webui"
+export A1111_HOME=“${CLONE_DIR}”
+
+cd ${A1111_HOME}
 git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
@@ -37,7 +24,7 @@ git branch -u forge/main
 git pull && git config pull.rebase false
 
 # Sync
-rsync -av “${CLONE_DIR}/“ “${INSTALL_DIR}/“
+rsync -av “${A1111_HOME}/“ “${INSTALL_DIR}/“
 echo "Synced A1111 to WebUI-Forge”
 
 ### Step 3 ###
@@ -128,7 +115,6 @@ echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/b
 source ${VENV_DIR}
 micromamba activate webui
 
-### Final Step ###
-# return home and run the program
-cd INSTALL_DIR; ./${LAUNCH_SCRIPT}
-#cd workspace/stable-diffusion-webui-forge; ./${LAUNCH_SCRIPT}
+cd ${INSTALL_DIR}
+sudo ./webui.sh
+sudo ./${LAUNCH_SCRIPT}
