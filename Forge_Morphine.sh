@@ -1,22 +1,42 @@
 #!bin/bash
 
-CLONE_DIR="/opt/stable-diffusion-webui"
+cd /opt
 
-# Navigate to clone
-cd ${CLONE_DIR}
+# Get Forge
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge 
+install_dir=“/stable-diffusion-webui-forge”
 
-# Environment variables
-export PYTHON="3.10.14"
-export GIT="git"
-git config --global pull.rebase false
+cd ${INSTALL_DIR}
+sudo wget https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh 
+sudo wget https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/build/webui-user.bat
 
-cd ${CLONE_DIR}
-sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge.git
+cd /opt
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+A1111_HOME=“stable-diffusion-webui”
+
+cd ${A1111_HOME}
+# start service to create python virtual env
+./webui.sh
+
+cd ${INSTALL_DIR}
+sudo bash /webui-user.bat 
+sudo chmod +x webui-user.bat 
+sudo ./webui-user.sh
+
+sudo bash /webui-user.sh
+sudo chmod +x webui-user.sh 
+sudo ./webui-user.sh
+
+cd /opt/stable-diffusion-webui
+git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
 git branch lllyasviel/main
 git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
 git pull
+git config pull.rebase false
+
+python3 /opt/stable-diffusion-webui launch.py
 
 
 ### Step 3 ###
