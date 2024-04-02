@@ -25,6 +25,7 @@ cd ${FORGE_HOME}
 # sync with A1111
 ./webui-user.sh
 sudo bash webui-user.bat
+./webui.sh
 
 cd ${A1111_HOME}
 sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
