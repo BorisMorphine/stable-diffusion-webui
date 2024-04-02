@@ -7,7 +7,7 @@ REM Set environment variables
 set PYTHON=3.10.14
 set GIT=git
 set DATA_DIR=\opt
-#set DATA_DIR=\workspace
+@REM set DATA_DIR=\workspace
 set CLONE_DIR=%DATA_DIR%\stable-diffusion-webui
 
 REM Cloning repos into Forge
