@@ -1,50 +1,51 @@
 #!bin/bash
 cd /opt
-sudo git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git SD_FORGE
-sudo webui.sh
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
+cd stable-diffusion-webui-forge
 
-##################################33
 cd stable-diffusion-webui-forge/extensions
-git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.giti/tree/gradio4 A1111_HOME
-##################################33
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.giti 
+git_branch="gradio4"
+
 cd A1111_HOME
-sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge
+sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge.git
 git branch lllyasviel/main
 git config pull.rebase false
 git checkout lllyasviel/main
 git fetch forge
 git branch -u forge/main
 sudo git pull 
-####################################
+
+# Install common dependencies for video scripts:
+pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezsynth
+
 DATA_DIR="/"
 INSTALL_DIR="SD_FORGE"
 WORKSPACE_DIRECTORY="workspace"
 VENV_DIR="opt/micromamba/envs/webui"
-####################################
+
+# Create and activate the virtual environment
+source ${VENV_DIR}
+micromamba activate webui
+
 export GIT="git"
 export LAUNCH_SCRIPT="launch.py"
 export REQS_FILE="requirements_versions.txt"
 export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --autolaunch"
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
-####################################
+
 Models_dir=“${INSTALL_DIR}/models”
 Extensions_dir=“${INSTALL_DIR}/extensions”
 Embeddings_dir=“${INSTALL_DIR}/embeddings”
 Safetensors_dir=“${MODELS_DIR}/Stable-Diffusion}
 Lora_dir=“${MODELS_DIR}/Lora”
 ESRGAN_dir=“${MODELS_DIR}/ESRGAN”
-####################################
-cd ${EXTENSIONS_DIR}
-wget 
 
 
-# Install common dependencies for video scripts:
-pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezsynth
 
 cd ${ckpt_dir}
 install git lfs
 git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
-wget -O sd_xl_turbo_1.0.safetensors https://huggingface.co/stabilityai/sdxl-turbo/blob/main/sd_xl_turbo_1.0.safetensors
 
 cd ${ESRGAN_dir}
 wget -O 4xUltraSharp.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
@@ -69,12 +70,6 @@ wget -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Mo
 # Build StableSR
 cd ${EXTENSIONS_DIR}
 git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git StableSR
-
-# cd into new directory and download models
-cd StableSR/scripts 
-git clone https://huggingface.co/Iceclear/StableSR -force scripts
-
-
 git clone https://github.com/amithgc/DeforumStableDiffusion-v0.5-Local.git
 git clone https://github.com/Rakile/DeforumationQT.git
 git clone https://github.com/s9roll7/ebsynth_utility.git
@@ -84,6 +79,10 @@ git clone https://github.com/BlafKing/sd-civitai-browser-plus.git
 git clone https://github.com/feffy380/sd-webui-token-downsampling.git
 git clone https://github.com/light-and-ray/sd-webui-replacer.git
 git clone https://github.com/volotat/SD-CN-Animation.git
+
+# cd into new directory and download models
+cd StableSR/scripts 
+git clone https://huggingface.co/Iceclear/StableSR -force scripts
 
 # cd into new directory download models
 cd DeOldify/models/deoldify
@@ -105,10 +104,6 @@ wget -O Deoldify790000.pth https://drive.google.com/uc?export=download&confirm=1
 ### Step 5 ###
 # clean up after yourself
 echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
-
-# Create and activate the virtual environment
-source ${VENV_DIR}
-micromamba activate webui
 
 cd ${INSTALL_DIR}
 sudo ./webui.sh
