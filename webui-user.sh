@@ -1,4 +1,4 @@
-#!/bin/bash
+ort #!/bin/bash
 #########################################################
 # Uncomment and change the variables below to your need:#
 #########################################################
@@ -19,7 +19,7 @@ export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --enable-insecure
 export GIT="git"
 
 # python3 venv without trailing slash (defaults to ${install_dir}/${clone_dir}/venv)
-venv_dir="/opt/micromamba/envs/webui/"
+export venv_dir="/opt/micromamba/envs/webui/"
 
 # install command for torch
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
