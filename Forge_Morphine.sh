@@ -1,48 +1,41 @@
+#cd /opt/
+
 #!/bin/bash
-cd /opt
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
-cd stable-diffusion-webui-forge
+micromamba deactivate activate base
+sudo micromamba run -n webui git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git
+mv /opt/stable-diffusion-webui /opt/stable-diffusion-forge-webui/extensions/A1111
+/opt/stable-diffusion-forge-webui/ /opt/stable-diffusion-webui/
+cd /opt/stable-diffusion-webui/
+./webui.sh | bash sudo
 
-cd A1111_HOME
-sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge.git
-git branch lllyasviel/main
-git config pull.rebase false
-git checkout lllyasviel/main
-git fetch forge
-git branch -u forge/main
-sudo git pull 
 
-############
-#!/bin/bash
-cd stable-diffusion-webui-forge/extensions
-git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git 
-git_branch="gradio4"
+https://github.com/lllyasviel/ControlNet-v1-1-nightly.git
+https://github.com/continue-revolution/sd-forge-animatediff.git
+https://github.com/DavG25/sd-webui-mov2mov.git
+https://github.com/Rakile/DeforumationQT.git
+https://github.com/Scholar01/sd-webui-bg-mask
+https://github.com/KohakuBlueleaf/a1111-sd-webui-lycoris
+GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/conrevo/AnimateDiff-A1111
 
-# Install common dependencies for video scripts:
-pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezsynth
-
+micromamba run -n webui wget -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
 INSTALL_DIR="opt/stable-diffusion-webui"
 WORKSPACE_DIRECTORY="/workspace"
 VENV_DIR="opt/micromamba/envs/webui"
 
-# Create and activate the virtual environment
-source ${VENV_DIR}
-micromamba activate webui
-
+micromamba run -n webui wget -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
 export GIT="git"
 export LAUNCH_SCRIPT="launch.py"
 export REQS_FILE="requirements_versions.txt"
-export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --autolaunch"
+export COMMANDLINE_ARGS="--port 7860 --listen --api --autolaunch"
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
+micromamba run -n webui wget -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
 set Models_dir="${INSTALL_DIR}/models"
 set Extensions_dir="${INSTALL_DIR}/extensions"
 set Embeddings_dir="${INSTALL_DIR}/embeddings"
 set ckpt_dir="${MODELS_DIR}/Stable-Diffusion"
 set Lora_dir="${MODELS_DIR}/Lora"
 set ESRGAN_dir="${MODELS_DIR}/ESRGAN”
-
-
 
 cd ${ckpt_dir}
 install git lfs
