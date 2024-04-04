@@ -1,11 +1,7 @@
-#!bin/bash
+#!/bin/bash
 cd /opt
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge
 cd stable-diffusion-webui-forge
-
-cd stable-diffusion-webui-forge/extensions
-git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.giti 
-git_branch="gradio4"
 
 cd A1111_HOME
 sudo git remote add forge https://github.com/lllyasviel/stable-diffusion-webui-forge.git
@@ -16,12 +12,17 @@ git fetch forge
 git branch -u forge/main
 sudo git pull 
 
+############
+#!/bin/bash
+cd stable-diffusion-webui-forge/extensions
+git clone https://github.com/AUTOMATIC1111/stable-diffusion-webui.git 
+git_branch="gradio4"
+
 # Install common dependencies for video scripts:
 pip install opencv-python imageio imageio-ffmpeg onnxruntime pymatting pooch ezsynth
 
-DATA_DIR="/"
-INSTALL_DIR="SD_FORGE"
-WORKSPACE_DIRECTORY="workspace"
+INSTALL_DIR="opt/stable-diffusion-webui"
+WORKSPACE_DIRECTORY="/workspace"
 VENV_DIR="opt/micromamba/envs/webui"
 
 # Create and activate the virtual environment
@@ -34,12 +35,12 @@ export REQS_FILE="requirements_versions.txt"
 export COMMANDLINE_ARGS="--port 7860 --listen --api --xformers --autolaunch"
 export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
 
-Models_dir=“${INSTALL_DIR}/models”
-Extensions_dir=“${INSTALL_DIR}/extensions”
-Embeddings_dir=“${INSTALL_DIR}/embeddings”
-Safetensors_dir=“${MODELS_DIR}/Stable-Diffusion}
-Lora_dir=“${MODELS_DIR}/Lora”
-ESRGAN_dir=“${MODELS_DIR}/ESRGAN”
+set Models_dir="${INSTALL_DIR}/models"
+set Extensions_dir="${INSTALL_DIR}/extensions"
+set Embeddings_dir="${INSTALL_DIR}/embeddings"
+set ckpt_dir="${MODELS_DIR}/Stable-Diffusion"
+set Lora_dir="${MODELS_DIR}/Lora"
+set ESRGAN_dir="${MODELS_DIR}/ESRGAN”
 
 
 
