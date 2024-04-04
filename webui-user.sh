@@ -1,10 +1,10 @@
-ort #!/bin/bash
+#!/bin/bash
 #########################################################
 # Uncomment and change the variables below to your need:#
 #########################################################
 
 # Install directory without trailing slash
-install_dir="/workspace"
+install_dir="/opt"
 
 # Name of the subdirectory
 clone_dir="stable-diffusion-webui"
