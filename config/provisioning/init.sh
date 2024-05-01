@@ -6,7 +6,7 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=90
+DISK_GB_REQUIRED=100
 
 MAMBA_PACKAGES=(
     #"package1"
@@ -44,7 +44,10 @@ CHECKPOINT_MODELS=(
     "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
     "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
     "https://civitai.com/api/download/models/133832"
-    "
+    "https://civitai.com/api/download/models/86329"
+    "https://civitai.com/api/download/models/11745"
+    "https://civitai.com/api/download/models/128713"
+    "https://civitai.com/api/download/models/351306"
 )
 
 LORA_MODELS=(
