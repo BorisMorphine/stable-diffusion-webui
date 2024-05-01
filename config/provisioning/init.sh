@@ -28,14 +28,14 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
-    "https://github.com/lllyasviel/ControlNet-v1-1-nightly ControlNet"
-    "https://github.com/deforum-art/sd-forge-deforum Deforum"
+    "https://github.com/Mikubill/sd-webui-controlnet"
+    "https://github.com/deforum-art/sd-webui-deforum"
     "https://github.com/Filexor/Clip_IO"
-    "https://github.com/VBVerduijn/sd-webui-mov2mov Mov-2-Mov"
-    "https://github.com/enlyth/sd-webui-riffusion Riffusion"
-    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111 Ultimate-Upscale"
-    "https://github.com/fkunn1326/openpose-editor Openpose"
-    "https://github.com/ashen-sensored/stable-diffusion-webui-two-shot Two-Shot"
+    "https://github.com/VBVerduijn/sd-webui-mov2mov"
+    "https://github.com/enlyth/sd-webui-riffusion"
+    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
+    "https://github.com/fkunn1326/openpose-editor"
+    "https://github.com/ashen-sensored/stable-diffusion-webui-two-shot"
 )
 
 CHECKPOINT_MODELS=(
