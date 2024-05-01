@@ -48,6 +48,7 @@ CHECKPOINT_MODELS=(
     "https://civitai.com/api/download/models/11745"
     "https://civitai.com/api/download/models/128713"
     "https://civitai.com/api/download/models/351306"
+    "https://civitai.com/api/download/models/372799?type=Model&format=SafeTensor&size=pruned&fp=fp32"
 )
 
 LORA_MODELS=(
@@ -94,6 +95,9 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors"
 )
 
+### Monkey Man
+cd /opt/stable-diffusion-webui/embeddings/
+wget -O CyberRealistic--neg https://civitai.com/api/download/models/82745?type=Negative&format=Other
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
@@ -126,7 +130,7 @@ function provisioning_start() {
     if [[ $XPU_TARGET = "CPU" ]]; then
         PLATFORM_FLAGS="--use-cpu all --skip-torch-cuda-test --no-half"
     fi
-    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 11404 --exit"
+    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 17860 --exit"
     FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
     
     # Start and exit because webui will probably require a restart
