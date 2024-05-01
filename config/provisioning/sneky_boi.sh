@@ -1,152 +1,207 @@
 #!/bin/bash
+# This file will be sourced in init.sh
+# Namespace functions with provisioning_
 
-cd /copt
-curl -sS https://webi.sh/gh | sh
-gh repo clone ashleykleynhans/forge-docker
+# https://raw.githubusercontent.com/ai-dock/stable-diffusion-webui/main/config/provisioning/default.sh
 
-# Log in to Docker Hub
-docker login -u ashleykza -p 
+### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-# Build the image, tag the image, and push the image to Docker Hub
-cd forge-docker
-docker buildx bake -f docker-bake.hcl --push
+DISK_GB_REQUIRED=90
 
-docker run -d \
-  --gpus all \
-  -v /workspace \
-  -p 3000:3001 \
-  -p 8888:8888 \
-  -p 2999:2999 \
-  -e VENV_PATH="/opts/venvs/stable-diffusion-webui-forge" \
-  ashleykza/forge:latest
-
-cd stable-diffusion-webui-forge
-
-webui_dir=/workspace/stable-diffusion-webui-forge
-models_dir=${webui_dir}/models
-sd_models_dir=${models_dir}/Stable-diffusion
-extensions_dir=${webui_dir}/extensions
-lora_dir=${models_dir}/Lora
-vae_dir=${models_dir}/VAE
-esrgan_dir=${models_dir}/ESRGAN
-
-opt/stabe-diffusion-webui/models/ESRGAN
-
-
-cd ${ESRGAN}
-# throw in some shiny new upscalers...
-cd ${ESRGAN}
-curl -o 4xUltraSharp.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/vRYVhaDA
-curl -o 4xUltraMix_Balanced.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-curl -o 4xUltraMix_Restore.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-curl -o 4xUltraMix_Smooth.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT
-curl -o 4x-FSDedither.pth https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w
-curl -o Bendel_Halftone.pth https://drive.google.com/uc?export=download&confirm=1&id=1vR_tvWNi8jXhXdmgW5xvWsQp0pXN3ge-
-curl -o 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
-curl -o 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
-curl -o 16xPNSR.pth https://openmodeldb.info/models/16x-PSNR#:~:text=Download%20(64.1,by%20Google%20Drive
-
-
-cd stable-diffusion-webui-forge/extensisons
-
-# get and install Deforum...
-cd ${extensions_dir}
-git clone https://github.com/deforum-art/sd-forge-deforum.git
-
-cd ${extensions_dir}/sd-forge-deforum
-pip install -r requirements.txt
-
-# change back to forge dir and cleanup...
-cd ${webui_dir}
-echo $PATH
+MAMBA_PACKAGES=(
+    #"package1"
+    #"package2=version"
+  )
+  
 PIP_PACKAGES=(
-    "numpy==1.26.2"
-    "onnx==1.15.0"
-    "onnxruntime==1.17.1"
-    "open-clip-torch==2.20.0"    
-    "optree==0.10.0"
-    "pytorch-lightning==1.9.4"
-    "torch==2.2.0"
-    "torchaudio==2.2.0"
-    "torchdiffeq==0.2.3"
-    "torchmetrics==1.3.2"
-    "torchsde==0.2.6"
-    "torchvision==0.17.0"
-    "triton==2.2.0"
-    "pytest-base-url~=2.0"
-    "pytest-cov~=4.0"
-    "pytest~=7.3"
-    "GitPython"
-    "Pillow"
-    "accelerate"
-    "blendmodes"
-    "clean-fid"
-    "einops"
-    "facexlib"
-    "fastapi>=0.90.1"
-    "gradio==3.41.2"
-    "inflection"
-    "jsonmerge"
-    "kornia"
-    "lark"
-    "numpy"
-    "omegaconf"
-    "open-clip-torch"
-    "piexif"
-    "psutil"
-    "pytorch_lightning"
-    "requests"
-    "resize-right"
-    "safetensors"
-    "scikit-image>=0.19"
-    "tomesd"
-    "torch"
-    "torchdiffeq"
-    "torchsde"
-    "transformers==4.30.2"
-    "cloudpickle"
-    "decorator"
-    "synr==0.5.0"
-    "tornado"
-    "GitPython==3.1.32"
-    "Pillow==9.5.0"
-    "accelerate==0.21.0"
-    "blendmodes==2022"
-    "clean-fid==0.1.35"
-    "einops==0.4.1"
-    "facexlib==0.3.0"
-    "fastapi==0.94.0"
-    "gradio==3.41.2"
-    "httpcore==0.15"
-    "inflection==0.5.1"
-    "jsonmerge==1.8.0"
-    "kornia==0.6.7"
-    "lark==1.1.2"
-    "numpy==1.26.2"
-    "omegaconf==2.2.3"
-    "open-clip-torch==2.20.0"
-    "piexif==1.1.3"
-    "psutil==5.9.5"
-    "pytorch_lightning==1.9.4"
-    "resize-right==0.0.2"
-    "safetensors==0.4.2"
-    "scikit-image==0.21.0"
-    "spandrel==0.1.6"
-    "tomesd==0.1.3"
-    "torch"
-    "torchdiffeq==0.2.3"
-    "torchsde==0.2.6"
-    "transformers==4.30.2"
-    "httpx==0.24.1"
-    "basicsr==1.4.2"
-    "diffusers==0.25.0"
+    "bitsandbytes==0.41.2.post2"
+    "basicsr==1.4.2" 
+    "imageio_ffmpeg" 
+    "av" 
+    "moviepy" 
+    "numexpr" 
+    "mutagen" 
+    "scikit-image==0.19.2 --no-cache-dir" 
+    "ezsynth" 
+    "ffmpeg" 
+    "onnxruntime"
   )
 
-# Download the required script into the current directory
-curl -sS https://raw.githubusercontent.com/Roldondo/stable-diffusion-webui/main/webui-user.sh -o webui-user.sh
+EXTENSIONS=(
+    "https://github.com/lllyasviel/ControlNet-v1-1-nightly ControlNet"
+    "https://github.com/deforum-art/sd-forge-deforum Deforum"
+    "https://github.com/Filexor/Clip_IO"
+    "https://github.com/VBVerduijn/sd-webui-mov2mov Mov-2-Mov"
+    "https://github.com/enlyth/sd-webui-riffusion Riffusion"
+    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111 Ultimate-Upscale"
+    "https://github.com/fkunn1326/openpose-editor Openpose"
+    "https://github.com/ashen-sensored/stable-diffusion-webui-two-shot Two-Shot"
+)
 
-# Execute Python script
-python3 webui.py
+CHECKPOINT_MODELS=(
+    "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
+    "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+    "https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    "https://civitai.com/api/download/models/133832"
+    "
+)
 
-# Run the shell script
-sudo bash webui-user.sh
+LORA_MODELS=(
+    "https://civitai.com/api/download/models/16576"
+    "https://civitai.com/api/download/models/61282"
+    "https://civitai.com/api/download/models/26503"
+    "https://civitai.com/api/download/models/93523"
+    "https://civitai.com/api/download/models/162602"
+    "https://civitai.com/api/download/models/61282"
+    "https://civitai.com/api/download/models/442216"
+    "https://civitai.com/api/download/models/426797"
+    "https://civitai.com/api/download/models/456744"
+    "https://civitai.com/api/download/models/449935"
+)
+
+VAE_MODELS=(
+    "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
+    "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
+    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+)
+
+ESRGAN_MODELS=(
+    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
+    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
+    "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
+)
+
+CONTROLNET_MODELS=(
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_mlsd-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_normal-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_seg-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_color-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_keypose-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_seg-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
+    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors"
+)
+
+
+### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
+
+function provisioning_start() {
+    source /opt/ai-dock/etc/environment.sh
+    DISK_GB_AVAILABLE=$(($(df --output=avail -m "${WORKSPACE}" | tail -n1) / 1000))
+    DISK_GB_USED=$(($(df --output=used -m "${WORKSPACE}" | tail -n1) / 1000))
+    DISK_GB_ALLOCATED=$(($DISK_GB_AVAILABLE + $DISK_GB_USED))
+    provisioning_print_header
+    provisioning_get_mamba_packages
+    provisioning_get_pip_packages
+    provisioning_get_extensions
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
+        "${CHECKPOINT_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/lora" \
+        "${LORA_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/controlnet" \
+        "${CONTROLNET_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/vae" \
+        "${VAE_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
+        "${ESRGAN_MODELS[@]}"
+     
+    PLATFORM_FLAGS=""
+    if [[ $XPU_TARGET = "CPU" ]]; then
+        PLATFORM_FLAGS="--use-cpu all --skip-torch-cuda-test --no-half"
+    fi
+    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 11404 --exit"
+    FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
+    
+    # Start and exit because webui will probably require a restart
+    cd /opt/stable-diffusion-webui && \
+    micromamba run -n webui -e LD_PRELOAD=libtcmalloc.so python launch.py \
+        ${FLAGS_COMBINED}
+    provisioning_print_end
+}
+
+function provisioning_get_mamba_packages() {
+    if [[ -n $MAMBA_PACKAGES ]]; then
+        $MAMBA_INSTALL -n webui ${MAMBA_PACKAGES[@]}
+    fi
+}
+
+function provisioning_get_pip_packages() {
+    if [[ -n $PIP_PACKAGES ]]; then
+        micromamba run -n webui $PIP_INSTALL ${PIP_PACKAGES[@]}
+    fi
+}
+
+function provisioning_get_extensions() {
+    for repo in "${EXTENSIONS[@]}"; do
+        dir="${repo##*/}"
+        path="/opt/stable-diffusion-webui/extensions/${dir}"
+        requirements="${path}/requirements.txt"
+        if [[ -d $path ]]; then
+            if [[ ${AUTO_UPDATE,,} == "true" ]]; then
+                printf "Updating extension: %s...\n" "${repo}"
+                ( cd "$path" && git pull )
+                if [[ -e $requirements ]]; then
+                    micromamba -n webui run ${PIP_INSTALL} -r "$requirements"
+                fi
+            fi
+        else
+            printf "Downloading extension: %s...\n" "${repo}"
+            git clone "${repo}" "${path}" --recursive
+            if [[ -e $requirements ]]; then
+                micromamba -n webui run ${PIP_INSTALL} -r "${requirements}"
+            fi
+        fi
+    done
+}
+
+function provisioning_get_models() {
+    if [[ -z $2 ]]; then return 1; fi
+    dir="$1"
+    mkdir -p "$dir"
+    shift
+    if [[ $DISK_GB_ALLOCATED -ge $DISK_GB_REQUIRED ]]; then
+        arr=("$@")
+    else
+        printf "WARNING: Low disk space allocation - Only the first model will be downloaded!\n"
+        arr=("$1")
+    fi
+    
+    printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+    for url in "${arr[@]}"; do
+        printf "Downloading: %s\n" "${url}"
+        provisioning_download "${url}" "${dir}"
+        printf "\n"
+    done
+}
+
+function provisioning_print_header() {
+    printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
+    if [[ $DISK_GB_ALLOCATED -lt $DISK_GB_REQUIRED ]]; then
+        printf "WARNING: Your allocated disk size (%sGB) is below the recommended %sGB - Some models will not be downloaded\n" "$DISK_GB_ALLOCATED" "$DISK_GB_REQUIRED"
+    fi
+}
+
+function provisioning_print_end() {
+    printf "\nProvisioning complete:  Web UI will start now\n\n"
+}
+
+# Download from $1 URL to $2 file path
+function provisioning_download() {
+    wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+}
+
+provisioning_start
