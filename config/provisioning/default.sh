@@ -9,8 +9,8 @@
 DISK_GB_REQUIRED=100
 
 MAMBA_PACKAGES=(
-    #"package1"
-    #"package2=version"
+    "package1"
+    "package2=version"
   )
   
 PIP_PACKAGES=(
@@ -36,6 +36,9 @@ EXTENSIONS=(
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
     "https://github.com/fkunn1326/openpose-editor"
     "https://github.com/ashen-sensored/stable-diffusion-webui-two-shot"
+    "https://github.com/CiaraStrawberry/TemporalKit"
+    "https://github.com/AbyszOne/Abysz-LAB-Ext.git"
+    "https://github.com/s9roll7/ebsynth_utility.git"
 )
 
 CHECKPOINT_MODELS=(
