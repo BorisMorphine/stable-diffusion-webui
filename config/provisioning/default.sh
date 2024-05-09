@@ -15,6 +15,7 @@ MAMBA_PACKAGES=(
   
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
+    "insightface"
     "basicsr==1.4.2" 
     "imageio_ffmpeg" 
     "av" 
