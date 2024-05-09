@@ -9,8 +9,8 @@
 DISK_GB_REQUIRED=100
 
 MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
+    #"package1"
+    #"package2=version"
   )
   
 PIP_PACKAGES=(
