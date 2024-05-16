@@ -22,7 +22,7 @@ PIP_PACKAGES=(
     "moviepy" 
     "numexpr" 
     "mutagen" 
-    "scikit-image==0.19.2 --no-cache-dir" 
+    "scikit-image==0.19.2" 
     "ezsynth" 
     "ffmpeg" 
     "onnxruntime"
