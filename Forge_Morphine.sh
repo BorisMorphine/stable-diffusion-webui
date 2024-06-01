@@ -1,6 +1,5 @@
-#cd /opt/
-
 #!/bin/bash
+
 micromamba deactivate activate base
 sudo micromamba run -n webui git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git
 mv /opt/stable-diffusion-webui /opt/stable-diffusion-forge-webui/extensions/A1111
@@ -98,7 +97,3 @@ wget -O Deoldify790000.pth https://drive.google.com/uc?export=download&confirm=1
 ### Step 5 ###
 # clean up after yourself
 echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
-
-cd ${INSTALL_DIR}
-sudo ./webui.sh
-sudo ./${LAUNCH_SCRIPT}
