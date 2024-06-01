@@ -2,42 +2,42 @@
 
 curl -sS https://webi.sh/gh | sh
 
-set opt='/opt'
-set rq1='{$opt_dir}/stable-stable-diffusion-webui/requirements.txt' 
-set rq3='{$opt_dir}/stable-stable-diffusion-webui/requirements_versions.txt' 
-set rq5='{$opt_dir}/stable-stable-diffusion-webui/requirements_npu.txt' 
-set rq7='{$opt_dir}/stable-stable-diffusion-webui/requirements-test.tx'
+set opt="/opt"
+set rq1="{$opt_dir}/stable-stable-diffusion-webui/requirements.txt" 
+set rq3="{$opt_dir}/stable-stable-diffusion-webui/requirements_versions.txt" 
+set rq5="{$opt_dir}/stable-stable-diffusion-webui/requirements_npu.txt" 
+set rq7="{$opt_dir}/stable-stable-diffusion-webui/requirements-test.tx"
 
-set workspace='/workspace'
-set rq2='{$workspace_dir}/stable-diffusion-webui/requirements.txt' 
-set rq4='{$workspace_dir}/stable-diffusion-webui/requirements_versions.txt'
-set rq6='{$workspace_dir}/stable-diffusion-webui/requirements_npu.txt' 
-set rq8='{$workspace_dir}/stable-stable-diffusion-webui/requirements-test.txt'
+set workspace="/workspace"
+set rq2="{$workspace_dir}/stable-diffusion-webui/requirements.txt" 
+set rq4="{$workspace_dir}/stable-diffusion-webui/requirements_versions.txt"
+set rq6="{$workspace_dir}/stable-diffusion-webui/requirements_npu.txt" 
+set rq8="{$workspace_dir}/stable-stable-diffusion-webui/requirements-test.txt"
 
-set base="stable-diffusion-webui"
+set base="/stable-diffusion-webui"
 set data_1=[${opt}/${base}]
 set data_2=[${workspace}/${base}]
 set data_dir=[${data_1}+${data_2}]
 
-set clone_dir="stable-diffusion-webui-forge"
-set install_dir='[${data_dir}/${clone_dir}]/extensions'
-set A1111_home='${install_dir}/stable-diffusion-webui-forge'
-set webui_dir='${A1111_home}'
+set clone_dir="/stable-diffusion-webui-forge"
+set install_dir="[${data_dir}/${clone_dir}]/extensions"
+set A1111_home="${install_dir}/stable-diffusion-webui-forge"
+set webui_dir="${A1111_home}"
 
-cd '${webui_dir}'
-set models_dir='${storage_dir}'/models
-set sd_models_dir='${models_dir}'/Stable-diffusion
-set extensions_dir='${webui_dir}'/extensions''
-set vae_models_dir='${models_dir}'/VAE
-set upscale_models_dir='${models_dir}'/ESRGAN
+cd ${webui_dir}
+set models_dir="${storage_dir}/models"
+set sd_models_dir="${models_dir}/Stable-diffusion"
+set extensions_dir="${webui_dir}/extensions"
+set vae_models_dir="${models_dir}/VAE"
+set upscale_models_dir="${models_dir}/ESRGAN"
 
-cd '${extensions_dir}'
+cd ${extensions_dir}
 git clone https://github.com/deforum-art/sd-forge-deforum.git
 
 # change back to main dir and cleanup...
 cd ${webui_dir}
 echo $PATH
-if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
+if [ -z ${PATH-} ]; then export PATH=/workspace/home/user/.local/bin; fi
 
 # throw in some shiny new upscalers...
 cd ${ESRGAN}
