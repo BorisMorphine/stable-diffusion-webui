@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd /root 
-
 curl -sS https://webi.sh/gh | sh
 
 set opt='/opt'
