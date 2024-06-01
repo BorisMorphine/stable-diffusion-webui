@@ -15,9 +15,9 @@ set rq6="{$workspace_dir}/stable-diffusion-webui/requirements_npu.txt"
 set rq8="{$workspace_dir}/stable-stable-diffusion-webui/requirements-test.txt"
 
 set base="/stable-diffusion-webui"
-set data_1=[${opt}/${base}]
-set data_2=[${workspace}/${base}]
-set data_dir=[${data_1}+${data_2}]
+set data_1="[${opt}/${base}]"
+set data_2="[${workspace}/${base}]"
+set data_dir="[${data_1}+${data_2}]"
 
 set clone_dir="/stable-diffusion-webui-forge"
 set install_dir="[${data_dir}/${clone_dir}]/extensions"
