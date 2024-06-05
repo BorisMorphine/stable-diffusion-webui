@@ -6,11 +6,7 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=100
-
-# Download and prepare the replacement files
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
-rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+DISK_GB_REQUIRED=200
 
 MAMBA_PACKAGES=(
     #"package1"
@@ -19,27 +15,19 @@ MAMBA_PACKAGES=(
   
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
-    "ffmpeg"
-    "insightface" 
-    "scikit-image" 
     "ezsynth" 
-    "opencv-python" 
-    "imageio" 
-    "imageio-ffmpeg"
   )
 
 EXTENSIONS=(
     "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
     "https://github.com/deforum-art/sd-forge-deforum"
-    "https://github.com/VBVerduijn/sd-webui-mov2mov"
-    "https://github.com/volotat/SD-CN-Animation"
 )
 
 CHECKPOINT_MODELS=(
+    "https://civitai.com/api/download/models/501240?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://civitai.com/api/download/models/547983?type=Model&format=SafeTensor&size=pruned&fp=fp16"
+    "https://civitai.com/api/download/models/518881?type=Model&format=SafeTensor&size=full&fp=fp32"
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
 )
 
 LORA_MODELS=(
@@ -49,7 +37,8 @@ LORA_MODELS=(
 VAE_MODELS=(
     "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
     "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
-    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    #"https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+    "https://civitai.com/api/download/models/518881?type=VAE&format=SafeTensor"
 )
 
 ESRGAN_MODELS=(
@@ -59,28 +48,29 @@ ESRGAN_MODELS=(
 )
 
 CONTROLNET_MODELS=(
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_mlsd-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_normal-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_openpose-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_seg-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_canny-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_color-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_keypose-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_openpose-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_seg-fp16.safetensors"
-    #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
+    "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
     #"https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_style-fp16.safetensors"
 )
 
-cd /workspace/stable-diffusion-webui/extensions/sd-forge-deforum
-pip install -r requirements.txt
-
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
+
+# Download and prepare the replacement files
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
+rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
 function provisioning_start() {
     source /opt/ai-dock/etc/environment.sh
