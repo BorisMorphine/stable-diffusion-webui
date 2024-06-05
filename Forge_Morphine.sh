@@ -6,11 +6,11 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
+DISK_GB_REQUIRED=300
+
 # Download and prepare the replacement files
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
-
-DISK_GB_REQUIRED=300
 
 MAMBA_PACKAGES=(
     #"package1"
@@ -20,28 +20,15 @@ MAMBA_PACKAGES=(
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
     "ffmpeg"
-    "insightface"
   )
 
 EXTENSIONS=(
-    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
-    "https://github.com/deforum-art/sd-forge-deforum"
-    "https://github.com/d8ahazard/sd_dreambooth_extension"
-    "https://github.com/adieyal/sd-dynamic-prompts"
-    "https://github.com/ototadana/sd-face-editor"
-    "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
-    "https://github.com/hako-mikan/sd-webui-regional-prompter"
-    "https://github.com/fkunn1326/openpose-editor"
-    "https://github.com/Gourieff/sd-webui-reactor"
+    "https://github.com/lllyasviel/ControlNet-v1-1-nightly controlnet"
+    "https://github.com/deforum-art/sd-forge-deforum deforum"
     "https://github.com/ibrahimsn98/sdwebui-kotlin"
     "https://github.com/volotat/SD-CN-Animation"
     "https://github.com/Scholar01/sd-webui-mov2mov"
 )
-
-mv /workspace/stable-diffusion-webui/extensions/ControlNet-v1-1-nightly /workspace/stable-diffusion-webui/extensions/controlnet
-mv /workspace/stable-diffusion-webui/extensions/sd-forge-deforum /workspace/stable-diffusion-webui/extensions/deforum
-mv /workspace/stable-diffusion-webui/extensions/sd-webui-mov2mov /workspace/stable-diffusion-webui/extensions/mov2mov
-mv /workspace/stable-diffusion-webui/extensions/SD-CN-Animation /workspace/stable-diffusion-webui/extensions/sd-cn
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
@@ -78,26 +65,24 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml"
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.pth"
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_canny.yaml"
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_canny.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_inpaint.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_canny.yaml"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_inpaint.pth"
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_inpaint.yaml"
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_lineart.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_lineart.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_mlsd.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_mlsd.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_normalbae.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_normalbae.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_openpose.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_openpose.yaml"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_lineart.yaml"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_mlsd.pth"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_mlsd.yaml"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_normalbae.pth"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_normalbae.yaml"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_openpose.pth"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_openpose.yaml"
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_scribble.pth"
     "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_scribble.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_seg.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_seg.yaml"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.yaml"   
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_seg.pth"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_seg.yaml"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.pth"
+    #"https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.yaml"   
 )
 
 cd /workspace/stable-diffusion-webui/sd-forge-deforum
