@@ -13,8 +13,8 @@ rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui
 DISK_GB_REQUIRED=300
 
 MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
+    #"package1"
+    #"package2=version"
   )
   
 PIP_PACKAGES=(
