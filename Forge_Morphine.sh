@@ -1,99 +1,222 @@
 #!/bin/bash
+# This file will be sourced in init.sh
+# Namespace functions with provisioning_
 
-micromamba deactivate activate base
-sudo micromamba run -n webui git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git
-mv /opt/stable-diffusion-webui /opt/stable-diffusion-forge-webui/extensions/A1111
-/opt/stable-diffusion-forge-webui/ /opt/stable-diffusion-webui/
-cd /opt/stable-diffusion-webui/
-./webui.sh | bash sudo
+# https://raw.githubusercontent.com/ai-dock/stable-diffusion-webui/main/config/provisioning/default.sh
 
+### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-https://github.com/lllyasviel/ControlNet-v1-1-nightly.git
-https://github.com/continue-revolution/sd-forge-animatediff.git
-https://github.com/DavG25/sd-webui-mov2mov.git
-https://github.com/Rakile/DeforumationQT.git
-https://github.com/Scholar01/sd-webui-bg-mask
-https://github.com/KohakuBlueleaf/a1111-sd-webui-lycoris
-GIT_LFS_SKIP_SMUDGE=1 git clone https://huggingface.co/conrevo/AnimateDiff-A1111
+# Download and prepare the replacement files
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
+rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
-micromamba run -n webui wget -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
-INSTALL_DIR="opt/stable-diffusion-webui"
-WORKSPACE_DIRECTORY="/workspace"
-VENV_DIR="opt/micromamba/envs/webui"
+DISK_GB_REQUIRED=300
 
-micromamba run -n webui wget -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
-export GIT="git"
-export LAUNCH_SCRIPT="launch.py"
-export REQS_FILE="requirements_versions.txt"
-export COMMANDLINE_ARGS="--port 7860 --listen --api --autolaunch"
-export TORCH_COMMAND="pip install torch==1.12.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113"
+MAMBA_PACKAGES=(
+    "package1"
+    "package2=version"
+  )
+  
+PIP_PACKAGES=(
+    "bitsandbytes==0.41.2.post2"
+    "ffmpeg"
+    "insightface"
+  )
 
-micromamba run -n webui wget -O webui-user.sh https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/webui-user.sh
-set Models_dir="${INSTALL_DIR}/models"
-set Extensions_dir="${INSTALL_DIR}/extensions"
-set Embeddings_dir="${INSTALL_DIR}/embeddings"
-set ckpt_dir="${MODELS_DIR}/Stable-Diffusion"
-set Lora_dir="${MODELS_DIR}/Lora"
-set ESRGAN_dir="${MODELS_DIR}/ESRGAN”
+EXTENSIONS=(
+    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    "https://github.com/deforum-art/sd-forge-deforum"
+    "https://github.com/d8ahazard/sd_dreambooth_extension"
+    "https://github.com/adieyal/sd-dynamic-prompts"
+    "https://github.com/ototadana/sd-face-editor"
+    "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
+    "https://github.com/hako-mikan/sd-webui-regional-prompter"
+    "https://github.com/fkunn1326/openpose-editor"
+    "https://github.com/Gourieff/sd-webui-reactor"
+    "https://github.com/ibrahimsn98/sdwebui-kotlin"
+    "https://github.com/volotat/SD-CN-Animation"
+    "https://github.com/Scholar01/sd-webui-mov2mov"
+)
 
-cd ${ckpt_dir}
-install git lfs
-git clone Deliberate_v.5.safetensors https://huggingface.co/XpucT/Deliberate/blob/main/Deliberate_v5.safetensors
+mv /workspace/stable-diffusion-webui/extensions/ControlNet-v1-1-nightly /workspace/stable-diffusion-webui/extensions/controlnet
+mv /workspace/stable-diffusion-webui/extensions/sd-forge-deforum /workspace/stable-diffusion-webui/extensions/deforum
+mv /workspace/stable-diffusion-webui/extensions/sd-webui-mov2mov /workspace/stable-diffusion-webui/extensions/mov2mov
+mv /workspace/stable-diffusion-webui/extensions/SD-CN-Animation /workspace/stable-diffusion-webui/extensions/sd-cn
 
-cd ${ESRGAN_dir}
-wget -O 4xUltraSharp.pth https://huggingface.co/uwg/upscaler/resolve/main/ESRGAN/4x-UltraSharp.pth
-wget -O 4xUltraMix_Balanced.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-wget -O  4xUltraMix_Restore.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/KBJRBQyR
-wget -O 4xUltraMix_Smooth.pth https://mega.nz/folder/qZRBmaIY#nIG8KyWFcGNTuMX_XNbJ_g/file/PIRDEYgT
-wget -O 4x-FSDedither.pth https://drive.google.com/uc?export=download&confirm=1&id=1H4KQyhcknOoExjvDdsoxAgTBMO7JuJ3w
-wget -O 8xESRGAN.pth https://icedrive.net/1/43GNBihZyi
-wget -O 16xESRGAN.pth https://objectstorage.us-phoenix-1.oraclecloud.com/n/ax6ygfvpvzka/b/open-modeldb-files/o/16x-ESRGAN.pth
-wget -O 1x_GainRESV3_Aggro.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/TlkHjITR
-wget -O 1x_GainRESV3_Nautral.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/KxkVEaAQ
-wget -O 1x_GainRESV3_Passive.pth https://mega.nz/folder/yg0lHQoJ#sP8_BfDk2YlshFjOL9Qrtg/file/H49nEAzI
-wget -O 4xNomos8kDAT.pth https://drive.usercontent.google.com/download?id=1JRwXYeuMBIsyeNfsTfeSs7gsHqCZD7x
-wget -O 4xLSDIRplus.pth https://github.com/Phhofm/models/blob/main/4xLSDIRplus/4xLSDIRplus.pth
-wget -O BSRGAN https://github.com/cszn/KAIR/releases/download/v1.0/BSRGAN.pth
+CHECKPOINT_MODELS=(
+    "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
+    "https://civitai.com/api/download/models/488645"
+    "https://civitai.com/api/download/models/489217"
+    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
+    #"https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
+    #"https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+)
 
-cd ${lora_dir}
-wget -O weird_lanscape.safetensors https://civitai.com/api/download/models/309330?type=Model&format=SafeTensor
-wget -O sheet_of_acid.safetensors https://civitai.com/api/download/models/145277?type=Model&format=SafeTensor
-wget -O gonzo.safetensors https://civitai.com/api/download/models/127015?type=Model&format=SafeTensor
+LORA_MODELS=(
+    #"https://civitai.com/api/download/models/16576"
+)
 
-# Build StableSR
-cd ${EXTENSIONS_DIR}
-git clone https://github.com/pkuliyi2015/sd-webui-stablesr.git StableSR
-git clone https://github.com/amithgc/DeforumStableDiffusion-v0.5-Local.git
-git clone https://github.com/Rakile/DeforumationQT.git
-git clone https://github.com/s9roll7/ebsynth_utility.git
-git clone https://github.com/Scholar01/sd-webui-mov2mov.git
-git clone https://github.com/Scholar01/sd-webui-bg-mask.git
-git clone https://github.com/BlafKing/sd-civitai-browser-plus.git
-git clone https://github.com/feffy380/sd-webui-token-downsampling.git
-git clone https://github.com/light-and-ray/sd-webui-replacer.git
-git clone https://github.com/volotat/SD-CN-Animation.git
+VAE_MODELS=(
+    "https://civitai.com/api/download/models/488645"
+    "https://huggingface.co/stabilityai/sd-vae-ft-ema-original/resolve/main/vae-ft-ema-560000-ema-pruned.safetensors"
+    "https://huggingface.co/stabilityai/sd-vae-ft-mse-original/resolve/main/vae-ft-mse-840000-ema-pruned.safetensors"
+    "https://huggingface.co/stabilityai/sdxl-vae/resolve/main/sdxl_vae.safetensors"
+)
 
-# cd into new directory and download models
-cd StableSR/scripts 
-git clone https://huggingface.co/Iceclear/StableSR -force scripts
+ESRGAN_MODELS=(
+    "https://huggingface.co/ai-forever/Real-ESRGAN/resolve/main/RealESRGAN_x4.pth"
+    "https://huggingface.co/FacehugmanIII/4x_foolhardy_Remacri/resolve/main/4x_foolhardy_Remacri.pth"
+    "https://huggingface.co/Akumetsu971/SD_Anime_Futuristic_Armor/resolve/main/4x_NMKD-Siax_200k.pth"
+)
 
-# cd into new directory download models
-cd DeOldify/models/deoldify
-wget -O ColorizeArtistic_gen.pth https://data.deepai.org/deoldify/ColorizeArtistic_gen.pth
-wget -O ColorizeArtistic_crit https://www.dropbox.com/s/xpq2ip9occuzgen/ColorizeArtistic_crit.pth
-wget -O ColorizeArtisitic_PretrainOnly.pth https://www.dropbox.com/s/h782d1zar3vdblw/ColorizeArtistic_PretrainOnly_gen.pth
-wget -O ColorizeArtistic_PretrainOnly.pth https://www.dropbox.com/s/gr81b3pkidwlrc7/ColorizeArtistic_PretrainOnly_crit.pth
-wget -O ColorizeStable_gen.pth https://www.dropbox.com/s/axsd2g85uyixaho/ColorizeStable_gen.pth
-wget -O ColorizeStable_crit.pth https://www.dropbox.com/s/xpq2ip9occuzgen/ColorizeStable_crit.pth
-wget -O ColorizeStable_PretrainOnly_gen.pth https://www.dropbox.com/s/h782d1zar3vdblw/ColorizeStable_PretrainOnly_gen.pth
-wget -O ColorizeStable_PretrainOnly_crit.pth https://www.dropbox.com/s/gr81b3pkidwlrc7/ColorizeStable_PretrainOnly_crit.pth
-wget -O ColorizeVideo_gen.pth https://www.dropbox.com/s/axsd2g85uyixaho/ColorizeVideo_gen.pth
-wget -O ColorizeVideo_crit.pth https://www.dropbox.com/s/xpq2ip9occuzgen/ColorizeVideo_crit.pth
-wget -O ColorizeVideo_PretrainOnly_gen.pth  https://www.dropbox.com/s/h782d1zar3vdblw/ColorizeVideo_PretrainOnly_gen.pth
-wget -O ColorizeVideo_PretrainOnly_crit.pth https://www.dropbox.com/s/gr81b3pkidwlrc7/ColorizeVidoe_PretrainOnly_crit.pth
-wget -O Deoldify790000.pth https://drive.google.com/uc?export=download&confirm=1&id=1-mxmDF1Dh-PnQqRz_PeCrvsTkHjYCbi3
+CONTROLNET_MODELS=(
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_ip2p.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_ip2p.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_shuffle.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11e_sd15_shuffle.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_canny.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_canny.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_depth.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_inpaint.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_inpaint.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_lineart.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_lineart.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_mlsd.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_mlsd.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_normalbae.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_normalbae.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_openpose.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_openpose.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_scribble.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_scribble.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_seg.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_seg.yaml"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1p_sd15_softedge.yaml"   
+)
 
+cd /workspace/stable-diffusion-webui/sd-forge-deforum
+pip install -r requirements.txt
 
-### Step 5 ###
-# clean up after yourself
-echo $PATH; if [ -z "${PATH-}" ]; then export PATH=/workspace/home/user/.local/bin; fi
+### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
+
+function provisioning_start() {
+    source /opt/ai-dock/etc/environment.sh
+    DISK_GB_AVAILABLE=$(($(df --output=avail -m "${WORKSPACE}" | tail -n1) / 1000))
+    DISK_GB_USED=$(($(df --output=used -m "${WORKSPACE}" | tail -n1) / 1000))
+    DISK_GB_ALLOCATED=$(($DISK_GB_AVAILABLE + $DISK_GB_USED))
+    provisioning_print_header
+    provisioning_get_mamba_packages
+    provisioning_get_pip_packages
+    provisioning_get_extensions
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
+        "${CHECKPOINT_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/lora" \
+        "${LORA_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/controlnet" \
+        "${CONTROLNET_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/vae" \
+        "${VAE_MODELS[@]}"
+    provisioning_get_models \
+        "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
+        "${ESRGAN_MODELS[@]}"
+     
+    PLATFORM_FLAGS=""
+    if [[ $XPU_TARGET = "CPU" ]]; then
+        PLATFORM_FLAGS="--use-cpu all --skip-torch-cuda-test --no-half"
+    fi
+    PROVISIONING_FLAGS="--skip-python-version-check --no-download-sd-model --do-not-download-clip --port 11404 --exit"
+    FLAGS_COMBINED="${PLATFORM_FLAGS} $(cat /etc/a1111_webui_flags.conf) ${PROVISIONING_FLAGS}"
+    
+    # Start and exit because webui will probably require a restart
+    cd /opt/stable-diffusion-webui && \
+    micromamba run -n webui -e LD_PRELOAD=libtcmalloc.so python launch.py \
+        ${FLAGS_COMBINED}
+    provisioning_print_end
+}
+
+function provisioning_get_mamba_packages() {
+    if [[ -n $MAMBA_PACKAGES ]]; then
+        $MAMBA_INSTALL -n webui ${MAMBA_PACKAGES[@]}
+    fi
+}
+
+function provisioning_get_pip_packages() {
+    if [[ -n $PIP_PACKAGES ]]; then
+        micromamba run -n webui $PIP_INSTALL ${PIP_PACKAGES[@]}
+    fi
+}
+
+function provisioning_get_extensions() {
+    for repo in "${EXTENSIONS[@]}"; do
+        dir="${repo##*/}"
+        path="/opt/stable-diffusion-webui/extensions/${dir}"
+        requirements="${path}/requirements.txt"
+        if [[ -d $path ]]; then
+            if [[ ${AUTO_UPDATE,,} != "false" ]]; then
+                printf "Updating extension: %s...\n" "${repo}"
+                ( cd "$path" && git pull )
+                if [[ -e $requirements ]]; then
+                    micromamba -n webui run ${PIP_INSTALL} -r "$requirements"
+                fi
+            fi
+        else
+            printf "Downloading extension: %s...\n" "${repo}"
+            git clone "${repo}" "${path}" --recursive
+            if [[ -e $requirements ]]; then
+                micromamba -n webui run ${PIP_INSTALL} -r "${requirements}"
+            fi
+        fi
+    done
+}
+
+function provisioning_get_models() {
+    if [[ -z $2 ]]; then return 1; fi
+    dir="$1"
+    mkdir -p "$dir"
+    shift
+    if [[ $DISK_GB_ALLOCATED -ge $DISK_GB_REQUIRED ]]; then
+        arr=("$@")
+    else
+        printf "WARNING: Low disk space allocation - Only the first model will be downloaded!\n"
+        arr=("$1")
+    fi
+    
+    printf "Downloading %s model(s) to %s...\n" "${#arr[@]}" "$dir"
+    for url in "${arr[@]}"; do
+        printf "Downloading: %s\n" "${url}"
+        provisioning_download "${url}" "${dir}"
+        printf "\n"
+    done
+}
+
+function provisioning_print_header() {
+    printf "\n##############################################\n#                                            #\n#          Provisioning container            #\n#                                            #\n#         This will take some time           #\n#                                            #\n# Your container will be ready on completion #\n#                                            #\n##############################################\n\n"
+    if [[ $DISK_GB_ALLOCATED -lt $DISK_GB_REQUIRED ]]; then
+        printf "WARNING: Your allocated disk size (%sGB) is below the recommended %sGB - Some models will not be downloaded\n" "$DISK_GB_ALLOCATED" "$DISK_GB_REQUIRED"
+    fi
+}
+
+function provisioning_print_end() {
+    printf "\nProvisioning complete:  Web UI will start now\n\n"
+}
+
+# Download from $1 URL to $2 file path
+function provisioning_download() {
+    wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+}
+
+provisioning_start
+    wget -qnc --content-disposition --show-progress -e dotbytes="${3:-4M}" -P "$2" "$1"
+}
+
+provisioning_start
