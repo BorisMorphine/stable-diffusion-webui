@@ -13,12 +13,19 @@ git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
 MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
+    #"package1"
+    #"package2=version"
   )
   
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
+    "ffmpeg"
+    "insightface" 
+    "scikit-image" 
+    "ezsynth" 
+    "opencv-python" 
+    "imageio" 
+    "imageio-ffmpeg"
   )
 
 EXTENSIONS=(
