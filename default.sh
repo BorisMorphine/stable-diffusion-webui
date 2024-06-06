@@ -2,6 +2,10 @@
 # This file will be sourced in init.sh
 # Namespace functions with provisioning_
 
+# Download and prepare the replacement files
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
+rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+
 # https://github.com/BorisMorphine/stable-diffusion-webui/blob/main/default.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
@@ -67,10 +71,6 @@ CONTROLNET_MODELS=(
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
-
-# Download and prepare the replacement files
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
-rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
 function provisioning_start() {
     source /opt/ai-dock/etc/environment.sh
