@@ -9,13 +9,12 @@
 # Download and prepare the replacement files
 wget https://github.com/lllyasviel/stable-diffusion-webui-forge/tree/dev2 /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
-mv /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
 DISK_GB_REQUIRED=120
 
 MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
+    #"package1"
+    #"package2=version"
 )
   
 PIP_PACKAGES=(
