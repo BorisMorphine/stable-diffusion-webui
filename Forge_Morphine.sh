@@ -2,19 +2,19 @@
 # This file will be sourced in init.sh
 # Namespace functions with provisioning_
 
-# Download and prepare the replacement files
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
-rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
-
 # https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/Forge_Morphine.sh
+
+# Download and prepare the replacement files
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git /tmp/stable-diffusion-webui-forge
+rsync -avzh /tmp/stable-diffusion-webui-forge /workspace/stable-diffusion-webui
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
 DISK_GB_REQUIRED=200
 
 MAMBA_PACKAGES=(
-    #"package1"
-    #"package2=version"
+    "package1"
+    "package2=version"
   )
   
 PIP_PACKAGES=(
