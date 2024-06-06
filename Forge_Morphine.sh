@@ -13,8 +13,8 @@ git clone -b dev2 https://github.com/lllyasviel/stable-diffusion-webui-forge /tm
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
 MAMBA_PACKAGES=(
-    "package1"
-    "package2=version"
+    #"package1"
+    #"package2=version"
   )
   
 PIP_PACKAGES=(
@@ -22,9 +22,8 @@ PIP_PACKAGES=(
   )
 
 EXTENSIONS=(
-    "https://github.com/Mikubill/sd-webui-controlnet"
+    "https://github.com/lllyasviel/stable-diffusion-webui-forge"
     "https://github.com/d8ahazard/sd_dreambooth_extension"
-    "https://github.com/deforum-art/sd-webui-deforum"
     "https://github.com/adieyal/sd-dynamic-prompts"
     "https://github.com/ototadana/sd-face-editor"
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
@@ -33,11 +32,6 @@ EXTENSIONS=(
     "https://github.com/fkunn1326/openpose-editor"
     "https://github.com/Gourieff/sd-webui-reactor"
     "https://github.com/ibrahimsn98/sdwebui-kotlin"
-    "https://github.com/andyjsharpe/Automatic1111Interpolator"
-    "https://github.com/zer0TF/deforum-prompt-interpolator"
-    "https://github.com/lllyasviel/stable-diffusion-webui-forge"
-    "https://github.com/s9roll7/sd_loopback_music_sync_wave"
-    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
 )
 
 CHECKPOINT_MODELS=(
