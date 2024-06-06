@@ -6,7 +6,7 @@
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
 rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
-# https://github.com/BorisMorphine/stable-diffusion-webui/blob/main/default.sh
+# https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/Forge_Morphine.sh
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
