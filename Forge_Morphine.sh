@@ -4,23 +4,23 @@
 
 # https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/Forge_Morphine.sh
 
-# Download and prepare the replacement files
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge.git /tmp/stable-diffusion-webui-forge
-rsync -avzh /tmp/stable-diffusion-webui-forge /workspace/stable-diffusion-webui
-
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=200
+# Download and prepare the replacement files
+wget https://github.com/lllyasviel/stable-diffusion-webui-forge/tree/dev2 /tmp/stable-diffusion-webui-forge/
+rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+mv /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+
+DISK_GB_REQUIRED=120
 
 MAMBA_PACKAGES=(
     "package1"
     "package2=version"
-  )
+)
   
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
-    "ezsynth" 
-  )
+)
 
 EXTENSIONS=(
     "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
