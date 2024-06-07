@@ -16,6 +16,15 @@ MAMBA_PACKAGES=(
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
     "ezsynth"
+    "numexpr"
+    "matplotlib"
+    "pandas"
+    "av"
+    "pims"
+    "ffmpeg"
+    "imageio_ffmpeg"
+    "rich"
+    "gdown"
 )
 
 EXTENSIONS=(
@@ -54,12 +63,6 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
 )
-
-# Install Deforum
-cd /workspace/stable-diffusion-webui/extensions
-git clone https://github.com/deforum-art/sd-forge-deforum.git
-cd sd-forge-deforum
-pip install -r requirements.txt
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
