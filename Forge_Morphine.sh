@@ -15,19 +15,13 @@ MAMBA_PACKAGES=(
 
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
+    "ezsynth"
 )
 
 EXTENSIONS=(
-    "https://github.com/lllyasviel/stable-diffusion-webui-forge"
-    "https://github.com/d8ahazard/sd_dreambooth_extension"
-    "https://github.com/adieyal/sd-dynamic-prompts"
-    "https://github.com/ototadana/sd-face-editor"
-    "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
-    "https://github.com/hako-mikan/sd-webui-regional-prompter"
-    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
-    "https://github.com/fkunn1326/openpose-editor"
-    "https://github.com/Gourieff/sd-webui-reactor"
-    "https://github.com/ibrahimsn98/sdwebui-kotlin"
+    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    "https://github.com/VBVerduijn/sd-webui-mov2mov"
+    "https://github.com/foglerek/SD-CN-Animation"
 )
 
 CHECKPOINT_MODELS=(
@@ -60,6 +54,12 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
 )
+
+# Install Deforum
+cd /workspace/stable-diffusion-webui/extensions
+git clone https://github.com/deforum-art/sd-forge-deforum.git
+cd sd-forge-deforum
+pip install -r requirements.txt
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
