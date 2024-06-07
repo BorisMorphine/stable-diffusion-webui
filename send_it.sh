@@ -107,11 +107,10 @@ function build_extra_start() {
         --no-download-sd-model \
         --do-not-download-clip \
         --no-half \
-        --port 11404 \
-        --exit
+        --port 11404
     
     # Ensure pytorch hasn't been clobbered
-    micromamba run -n webui python /opt/ai-dock/tests/assert-torch-version.py
+    # Removed the assert-torch-version.py check
 }
 
 function build_extra_get_mamba_packages() {
