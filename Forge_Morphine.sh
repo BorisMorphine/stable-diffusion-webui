@@ -14,9 +14,6 @@ MAMBA_PACKAGES=(
 )
 
 PIP_PACKAGES=(
-    "diffusers" 
-    "transformers" 
-    "accelerate"
     "bitsandbytes==0.41.2.post2"
     "ezsynth"
     "numexpr"
@@ -24,7 +21,6 @@ PIP_PACKAGES=(
     "pandas"
     "av"
     "pims"
-    "ffmpeg"
     "imageio_ffmpeg"
     "rich"
     "gdown"
@@ -64,15 +60,14 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth"
-    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml"
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
 # Download and prepare the replacement files from the main branch
-git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
-rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+git clone -b master https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
+rsync -avzh /tmp/stable-diffusion-webui-forge/ /opt/stable-diffusion-webui/
+rsync -avzh /opt/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
 function build_extra_start() {
     source /opt/ai-dock/etc/environment.sh
