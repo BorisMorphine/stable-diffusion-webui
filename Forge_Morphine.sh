@@ -164,5 +164,3 @@ build_extra_start
 fix-permissions.sh -o container
 rm /etc/ld.so.cache
 ldconfig
-cd /tmp/stable-diffusion-webui-forge/
-python3 launch.py
