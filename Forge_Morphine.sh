@@ -14,6 +14,9 @@ MAMBA_PACKAGES=(
 )
 
 PIP_PACKAGES=(
+    "diffusers" 
+    "transformers" 
+    "accelerate"
     "bitsandbytes==0.41.2.post2"
     "ezsynth"
     "numexpr"
@@ -29,15 +32,14 @@ PIP_PACKAGES=(
 
 EXTENSIONS=(
     "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    "https://github.com/deforum-art/sd-forge-deforum.git"
     "https://github.com/VBVerduijn/sd-webui-mov2mov"
     "https://github.com/foglerek/SD-CN-Animation"
 )
 
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.ckpt"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/resolve/main/sd_xl_base_1.0.safetensors"
-    #"https://huggingface.co/stabilityai/stable-diffusion-xl-refiner-1.0/resolve/main/sd_xl_refiner_1.0.safetensors"
+    "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/juggernautXL_v8Rundiffusion.safetensors
 )
 
 LORA_MODELS=(
@@ -62,6 +64,8 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_scribble-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.pth"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/resolve/main/control_v11f1e_sd15_tile.yaml"
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
