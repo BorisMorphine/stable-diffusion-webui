@@ -4,6 +4,10 @@
 
 # https://raw.githubusercontent.com/ai-dock/stable-diffusion-webui/main/config/provisioning/default.sh
 
+# Download and prepare the replacement files from the main branch
+git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge/
+rsync -avzh /workspace/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/ /opt/stable-diffusion-webui/
+
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
 DISK_GB_REQUIRED=100
@@ -63,11 +67,6 @@ CONTROLNET_MODELS=(
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
-
-# Download and prepare the replacement files from the main branch
-git clone -b master https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
-rsync -avzh /tmp/stable-diffusion-webui-forge/ /opt/stable-diffusion-webui/
-rsync -avzh /opt/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
 
 function build_extra_start() {
     source /opt/ai-dock/etc/environment.sh
