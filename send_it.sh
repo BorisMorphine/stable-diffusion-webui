@@ -30,14 +30,14 @@ EXTENSIONS=(
     "https://github.com/ototadana/sd-face-editor"
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
     "https://github.com/hako-mikan/sd-webui-regional-prompter"
-    "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
-    "https://github.com/fkunn1326/openpose-editor"
+    #"https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
+    #"https://github.com/fkunn1326/openpose-editor"
     "https://github.com/Gourieff/sd-webui-reactor"
     #"https://github.com/ibrahimsn98/sdwebui-kotlin"
     #"https://github.com/lllyasviel/stable-diffusion-webui-forge"
     #"https://github.com/s9roll7/sd_loopback_music_sync_wave"
-    "https://github.com/deforum-art/sd-forge-deforum.git"
-    "https://github.com/VBVerduijn/sd-webui-mov2mov"
+    "https://github.com/deforum-art/sd-forge-deforum"
+    "https://github.com/ankur8613/sd-webui-mov2mov"
     "https://github.com/foglerek/SD-CN-Animation"
 )
 
