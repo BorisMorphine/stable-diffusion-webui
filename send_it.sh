@@ -6,7 +6,7 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=30
+DISK_GB_REQUIRED=120
 
 # Download and prepare the replacement files from the main branch
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
@@ -22,9 +22,10 @@ PIP_PACKAGES=(
 )
 
 EXTENSIONS=(
-    "https://github.com/Mikubill/sd-webui-controlnet"
+    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    #"https://github.com/Mikubill/sd-webui-controlnet"
     "https://github.com/d8ahazard/sd_dreambooth_extension"
-    "https://github.com/deforum-art/sd-webui-deforum"
+    #"https://github.com/deforum-art/sd-webui-deforum"
     "https://github.com/adieyal/sd-dynamic-prompts"
     "https://github.com/ototadana/sd-face-editor"
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
@@ -32,12 +33,9 @@ EXTENSIONS=(
     "https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
     "https://github.com/fkunn1326/openpose-editor"
     "https://github.com/Gourieff/sd-webui-reactor"
-    "https://github.com/ibrahimsn98/sdwebui-kotlin"
-    "https://github.com/andyjsharpe/Automatic1111Interpolator"
-    "https://github.com/zer0TF/deforum-prompt-interpolator"
-    "https://github.com/lllyasviel/stable-diffusion-webui-forge"
-    "https://github.com/s9roll7/sd_loopback_music_sync_wave"
-    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    #"https://github.com/ibrahimsn98/sdwebui-kotlin"
+    #"https://github.com/lllyasviel/stable-diffusion-webui-forge"
+    #"https://github.com/s9roll7/sd_loopback_music_sync_wave"
     "https://github.com/deforum-art/sd-forge-deforum.git"
     "https://github.com/VBVerduijn/sd-webui-mov2mov"
     "https://github.com/foglerek/SD-CN-Animation"
