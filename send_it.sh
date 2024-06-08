@@ -9,8 +9,8 @@
 DISK_GB_REQUIRED=120
 
 # Download and prepare the replacement files from the main branch
-git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /tmp/stable-diffusion-webui-forge/
-rsync -avzh /tmp/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/
+git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /opt/stable-diffusion-webui-forge/
+rsync -avzh /opt/stable-diffusion-webui-forge/ /opt/stable-diffusion-webui/
 
 MAMBA_PACKAGES=(
     "package1"
