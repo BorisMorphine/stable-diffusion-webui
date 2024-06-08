@@ -5,6 +5,7 @@
 # https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/init.sh
 
 micromamba --always-softlink create -y -c conda-forge -n forge1111 python=3.10
+
 micromamba deactivate activate forge1111
 
 # Download and prepare the replacement files from the main branch
