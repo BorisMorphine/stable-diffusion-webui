@@ -103,7 +103,7 @@ function provisioning_start() {
         "${ESRGAN_MODELS[@]}"
         
     cd ${WORKSPACE}/extensions
-    git clone https://github.com/deforum-art/sd-forge-deforum
+    git clone https://github.com/deforum-art/sd-forge-deforum.git
     cd ${WORKSPACE}/extensions/sd-forge-deforum
     pip install -r requirements.txt 
     
