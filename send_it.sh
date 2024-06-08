@@ -24,21 +24,20 @@ PIP_PACKAGES=(
 )
 
 EXTENSIONS=(
-    "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
+    #"https://github.com/lllyasviel/ControlNet-v1-1-nightly"
     #"https://github.com/Mikubill/sd-webui-controlnet"
-    "https://github.com/d8ahazard/sd_dreambooth_extension"
+    #"https://github.com/d8ahazard/sd_dreambooth_extension"
     #"https://github.com/deforum-art/sd-webui-deforum"
     #"https://github.com/adieyal/sd-dynamic-prompts"
     #"https://github.com/ototadana/sd-face-editor"
-    "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
-    "https://github.com/hako-mikan/sd-webui-regional-prompter"
+    #"https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
+    #"https://github.com/hako-mikan/sd-webui-regional-prompter"
     #"https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
     #"https://github.com/fkunn1326/openpose-editor"
-    "https://github.com/Gourieff/sd-webui-reactor"
+    #"https://github.com/Gourieff/sd-webui-reactor"
     #"https://github.com/ibrahimsn98/sdwebui-kotlin"
     #"https://github.com/lllyasviel/stable-diffusion-webui-forge"
     #"https://github.com/s9roll7/sd_loopback_music_sync_wave"
-    "https://github.com/deforum-art/sd-forge-deforum"
     "https://github.com/foglerek/SD-CN-Animation"
 )
 
@@ -102,7 +101,12 @@ function provisioning_start() {
     provisioning_get_models \
         "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
-     
+        
+    cd ${WORKSPACE}/extensions
+    git clone https://github.com/deforum-art/sd-forge-deforum
+    cd ${WORKSPACE}/extensions/sd-forge-deforum
+    pip install -r requirements.txt 
+    
     PLATFORM_FLAGS=""
     if [[ $XPU_TARGET = "CPU" ]]; then
         PLATFORM_FLAGS="--use-cpu all --skip-torch-cuda-test --no-half"
