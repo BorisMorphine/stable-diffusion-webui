@@ -63,6 +63,10 @@ ESRGAN_MODELS=(
 )
 
 CONTROLNET_MODELS=(
+    "https://civitai.com/api/download/models/181335?type=Model&format=SafeTensor&size=full&fp=fp16"
+    "https://civitai.com/api/download/models/507015?type=Model&format=SafeTensor"
+    "https://civitai.com/api/download/models/183051?type=Model&format=SafeTensor"
+    "https://civitai.com/api/download/models/175285?type=Model&format=SafeTensor"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
