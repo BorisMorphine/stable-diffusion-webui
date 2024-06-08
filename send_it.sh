@@ -67,6 +67,8 @@ CONTROLNET_MODELS=(
     "https://civitai.com/api/download/models/507015?type=Model&format=SafeTensor"
     "https://civitai.com/api/download/models/183051?type=Model&format=SafeTensor"
     "https://civitai.com/api/download/models/175285?type=Model&format=SafeTensor"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/commit/7ce7097d1f5d5d7d1600da5eba8c4c6bc8381706#d2h-905547"
+    "https://huggingface.co/lllyasviel/ControlNet-v1-1/commit/7ce7097d1f5d5d7d1600da5eba8c4c6bc8381706#:~:text=%2D0-,control_v11f1e_sd15_tile.yaml,-%2B79"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
