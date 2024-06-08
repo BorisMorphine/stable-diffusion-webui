@@ -28,8 +28,8 @@ EXTENSIONS=(
     #"https://github.com/Mikubill/sd-webui-controlnet"
     "https://github.com/d8ahazard/sd_dreambooth_extension"
     #"https://github.com/deforum-art/sd-webui-deforum"
-    "https://github.com/adieyal/sd-dynamic-prompts"
-    "https://github.com/ototadana/sd-face-editor"
+    #"https://github.com/adieyal/sd-dynamic-prompts"
+    #"https://github.com/ototadana/sd-face-editor"
     "https://github.com/AlUlkesh/stable-diffusion-webui-images-browser"
     "https://github.com/hako-mikan/sd-webui-regional-prompter"
     #"https://github.com/Coyote-A/ultimate-upscale-for-automatic1111"
@@ -39,7 +39,6 @@ EXTENSIONS=(
     #"https://github.com/lllyasviel/stable-diffusion-webui-forge"
     #"https://github.com/s9roll7/sd_loopback_music_sync_wave"
     "https://github.com/deforum-art/sd-forge-deforum"
-    "https://github.com/ankur8613/sd-webui-mov2mov"
     "https://github.com/foglerek/SD-CN-Animation"
 )
 
