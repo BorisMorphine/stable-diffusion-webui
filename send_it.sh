@@ -1,13 +1,17 @@
 #!/bin/bash
 # This file will be sourced in init.sh
-# Namespace functions with provisioning_
+# Namespace functions with provisioning
 
-# Check for root privileges
-if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root or with sudo. Re-running with sudo..."
-   sudo bash "$0" "$@"
-   exit $?
-fi
+micromamba --always-softlink create -y -c conda-forge -n forge1111 python=3.10
+micromamba deactivate activate forge1111
+
+# Download and prepare the replacement files from the main branch
+micromamba run -n webui cd /workspace
+
+# Hijack the shit out of it.
+git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui/
+rsync -avzh /workspace/stable-diffusion-webui/ /opt/stable-diffusion-webui/
+micromamba deactivate activate forge1111
 
 # Clone and synchronize the Forge repository with the stable-diffusion-webui directory
 git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge/ || {
@@ -21,7 +25,7 @@ rsync -avzh /workspace/stable-diffusion-webui-forge/ /workspace/stable-diffusion
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=100
+DISK_GB_REQUIRED=300
 
 MAMBA_PACKAGES=(
     "package1"
@@ -30,16 +34,6 @@ MAMBA_PACKAGES=(
 
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
-    "ezsynth"
-    "numexpr"
-    "matplotlib"
-    "pandas"
-    "av"
-    "pims"
-    "imageio_ffmpeg"
-    "rich"
-    "gdown"
-    "insightface"
 )
 
 EXTENSIONS=(
