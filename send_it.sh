@@ -2,26 +2,13 @@
 # This file will be sourced in init.sh
 # Namespace functions with provisioning
 
+micromamba deactivate 
 micromamba --always-softlink create -y -c conda-forge -n forge1111 python=3.10
-micromamba deactivate activate forge1111
+micromamba activate forge1111
 
-# Download and prepare the replacement files from the main branch
-micromamba run -n webui cd /workspace
-
-# Hijack the shit out of it.
 git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui/
-rsync -avzh /workspace/stable-diffusion-webui/ /opt/stable-diffusion-webui/
-micromamba deactivate activate forge1111
-
-# Clone and synchronize the Forge repository with the stable-diffusion-webui directory
-git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge/ || {
-    echo "Failed to clone the repository."
-    exit 1
-}
-rsync -avzh /workspace/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/ || {
-    echo "Failed to synchronize the repository."
-    exit 1
-}
+micromamba deactivate 
+micromamba activate webui
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
