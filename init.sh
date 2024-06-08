@@ -5,8 +5,7 @@
 # https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/init.sh
 
 micromamba --always-softlink create -y -c conda-forge -n forge1111 python=3.10
-
-micromamba activate forge1111
+micromamba deactivate activate forge1111
 
 # Download and prepare the replacement files from the main branch
 micromamba run -n webui cd /workspace
@@ -14,6 +13,8 @@ micromamba run -n webui cd /workspace
 # Hijack the shit out of it.
 git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui/
 rsync -avzh /workspace/stable-diffusion-webui/ /opt/stable-diffusion-webui/
+
+micromamba deactivate activate forge1111
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
