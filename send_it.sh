@@ -19,6 +19,8 @@ MAMBA_PACKAGES=(
 
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
+    "exsynth"
+    "ffmpeg"
 )
 
 EXTENSIONS=(
