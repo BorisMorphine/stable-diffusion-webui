@@ -4,9 +4,16 @@
 
 # https://raw.githubusercontent.com/BorisMorphine/stable-diffusion-webui/main/init.sh
 
+micromamba --always-softlink create -y -c conda-forge -n forge1111 python=3.10
+
+micromamba activate forge1111
+
 # Download and prepare the replacement files from the main branch
-git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui-forge/
-rsync -avzh /workspace/stable-diffusion-webui-forge/ /workspace/stable-diffusion-webui/ /opt/stable-diffusion-webui/
+micromamba run -n webui cd /workspace
+
+# Hijack the shit out of it.
+git clone -b main https://github.com/lllyasviel/stable-diffusion-webui-forge /workspace/stable-diffusion-webui/
+rsync -avzh /workspace/stable-diffusion-webui/ /opt/stable-diffusion-webui/
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
@@ -19,20 +26,10 @@ MAMBA_PACKAGES=(
 
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
-    "ezsynth"
-    "numexpr"
-    "matplotlib"
-    "pandas"
-    "av"
-    "pims"
-    "imageio_ffmpeg"
-    "rich"
-    "gdown"
 )
 
 EXTENSIONS=(
     "https://github.com/lllyasviel/ControlNet-v1-1-nightly"
-    "https://github.com/deforum-art/sd-forge-deforum.git"
     "https://github.com/VBVerduijn/sd-webui-mov2mov"
     "https://github.com/foglerek/SD-CN-Animation"
 )
@@ -65,6 +62,11 @@ CONTROLNET_MODELS=(
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_depth-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/t2iadapter_sketch-fp16.safetensors"
 )
+
+micromamba run -n webui cd /workspace/stable-diffusion-webui/extensions
+git clone https://github.com/deforum-art/sd-forge-deforum
+cd sd-forge-deforum
+pip install -r requirements.txt
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
 
