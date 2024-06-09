@@ -30,8 +30,10 @@ PIP_PACKAGES=(
 )
 
 EXTENSIONS=(
+    "https://github.com/continue-revolution/sd-forge-animatediff"
     "https://github.com/BlafKing/sd-civitai-browser-plus"
     "https://github.com/foglerek/SD-CN-Animation"
+    "https://github.com/DavG25/sd-webui-mov2mov"
 )
     
 CHECKPOINT_MODELS=(
