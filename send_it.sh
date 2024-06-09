@@ -6,11 +6,11 @@
 
 ### Edit the following arrays to suit your workflow - values must be quoted and separated by newlines or spaces.
 
-DISK_GB_REQUIRED=120
-
 # Download and prepare the replacement files from the main branch
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /opt/stable-diffusion-webui-forge/
 rsync -avzh /opt/stable-diffusion-webui-forge/ /opt/stable-diffusion-webui/
+
+DISK_GB_REQUIRED=120
 
 MAMBA_PACKAGES=(
     "package1"
@@ -19,12 +19,9 @@ MAMBA_PACKAGES=(
 
 PIP_PACKAGES=(
     "bitsandbytes==0.41.2.post2"
-    "exsynth"
-    "ffmpeg"
 )
 
 EXTENSIONS=(
-    "https://github.com/continue-revolution/sd-forge-animatediff"
     "https://github.com/BlafKing/sd-civitai-browser-plus"
     "https://github.com/deforum-art/sd-forge-deforum"
     "https://github.com/foglerek/SD-CN-Animation"
