@@ -12,6 +12,12 @@ DISK_GB_REQUIRED=120
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /opt/stable-diffusion-webui-forge/
 rsync -avzh /opt/stable-diffusion-webui-forge/ /opt/stable-diffusion-webui/
 
+cd /opt/stable-diffusion-webui-forge/extensions
+git clone https://github.com/deforum-art/sd-forge-deforum.git
+
+cd /opt/stable-diffusion-webui-forge//extensions/sd-forge-deforum
+pip install -r requirements.txt 
+
 MAMBA_PACKAGES=(
     "package1"
     "package2=version"
@@ -27,7 +33,7 @@ EXTENSIONS=(
     "https://github.com/BlafKing/sd-civitai-browser-plus"
     "https://github.com/foglerek/SD-CN-Animation"
 )
-
+    
 CHECKPOINT_MODELS=(
     "https://huggingface.co/runwayml/stable-diffusion-v1-5/resolve/main/v1-5-pruned-emaonly.ckpt"
     "https://huggingface.co/lllyasviel/fav_models/resolve/main/fav/juggernautXL_v8Rundiffusion.safetensors"
@@ -96,17 +102,6 @@ function provisioning_start() {
     provisioning_get_models \
         "/opt/stable-diffusion-webui/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
-        
-    cd ${WORKSPACE}/extensions
-    git clone https://github.com/deforum-art/sd-forge-deforum.git
-    cd ${WORKSPACE}/extensions/sd-forge-deforum
-    pip install -r requirements.txt 
-    
-    cd /opt/stable-diffusion-webui/embeddings
-    wget -O artful_XL.safetensors -q https://civitai.com/api/download/models/152309?type=Model&format=SafeTensor
-    wget -O detail_XL.safetensors -q https://civitai.com/api/download/models/539032?type=Model&format=SafeTensor
-    wget -O fractal_XL.safetensors -q https://civitai.com/api/download/models/169002?type=Model&format=SafeTensor
-    wget -O detail_1.5.pt -q https://civitai.com/api/download/models/106020?type=Model&format=PickleTensor
     
     PLATFORM_FLAGS=""
     if [[ $XPU_TARGET = "CPU" ]]; then
