@@ -12,12 +12,6 @@ DISK_GB_REQUIRED=120
 git clone https://github.com/lllyasviel/stable-diffusion-webui-forge /opt/stable-diffusion-webui-forge/
 rsync -avzh /opt/stable-diffusion-webui-forge/ /opt/stable-diffusion-webui/
 
-cd /opt/stable-diffusion-webui-forge/extensions
-git clone https://github.com/deforum-art/sd-forge-deforum.git
-
-cd /opt/stable-diffusion-webui-forge//extensions/sd-forge-deforum
-pip install -r requirements.txt 
-
 MAMBA_PACKAGES=(
     "package1"
     "package2=version"
@@ -79,6 +73,9 @@ CONTROLNET_MODELS=(
 )
 
 ### DO NOT EDIT BELOW HERE UNLESS YOU KNOW WHAT YOU ARE DOING ###
+
+cd /opt/stable-diffusion-webui-forge//extensions/sd-forge-deforum
+pip install -r requirements.txt 
 
 function provisioning_start() {
     source /opt/ai-dock/etc/environment.sh
