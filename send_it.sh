@@ -35,6 +35,8 @@ CHECKPOINT_MODELS=(
 
 LORA_MODELS=(
     "https://civitai.com/api/download/models/16576"
+    "https://civitai.com/api/download/models/94277"
+    "https://civitai.com/api/download/models/516211"
 )
 
 VAE_MODELS=(
@@ -99,6 +101,12 @@ function provisioning_start() {
     git clone https://github.com/deforum-art/sd-forge-deforum.git
     cd ${WORKSPACE}/extensions/sd-forge-deforum
     pip install -r requirements.txt 
+    
+    cd ${WORKSPACE}/embeddings
+    wget -O artful_XL.safetensors -q https://civitai.com/api/download/models/152309?type=Model&format=SafeTensor
+    wget -O detail_XL.safetensors -q https://civitai.com/api/download/models/539032?type=Model&format=SafeTensor
+    wget -O fractal_XL.safetensors -q https://civitai.com/api/download/models/169002?type=Model&format=SafeTensor
+    wget -O detail_1.5.pt -q https://civitai.com/api/download/models/106020?type=Model&format=PickleTensor
     
     PLATFORM_FLAGS=""
     if [[ $XPU_TARGET = "CPU" ]]; then
