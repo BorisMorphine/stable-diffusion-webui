@@ -82,19 +82,19 @@ function provisioning_start() {
     provisioning_get_pip_packages
     provisioning_get_extensions
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/ckpt" \
+        "/opt/stable-diffusion-webui/models/Stable-diffusion" \
         "${CHECKPOINT_MODELS[@]}"
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/lora" \
+        "/opt/stable-diffusion-webui/models/lora" \
         "${LORA_MODELS[@]}"
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/controlnet" \
+        "/opt/stable-diffusion-webui/models/controlnet" \
         "${CONTROLNET_MODELS[@]}"
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/vae" \
+        "/opt/stable-diffusion-webui/models/vae" \
         "${VAE_MODELS[@]}"
     provisioning_get_models \
-        "${WORKSPACE}/storage/stable_diffusion/models/esrgan" \
+        "/opt/stable-diffusion-webui/models/esrgan" \
         "${ESRGAN_MODELS[@]}"
         
     cd ${WORKSPACE}/extensions
@@ -102,7 +102,7 @@ function provisioning_start() {
     cd ${WORKSPACE}/extensions/sd-forge-deforum
     pip install -r requirements.txt 
     
-    cd ${WORKSPACE}/embeddings
+    cd /opt/stable-diffusion-webui/embeddings
     wget -O artful_XL.safetensors -q https://civitai.com/api/download/models/152309?type=Model&format=SafeTensor
     wget -O detail_XL.safetensors -q https://civitai.com/api/download/models/539032?type=Model&format=SafeTensor
     wget -O fractal_XL.safetensors -q https://civitai.com/api/download/models/169002?type=Model&format=SafeTensor
