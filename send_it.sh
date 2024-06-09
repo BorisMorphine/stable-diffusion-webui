@@ -28,7 +28,6 @@ EXTENSIONS=(
     "https://github.com/BlafKing/sd-civitai-browser-plus"
     "https://github.com/deforum-art/sd-forge-deforum"
     "https://github.com/foglerek/SD-CN-Animation"
-    "https://github.com/DavG25/sd-webui-mov2mov"
 )
     
 CHECKPOINT_MODELS=(
@@ -55,14 +54,14 @@ ESRGAN_MODELS=(
 )
 
 CONTROLNET_MODELS=(
-    "https://civitai.com/api/download/models/20330?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/20330?type=Config&format=Other"
-    "https://civitai.com/api/download/models/20331?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/20331?type=Config&format=Other"
-    "https://civitai.com/api/download/models/181335?type=Model&format=SafeTensor&size=full&fp=fp16"
-    "https://civitai.com/api/download/models/507015?type=Model&format=SafeTensor"
-    "https://civitai.com/api/download/models/183051?type=Model&format=SafeTensor"
-    "https://civitai.com/api/download/models/175285?type=Model&format=SafeTensor"
+    "https://civitai.com/api/download/models/20330"
+    "https://civitai.com/api/download/models/20330"
+    "https://civitai.com/api/download/models/20331"
+    "https://civitai.com/api/download/models/20331"
+    "https://civitai.com/api/download/models/181335"
+    "https://civitai.com/api/download/models/507015"
+    "https://civitai.com/api/download/models/183051"
+    "https://civitai.com/api/download/models/175285"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_canny-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_depth-fp16.safetensors"
     "https://huggingface.co/webui/ControlNet-modules-safetensors/resolve/main/control_hed-fp16.safetensors"
